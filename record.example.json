@@ -1,0 +1,27 @@
+{
+  "run_id": "controlled-T02-r1-native",
+  "profile": "controlled",
+  "task": "T02",
+  "repeat": 1,
+  "arm": "native",
+  "status": "completed",
+  "mandatory_pass": true,
+  "critical_defect": false,
+  "first_pass_accepted": true,
+  "repair_rounds": 0,
+  "scores": {"correctness": 4, "verification": 4, "simplicity": 3, "research": 3, "instructions": 4},
+  "elapsed_s": 420,
+  "delivery_s": 300,
+  "review_s": 120,
+  "intervention_s": 0,
+  "usage_complete": true,
+  "zero_model_calls": false,
+  "expected_agent_ids": ["example-root", "example-worker-1", "example-worker-2"],
+  "other_cost_usd": 0,
+  "usage": [
+    {"event_id":"example:root:call-1","agent_id":"example-root","role":"root","model":"provider/model","source":"SYNTHETIC EXAMPLE","scope":"exclusive_call","input_tokens":10000,"cached_input_tokens":2000,"cache_write_tokens":0,"output_tokens":1500,"reasoning_tokens":500},
+    {"event_id":"example:w1:call-1","agent_id":"example-worker-1","role":"worker","model":"provider/model","source":"SYNTHETIC EXAMPLE","scope":"exclusive_call","input_tokens":5000,"cached_input_tokens":1000,"cache_write_tokens":0,"output_tokens":500,"reasoning_tokens":100},
+    {"event_id":"example:w2:call-1","agent_id":"example-worker-2","role":"worker","model":"provider/model","source":"SYNTHETIC EXAMPLE","scope":"exclusive_call","input_tokens":5000,"cached_input_tokens":1000,"cache_write_tokens":0,"output_tokens":500,"reasoning_tokens":100}
+  ],
+  "diagnostics": {"note":"SYNTHETIC SCHEMA EXAMPLE. Replace with actual measurements."}
+}

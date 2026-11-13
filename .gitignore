@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+node_modules/
+trial-*/
+*-results.local.jsonl
+rates.json
+comparison.json
