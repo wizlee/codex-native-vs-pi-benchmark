@@ -1,0 +1,97 @@
+{
+  "scope": "Independent post-submission review edge case; final mathematical total is safe integer",
+  "results": [
+    {
+      "run_id": "usual-T02-r1-pi",
+      "input_cents": [
+        9007199254740991,
+        2,
+        -9007199254740991
+      ],
+      "expected": [
+        {
+          "customer": "x",
+          "cents": 2,
+          "count": 3
+        }
+      ],
+      "actual": [
+        {
+          "customer": "x",
+          "cents": 2,
+          "count": 3
+        }
+      ],
+      "pass": true
+    },
+    {
+      "run_id": "usual-T02-r1-native",
+      "input_cents": [
+        9007199254740991,
+        2,
+        -9007199254740991
+      ],
+      "expected": [
+        {
+          "customer": "x",
+          "cents": 2,
+          "count": 3
+        }
+      ],
+      "actual": [
+        {
+          "customer": "x",
+          "cents": 2,
+          "count": 3
+        }
+      ],
+      "pass": true
+    },
+    {
+      "run_id": "usual-T02-r2-native",
+      "input_cents": [
+        9007199254740991,
+        2,
+        -9007199254740991
+      ],
+      "expected": [
+        {
+          "customer": "x",
+          "cents": 2,
+          "count": 3
+        }
+      ],
+      "actual": [
+        {
+          "customer": "x",
+          "cents": 2,
+          "count": 3
+        }
+      ],
+      "pass": true
+    },
+    {
+      "run_id": "usual-T02-r2-pi",
+      "input_cents": [
+        9007199254740991,
+        2,
+        -9007199254740991
+      ],
+      "expected": [
+        {
+          "customer": "x",
+          "cents": 2,
+          "count": 3
+        }
+      ],
+      "actual": [
+        {
+          "customer": "x",
+          "cents": 2,
+          "count": 3
+        }
+      ],
+      "pass": true
+    }
+  ]
+}

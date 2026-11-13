@@ -18,7 +18,7 @@ Parent plans, delegates, verifies, integrates, and answers in both arms. Count p
 
 Run controlled comparison first. Analyze profiles separately. If model, tool, or skill parity cannot be established, label result `configuration-confounded`. Keep result visible. Do not call it controlled.
 
-Controlled workers receive same logical packet. Backend-required tool syntax can differ. Root follows common two-worker plan from PROMPTS.md. Record root integrations, worker startup, repeated reading, and handoff sizes. These reveal where overhead occurs.
+Controlled workers receive same logical packet and equivalent read access. Backend-required tool syntax can differ. Native readers may use read-only shell commands; Pi readers use native read/grep/find/ls. Root alone edits and executes candidate code/tests. Load actual skill files; do not manually transcribe skill bodies. Root follows common two-worker plan from PROMPTS.md. Record root integrations, worker startup, repeated reading, and handoff sizes.
 
 Do not silently override model/thinking defaults. Configure matched values only through explicit run instructions and supported controls. If same model unavailable, compare usual setups or report unsupported controlled cell.
 

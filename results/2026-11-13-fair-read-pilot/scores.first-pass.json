@@ -1,0 +1,154 @@
+{
+  "artifacts": [
+    {
+      "blind_id": "artifact-001",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read primary summary.mjs. Validation precedes winner selection; Map avoids special-key collisions; >= implements later-position ties; retained void tombstones prevent stale resurrection; winners group by winning customer; relational string comparator gives code-unit order. Own copied API passed common latest/tie/customer/refund, void/stale/revival, invalid-entry, empty, ordering and frozen-input/fresh-result probes. Rerun: node work/reproduce.mjs.",
+        "BigInt accumulator preserves exact signed sums through unsafe intermediate cancellation; copied API returned cents=2 for MAX_SAFE_INTEGER, 2, -MAX_SAFE_INTEGER, then converts safe final total to Number. No contract failure reproduced.",
+        "Submitted regression suite includes final-safe cancellation, invalid revisions, special keys, ordering and immutability; no unnecessary dependencies or generalized framework in primary API.",
+        "KEEP/source preservation accepted as supplied evidence, not independently verified against an original checkout. Delegation completion or incompatibility excluded from artifact-quality scores."
+      ]
+    },
+    {
+      "blind_id": "artifact-002",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read primary summary.mjs. Validation precedes winner selection; Map avoids special-key collisions; >= implements later-position ties; retained void tombstones prevent stale resurrection; winners group by winning customer; relational string comparator gives code-unit order. Own copied API passed common latest/tie/customer/refund, void/stale/revival, invalid-entry, empty, ordering and frozen-input/fresh-result probes. Rerun: node work/reproduce.mjs.",
+        "BigInt accumulator preserves exact signed sums through unsafe intermediate cancellation; copied API returned cents=2 for MAX_SAFE_INTEGER, 2, -MAX_SAFE_INTEGER, then converts safe final total to Number. No contract failure reproduced.",
+        "Submitted regression suite includes final-safe cancellation, invalid revisions, special keys, ordering and immutability; no unnecessary dependencies or generalized framework in primary API.",
+        "KEEP/source preservation accepted as supplied evidence, not independently verified against an original checkout. Delegation completion or incompatibility excluded from artifact-quality scores."
+      ]
+    },
+    {
+      "blind_id": "artifact-003",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Reviewed DECISION.md against original authoritative N1/N2/N3/S1/M1 packet. Independently recomputed North $10 + ceil((30000-10000)/10000)*$1 = $12; South $15 + ceil((30000-20000)/10000)*$2 + $4 = $21. Correct EU-only availability, included/optional seven-day retention and $14 eligibility. Current at-least-once delivery and stable-ID deduplication stated; N1 supersedes M1 exactly-once marketing. N3 lab observation 180 ms at 20 jobs/second, 1 KB, single tenant, no induced failures is distinguished from production <=250 ms guarantee; N1 no latency SLA identified. Decisive claims cite packet section IDs. Unknowns and bounded representative-load trial with retry/deduplication checks support conditional North commitment. No invented decisive evidence found.",
+        "Own copied document whitespace count: 334/600 words. Concise standalone rationale, source citations and explicit validation step make decision directly reviewable. Supplied supporting text guards are supplementary; semantic assessment used original packet.",
+        "KEEP/source preservation accepted as supplied evidence, not independently verified against an original checkout. Delegation completion or incompatibility excluded from artifact-quality scores."
+      ]
+    },
+    {
+      "blind_id": "artifact-004",
+      "mandatory_pass": false,
+      "critical_defect": true,
+      "scores": {
+        "correctness": 3,
+        "verification": 3.5,
+        "simplicity": 3.5,
+        "research": 3.5,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read primary summary.mjs. Validation precedes winner selection; Map avoids special-key collisions; >= implements later-position ties; retained void tombstones prevent stale resurrection; winners group by winning customer; relational string comparator gives code-unit order. Own copied API passed common latest/tie/customer/refund, void/stale/revival, invalid-entry, empty, ordering and frozen-input/fresh-result probes. Rerun: node work/reproduce.mjs.",
+        "Reproduced primary API defect using [{\"id\":\"a\",\"customer\":\"A\",\"sequence\":0,\"cents\":9007199254740991,\"state\":\"posted\"},{\"id\":\"b\",\"customer\":\"A\",\"sequence\":0,\"cents\":2,\"state\":\"posted\"},{\"id\":\"c\",\"customer\":\"A\",\"sequence\":0,\"cents\":-9007199254740991,\"state\":\"posted\"}]. Expected [{\"customer\":\"A\",\"cents\":2,\"count\":3}]; actual [{\"customer\":\"A\",\"cents\":1,\"count\":3}]. Every input amount is safe and final customer total is safe. Number accumulation rounds the unsafe intermediate sum, permanently losing one cent before cancellation. Signed refunds make this input valid under final-total reading of PROMPT.md. Classified critical because returned monetary data is corrupted; no persistent-storage damage or unauthorized side effect alleged.",
+        "Submitted regression tests cover ordinary contracts but omit unsafe-intermediate/final-safe cancellation. Public predeclared checks therefore do not establish complete correctness.",
+        "KEEP/source preservation accepted as supplied evidence, not independently verified against an original checkout. Delegation completion or incompatibility excluded from artifact-quality scores."
+      ]
+    },
+    {
+      "blind_id": "artifact-005",
+      "mandatory_pass": false,
+      "critical_defect": true,
+      "scores": {
+        "correctness": 3,
+        "verification": 3.5,
+        "simplicity": 3.5,
+        "research": 3.5,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read primary summary.mjs. Validation precedes winner selection; Map avoids special-key collisions; >= implements later-position ties; retained void tombstones prevent stale resurrection; winners group by winning customer; relational string comparator gives code-unit order. Own copied API passed common latest/tie/customer/refund, void/stale/revival, invalid-entry, empty, ordering and frozen-input/fresh-result probes. Rerun: node work/reproduce.mjs.",
+        "Reproduced primary API defect using [{\"id\":\"a\",\"customer\":\"A\",\"sequence\":0,\"cents\":9007199254740991,\"state\":\"posted\"},{\"id\":\"b\",\"customer\":\"A\",\"sequence\":0,\"cents\":2,\"state\":\"posted\"},{\"id\":\"c\",\"customer\":\"A\",\"sequence\":0,\"cents\":-9007199254740991,\"state\":\"posted\"}]. Expected [{\"customer\":\"A\",\"cents\":2,\"count\":3}]; actual [{\"customer\":\"A\",\"cents\":1,\"count\":3}]. Every input amount is safe and final customer total is safe. Number accumulation rounds the unsafe intermediate sum, permanently losing one cent before cancellation. Signed refunds make this input valid under final-total reading of PROMPT.md. Classified critical because returned monetary data is corrupted; no persistent-storage damage or unauthorized side effect alleged.",
+        "Submitted regression tests cover ordinary contracts but omit unsafe-intermediate/final-safe cancellation. Public predeclared checks therefore do not establish complete correctness.",
+        "KEEP/source preservation accepted as supplied evidence, not independently verified against an original checkout. Delegation completion or incompatibility excluded from artifact-quality scores."
+      ]
+    },
+    {
+      "blind_id": "artifact-006",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Reviewed DECISION.md against original authoritative N1/N2/N3/S1/M1 packet. Independently recomputed North $10 + ceil((30000-10000)/10000)*$1 = $12; South $15 + ceil((30000-20000)/10000)*$2 + $4 = $21. Correct EU-only availability, included/optional seven-day retention and $14 eligibility. Current at-least-once delivery and stable-ID deduplication stated; N1 supersedes M1 exactly-once marketing. N3 lab observation 180 ms at 20 jobs/second, 1 KB, single tenant, no induced failures is distinguished from production <=250 ms guarantee; N1 no latency SLA identified. Decisive claims cite packet section IDs. Unknowns and bounded representative-load trial with retry/deduplication checks support conditional North commitment. No invented decisive evidence found.",
+        "Own copied document whitespace count: 317/600 words. Concise standalone rationale, source citations and explicit validation step make decision directly reviewable. Supplied supporting text guards are supplementary; semantic assessment used original packet.",
+        "KEEP/source preservation accepted as supplied evidence, not independently verified against an original checkout. Delegation completion or incompatibility excluded from artifact-quality scores."
+      ]
+    },
+    {
+      "blind_id": "artifact-007",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Reviewed DECISION.md against original authoritative N1/N2/N3/S1/M1 packet. Independently recomputed North $10 + ceil((30000-10000)/10000)*$1 = $12; South $15 + ceil((30000-20000)/10000)*$2 + $4 = $21. Correct EU-only availability, included/optional seven-day retention and $14 eligibility. Current at-least-once delivery and stable-ID deduplication stated; N1 supersedes M1 exactly-once marketing. N3 lab observation 180 ms at 20 jobs/second, 1 KB, single tenant, no induced failures is distinguished from production <=250 ms guarantee; N1 no latency SLA identified. Decisive claims cite packet section IDs. Unknowns and bounded representative-load trial with retry/deduplication checks support conditional North commitment. No invented decisive evidence found.",
+        "Own copied document whitespace count: 345/600 words. Concise standalone rationale, source citations and explicit validation step make decision directly reviewable. Supplied supporting text guards are supplementary; semantic assessment used original packet.",
+        "KEEP/source preservation accepted as supplied evidence, not independently verified against an original checkout. Delegation completion or incompatibility excluded from artifact-quality scores."
+      ]
+    },
+    {
+      "blind_id": "artifact-008",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Reviewed DECISION.md against original authoritative N1/N2/N3/S1/M1 packet. Independently recomputed North $10 + ceil((30000-10000)/10000)*$1 = $12; South $15 + ceil((30000-20000)/10000)*$2 + $4 = $21. Correct EU-only availability, included/optional seven-day retention and $14 eligibility. Current at-least-once delivery and stable-ID deduplication stated; N1 supersedes M1 exactly-once marketing. N3 lab observation 180 ms at 20 jobs/second, 1 KB, single tenant, no induced failures is distinguished from production <=250 ms guarantee; N1 no latency SLA identified. Decisive claims cite packet section IDs. Unknowns and bounded representative-load trial with retry/deduplication checks support conditional North commitment. No invented decisive evidence found.",
+        "Own copied document whitespace count: 332/600 words. Concise standalone rationale, source citations and explicit validation step make decision directly reviewable. Supplied supporting text guards are supplementary; semantic assessment used original packet.",
+        "KEEP/source preservation accepted as supplied evidence, not independently verified against an original checkout. Delegation completion or incompatibility excluded from artifact-quality scores."
+      ]
+    }
+  ],
+  "review_limits": [
+    "Provisional AI ratings only. Human review time unknown. No backend identity inference, quality-equivalence claim, delegation-status grade or worker-scope audit.",
+    "Only supplied task/source packet, primary APIs/documents and supporting text reviewed. No other chats, repository, logs, external sources, solvers or subagents consulted.",
+    "Executed own copied primary T02 APIs under Node v26.13.0 with common probes. Code whitespace normalized and HTML transport entities decoded; behavior preserved. Own reproduction files are evidence, not graded submissions. Supplied original test suites were read but not executed in full.",
+    "Read all four primary T05 documents against original packet, independently checked tariffs and counted own copied documents. No live vendor validation possible or required for fictional packet.",
+    "Not all linked README/proof/metadata/deliverable aliases were supplied. No claim those unseen files were inspected or their reported runs independently reproduced. Supporting text checks cannot establish reasoning correctness.",
+    "Input totals fit safe integers interpreted as final customer totals, not a guarantee that every running subtotal stays safe. Signed valid amounts can temporarily exceed safe precision. Both affected APIs otherwise passed common contract probes.",
+    "Critical flags on artifact-004/005 refer specifically to reproduced monetary-output corruption. No invented decisive evidence or unauthorized side effect otherwise demonstrated.",
+    "Scores use requested 0..4 dimensions. Intended weights: correctness 40, verification 20, simplicity 15, research 15, instructions 10. Equal ratings do not assert quality equivalence."
+  ]
+}

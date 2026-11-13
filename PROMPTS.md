@@ -17,13 +17,16 @@ Use exactly two read-only workers. No worker descendants.
 Worker 1: inspect implementation/evidence; propose smallest complete solution.
 Worker 2: independently inspect requirements, edge cases, and verification gaps.
 Start both before implementation. Root alone edits and runs commands.
-Workers cannot use shell, web, MCP, or write tools. Root can retrieve needed
+Workers cannot write, execute candidate code, or browse web. Workers may read,
+search, and list source/skill files. Native workers may use read-only shell
+commands; Pi workers use read/grep/find/ls. Root can retrieve needed
 evidence and provide same relevant packet to workers.
 Give both workers complete task text, file scope, constraints, source packet,
 and expected reply shape. Forward corrections to both before final integration.
 Workers reply with findings, evidence paths, proposed change, verification gaps.
 Use same named portable skills from approved batch manifest. Load required
 skills through each host's supported workflow. Report unavailable skill/tool.
+Read actual skill files; do not manually transcribe their bodies.
 Do not silently omit required skill or substitute delegation backend.
 Use batch model/reasoning configuration. Report actual resolved models.
 Limits: 20 minutes initial work. Evaluator may allow one repair, <=5 minutes.
@@ -50,6 +53,7 @@ Use Codex native subagents. Do not delegate through Pi.
 For controlled profile, start fresh workers without conversation inheritance
 when supported. Pass same explicit self-contained task packet.
 Record unavoidable inheritance or tool/model differences.
+Give workers supported read access to actual source and skill files.
 This scoped instruction does not change user-wide policy or configuration.
 ```
 

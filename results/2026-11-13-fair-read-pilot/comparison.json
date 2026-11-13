@@ -1,0 +1,269 @@
+{
+  "profile": "usual",
+  "scheduled_runs": 8,
+  "distinct_tasks": 2,
+  "pairs": 4,
+  "weighting": "equal tasks for paired deltas; per-run rates and totals for arm summaries",
+  "arms": {
+    "native": {
+      "runs": 4,
+      "accepted": 4,
+      "acceptance_rate": 1,
+      "first_pass_rate": 1,
+      "quality_mean": 100,
+      "dimension_means": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "statuses": {
+        "completed": 4,
+        "timeout": 0,
+        "blocked": 0,
+        "error": 0,
+        "cancelled": 0
+      },
+      "tokens_all": 2179913,
+      "observed_tokens_lower_bound": 2179913,
+      "token_coverage_complete": true,
+      "tokens_per_accepted": 544978.25,
+      "root_tokens": 1541152,
+      "worker_tokens": 638761,
+      "estimated_api_usd_all": 0.8826356,
+      "estimated_api_usd_per_accepted": 0.2206589,
+      "elapsed_median_s": 153.97050000000002,
+      "successful_elapsed_median_s": 153.97050000000002,
+      "elapsed_s_per_accepted": 151.7495,
+      "delivery_median_s": 153.97050000000002,
+      "review_median_s": 0,
+      "human_s_all": 0,
+      "repair_rounds": 0,
+      "critical_defects": 0
+    },
+    "pi": {
+      "runs": 4,
+      "accepted": 4,
+      "acceptance_rate": 1,
+      "first_pass_rate": 0.5,
+      "quality_mean": 100,
+      "dimension_means": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "statuses": {
+        "completed": 4,
+        "timeout": 0,
+        "blocked": 0,
+        "error": 0,
+        "cancelled": 0
+      },
+      "tokens_all": 2938823,
+      "observed_tokens_lower_bound": 2938823,
+      "token_coverage_complete": true,
+      "tokens_per_accepted": 734705.75,
+      "root_tokens": 2464935,
+      "worker_tokens": 473888,
+      "estimated_api_usd_all": 1.0423804,
+      "estimated_api_usd_per_accepted": 0.2605951,
+      "elapsed_median_s": 202.86399999999998,
+      "successful_elapsed_median_s": 202.86399999999998,
+      "elapsed_s_per_accepted": 203.47575,
+      "delivery_median_s": 202.86399999999998,
+      "review_median_s": 0,
+      "human_s_all": 0,
+      "repair_rounds": 2,
+      "critical_defects": 0
+    }
+  },
+  "per_task": {
+    "T02": {
+      "native": {
+        "runs": 2,
+        "accepted": 2,
+        "acceptance_rate": 1,
+        "first_pass_rate": 1,
+        "quality_mean": 100,
+        "dimension_means": {
+          "correctness": 4,
+          "verification": 4,
+          "simplicity": 4,
+          "research": 4,
+          "instructions": 4
+        },
+        "statuses": {
+          "completed": 2,
+          "timeout": 0,
+          "blocked": 0,
+          "error": 0,
+          "cancelled": 0
+        },
+        "tokens_all": 992390,
+        "observed_tokens_lower_bound": 992390,
+        "token_coverage_complete": true,
+        "tokens_per_accepted": 496195,
+        "root_tokens": 733764,
+        "worker_tokens": 258626,
+        "estimated_api_usd_all": 0.39643439999999996,
+        "estimated_api_usd_per_accepted": 0.19821719999999998,
+        "elapsed_median_s": 156.46550000000002,
+        "successful_elapsed_median_s": 156.46550000000002,
+        "elapsed_s_per_accepted": 156.46550000000002,
+        "delivery_median_s": 156.46550000000002,
+        "review_median_s": 0,
+        "human_s_all": 0,
+        "repair_rounds": 0,
+        "critical_defects": 0
+      },
+      "pi": {
+        "runs": 2,
+        "accepted": 2,
+        "acceptance_rate": 1,
+        "first_pass_rate": 0,
+        "quality_mean": 100,
+        "dimension_means": {
+          "correctness": 4,
+          "verification": 4,
+          "simplicity": 4,
+          "research": 4,
+          "instructions": 4
+        },
+        "statuses": {
+          "completed": 2,
+          "timeout": 0,
+          "blocked": 0,
+          "error": 0,
+          "cancelled": 0
+        },
+        "tokens_all": 1560451,
+        "observed_tokens_lower_bound": 1560451,
+        "token_coverage_complete": true,
+        "tokens_per_accepted": 780225.5,
+        "root_tokens": 1374943,
+        "worker_tokens": 185508,
+        "estimated_api_usd_all": 0.5556188000000001,
+        "estimated_api_usd_per_accepted": 0.27780940000000004,
+        "elapsed_median_s": 204.0875,
+        "successful_elapsed_median_s": 204.0875,
+        "elapsed_s_per_accepted": 204.0875,
+        "delivery_median_s": 204.0875,
+        "review_median_s": 0,
+        "human_s_all": 0,
+        "repair_rounds": 2,
+        "critical_defects": 0
+      },
+      "quality_delta_pi_minus_native": 0,
+      "acceptance_delta_pi_minus_native": 0
+    },
+    "T05": {
+      "native": {
+        "runs": 2,
+        "accepted": 2,
+        "acceptance_rate": 1,
+        "first_pass_rate": 1,
+        "quality_mean": 100,
+        "dimension_means": {
+          "correctness": 4,
+          "verification": 4,
+          "simplicity": 4,
+          "research": 4,
+          "instructions": 4
+        },
+        "statuses": {
+          "completed": 2,
+          "timeout": 0,
+          "blocked": 0,
+          "error": 0,
+          "cancelled": 0
+        },
+        "tokens_all": 1187523,
+        "observed_tokens_lower_bound": 1187523,
+        "token_coverage_complete": true,
+        "tokens_per_accepted": 593761.5,
+        "root_tokens": 807388,
+        "worker_tokens": 380135,
+        "estimated_api_usd_all": 0.4862011999999999,
+        "estimated_api_usd_per_accepted": 0.24310059999999994,
+        "elapsed_median_s": 147.0335,
+        "successful_elapsed_median_s": 147.0335,
+        "elapsed_s_per_accepted": 147.0335,
+        "delivery_median_s": 147.0335,
+        "review_median_s": 0,
+        "human_s_all": 0,
+        "repair_rounds": 0,
+        "critical_defects": 0
+      },
+      "pi": {
+        "runs": 2,
+        "accepted": 2,
+        "acceptance_rate": 1,
+        "first_pass_rate": 1,
+        "quality_mean": 100,
+        "dimension_means": {
+          "correctness": 4,
+          "verification": 4,
+          "simplicity": 4,
+          "research": 4,
+          "instructions": 4
+        },
+        "statuses": {
+          "completed": 2,
+          "timeout": 0,
+          "blocked": 0,
+          "error": 0,
+          "cancelled": 0
+        },
+        "tokens_all": 1378372,
+        "observed_tokens_lower_bound": 1378372,
+        "token_coverage_complete": true,
+        "tokens_per_accepted": 689186,
+        "root_tokens": 1089992,
+        "worker_tokens": 288380,
+        "estimated_api_usd_all": 0.4867616,
+        "estimated_api_usd_per_accepted": 0.2433808,
+        "elapsed_median_s": 202.86399999999998,
+        "successful_elapsed_median_s": 202.86399999999998,
+        "elapsed_s_per_accepted": 202.86399999999998,
+        "delivery_median_s": 202.86399999999998,
+        "review_median_s": 0,
+        "human_s_all": 0,
+        "repair_rounds": 0,
+        "critical_defects": 0
+      },
+      "quality_delta_pi_minus_native": 0,
+      "acceptance_delta_pi_minus_native": 0
+    }
+  },
+  "paired": {
+    "quality_delta_pi_minus_native": 0,
+    "quality_delta_interval": {
+      "low": 0,
+      "high": 0,
+      "level": 0.95,
+      "method": "paired task-cluster percentile bootstrap; exploratory"
+    },
+    "acceptance_delta_pi_minus_native": 0,
+    "acceptance_delta_interval": {
+      "low": 0,
+      "high": 0,
+      "level": 0.95,
+      "method": "paired task-cluster percentile bootstrap; exploratory"
+    },
+    "both_accepted_pairs": 4,
+    "both_accepted_elapsed_ratio_median_pi_over_native": 1.3833048409259208,
+    "all_run_tokens_ratio_pi_over_native": 1.3481377467816376,
+    "tokens_per_accepted_ratio_pi_over_native": 1.3481377467816376,
+    "estimated_api_usd_per_accepted_ratio_pi_over_native": 1.1809861283637326
+  },
+  "notes": [
+    "No automatic winner. Inspect acceptance, critical defects, quality, cost, review labor, and task-specific differences together.",
+    "Positive quality/acceptance delta favors Pi. Ratios below 1 favor Pi for resource use.",
+    "Observed token counts are lower bounds when telemetry incomplete. Missing dollars are unknown, not zero.",
+    "Token and latency ratios are descriptive point estimates; script does not compute their confidence intervals.",
+    "Bootstrap intervals describe this task sample. Few distinct tasks limit broader inference."
+  ]
+}

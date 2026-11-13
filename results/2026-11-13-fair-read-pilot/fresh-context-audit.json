@@ -1,0 +1,69 @@
+[
+  {
+    "run_id": "usual-T02-r1-pi",
+    "resumed_states": [
+      {
+        "session_matches": true,
+        "contains_prior_benchmark_results": false
+      }
+    ]
+  },
+  {
+    "run_id": "usual-T02-r1-native",
+    "resumed_states": [
+      {
+        "session_matches": true,
+        "contains_prior_benchmark_results": false
+      }
+    ]
+  },
+  {
+    "run_id": "usual-T05-r1-pi",
+    "resumed_states": [
+      {
+        "session_matches": true,
+        "contains_prior_benchmark_results": false
+      }
+    ]
+  },
+  {
+    "run_id": "usual-T05-r1-native",
+    "resumed_states": [
+      {
+        "session_matches": true,
+        "contains_prior_benchmark_results": false
+      }
+    ]
+  },
+  {
+    "run_id": "usual-T02-r2-native",
+    "resumed_states": [
+      {
+        "session_matches": true,
+        "contains_prior_benchmark_results": false
+      }
+    ]
+  },
+  {
+    "run_id": "usual-T02-r2-pi",
+    "resumed_states": [
+      {
+        "session_matches": true,
+        "contains_prior_benchmark_results": false
+      }
+    ]
+  },
+  {
+    "run_id": "usual-T05-r2-native",
+    "resumed_states": []
+  },
+  {
+    "run_id": "usual-T05-r2-pi",
+    "resumed_states": [
+      {
+        "session_matches": true,
+        "contains_prior_benchmark_results": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,100 @@
+[
+  {
+    "run_id": "usual-T02-r1-pi",
+    "fresh_root": true,
+    "fork_parent_present": false,
+    "resume_calls": 3,
+    "native_read_commands": 0,
+    "native_non_read_commands": [],
+    "native_file_changes": 0,
+    "pi_tool_names": [
+      "read"
+    ],
+    "pi_workers_reporting_blocked": 2
+  },
+  {
+    "run_id": "usual-T02-r1-native",
+    "fresh_root": true,
+    "fork_parent_present": false,
+    "resume_calls": 2,
+    "native_read_commands": 2,
+    "native_non_read_commands": [],
+    "native_file_changes": 0,
+    "pi_tool_names": [],
+    "pi_workers_reporting_blocked": 0
+  },
+  {
+    "run_id": "usual-T05-r1-pi",
+    "fresh_root": true,
+    "fork_parent_present": false,
+    "resume_calls": 3,
+    "native_read_commands": 0,
+    "native_non_read_commands": [],
+    "native_file_changes": 0,
+    "pi_tool_names": [
+      "read",
+      "ls"
+    ],
+    "pi_workers_reporting_blocked": 0
+  },
+  {
+    "run_id": "usual-T05-r1-native",
+    "fresh_root": true,
+    "fork_parent_present": false,
+    "resume_calls": 3,
+    "native_read_commands": 3,
+    "native_non_read_commands": [],
+    "native_file_changes": 0,
+    "pi_tool_names": [],
+    "pi_workers_reporting_blocked": 0
+  },
+  {
+    "run_id": "usual-T02-r2-native",
+    "fresh_root": true,
+    "fork_parent_present": false,
+    "resume_calls": 3,
+    "native_read_commands": 2,
+    "native_non_read_commands": [],
+    "native_file_changes": 0,
+    "pi_tool_names": [],
+    "pi_workers_reporting_blocked": 0
+  },
+  {
+    "run_id": "usual-T02-r2-pi",
+    "fresh_root": true,
+    "fork_parent_present": false,
+    "resume_calls": 2,
+    "native_read_commands": 0,
+    "native_non_read_commands": [],
+    "native_file_changes": 0,
+    "pi_tool_names": [
+      "read"
+    ],
+    "pi_workers_reporting_blocked": 2
+  },
+  {
+    "run_id": "usual-T05-r2-native",
+    "fresh_root": true,
+    "fork_parent_present": false,
+    "resume_calls": 2,
+    "native_read_commands": 2,
+    "native_non_read_commands": [],
+    "native_file_changes": 0,
+    "pi_tool_names": [],
+    "pi_workers_reporting_blocked": 0
+  },
+  {
+    "run_id": "usual-T05-r2-pi",
+    "fresh_root": true,
+    "fork_parent_present": false,
+    "resume_calls": 3,
+    "native_read_commands": 0,
+    "native_non_read_commands": [],
+    "native_file_changes": 0,
+    "pi_tool_names": [
+      "read",
+      "ls"
+    ],
+    "pi_workers_reporting_blocked": 0
+  }
+]

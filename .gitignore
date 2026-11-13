@@ -6,3 +6,6 @@ trial-*/
 *-results.local.jsonl
 rates.json
 comparison.json
+runs/
+!results/**/rates.json
+!results/**/comparison.json
