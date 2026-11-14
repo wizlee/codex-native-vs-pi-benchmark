@@ -2,7 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import {createHash} from 'node:crypto';
-import {collect} from './trial-ledger.mjs';
+import {collect,verifyConfiguration} from './trial-ledger.mjs';
+import {pathToFileURL} from 'node:url';
 import {checkTask} from './check.mjs';
 import {taskFiles} from './cases.mjs';
 
@@ -31,7 +32,22 @@ else{
     .filter(file=>fs.readFileSync(file,'utf8').split('\n').filter(Boolean).map(JSON.parse).some(e=>e.type==='message'&&e.message?.role==='assistant'));
 }
 const usage=collect(spec);
+const manifestPath=path.join(base,'manifest.json');
+const manifest=fs.existsSync(manifestPath)?JSON.parse(fs.readFileSync(manifestPath,'utf8')):{};
+let configuration=null;
+if(manifest.matched_workers){
+  configuration=verifyConfiguration(usage,{root_model:manifest.root_model,root_reasoning:manifest.root_reasoning,worker_model:manifest.worker_model,worker_reasoning:manifest.native_worker_reasoning});
+  fs.writeFileSync(path.join(base,`${runId}${tag}.configuration.json`),JSON.stringify(configuration,null,2)+'\n',{flag:'wx'});
+}
 const checker=await checkTask(run.task,cwd);
+if(run.task==='T02'&&manifest.precision_case_predeclared){
+  const {summarize}=await import(pathToFileURL(path.join(cwd,'summary.mjs')).href);
+  const input=[Number.MAX_SAFE_INTEGER,2,-Number.MAX_SAFE_INTEGER].map((cents,i)=>({id:String(i),customer:'x',sequence:0,cents,state:'posted'}));
+  const actual=summarize(input),expected=[{customer:'x',cents:2,count:3}];
+  const pass=JSON.stringify(actual)===JSON.stringify(expected);
+  checker.checks.push({name:'predeclared signed integer cancellation precision',pass,actual,expected});
+  checker.functional_checks_pass&&=pass;
+}
 const fixtures=taskFiles(run.task),artifactFiles={};
 const names=[];
 function visit(relative=''){
@@ -57,6 +73,7 @@ fs.writeFileSync(path.join(base,`${runId}${tag}.usage.json`),JSON.stringify(usag
 const observed={...run,cwd,delivery_s:turns.reduce((s,t)=>s+(t.durationMs??0),0)/1000,started_at:Math.min(...turns.map(t=>t.startedAt)),completed_at:turn.completedAt,
   root_reported_blocked:final.includes('RUN_BLOCKED'),root_reported_complete:final.includes('RUN_COMPLETE'),
   status_history:turns.map(t=>({status:t.status,started_at:t.startedAt,completed_at:t.completedAt,error:t.error})),
+  configuration,
   workers_with_model_calls:usage.expected_agent_ids.length-1,usage_complete:usage.usage_complete,
   total_tokens:usage.usage.reduce((s,u)=>s+u.input_tokens+u.output_tokens,0),
   input_tokens:usage.usage.reduce((s,u)=>s+u.input_tokens,0),
@@ -67,4 +84,4 @@ const observed={...run,cwd,delivery_s:turns.reduce((s,t)=>s+(t.durationMs??0),0)
   hashes:Object.fromEntries(Object.entries(artifactFiles).map(([n,s])=>[n,createHash('sha256').update(s).digest('hex')]))};
 fs.writeFileSync(path.join(base,`${runId}${tag}.observation.json`),JSON.stringify(observed,null,2)+'\n',{flag:'wx'});
 console.log(JSON.stringify({run:runId,delivery_s:observed.delivery_s,workers:observed.workers_with_model_calls,
-  complete:usage.usage_complete,tokens:observed.total_tokens,checks:checker.functional_checks_pass,files:Object.keys(artifactFiles)}));
+  complete:usage.usage_complete,tokens:observed.total_tokens,checks:checker.functional_checks_pass,configuration_pass:configuration?.pass??null,files:Object.keys(artifactFiles)}));

@@ -1,18 +1,21 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {analyze,quality,measureRecord} from './benchmark.mjs';
+import {configurationOf} from './trial-ledger.mjs';
 
 const directory=path.resolve(process.argv[3]??'runs/2026-11-13-pilot');
 const schedule=JSON.parse(fs.readFileSync(fs.existsSync(path.join(directory,'schedule.json'))?path.join(directory,'schedule.json'):'pilot-schedule.json','utf8'));
 const review=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
 const firstReview=JSON.parse(fs.readFileSync(path.join(directory,'scores.first-pass.json'),'utf8'));
 const rates=JSON.parse(fs.readFileSync(path.join(directory,'rates.json'),'utf8'));
+const manifest=fs.existsSync(path.join(directory,'manifest.json'))?JSON.parse(fs.readFileSync(path.join(directory,'manifest.json'),'utf8')):{};
 const records=[],details=[];
 for(const planned of schedule.runs){
   const initial=JSON.parse(fs.readFileSync(path.join(directory,`${planned.run_id}.observation.json`),'utf8'));
   const tag=fs.existsSync(path.join(directory,`${planned.run_id}.repair1.observation.json`))?'.repair1':'';
   const o=tag?JSON.parse(fs.readFileSync(path.join(directory,`${planned.run_id}${tag}.observation.json`),'utf8')):initial;
   const ledger=JSON.parse(fs.readFileSync(path.join(directory,`${planned.run_id}${tag}.usage.json`),'utf8'));
+  const actualConfiguration=configurationOf(ledger);
   const judged=review.artifacts.find(x=>x.blind_id===planned.blind_id);
   if(!judged)throw Error(`Missing blinded score ${planned.blind_id}`);
   const mandatory=o.functional_checks.functional_checks_pass&&judged.mandatory_pass&&o.workers_with_model_calls===2;
@@ -29,7 +32,7 @@ for(const planned of schedule.runs){
     expected_agent_ids:ledger.expected_agent_ids,other_cost_usd:0,usage:ledger.usage,
     quality_provenance:'Independent blinded AI reviewer; not human review',
     diagnostics:{human_acceptance:'unknown; not measured',human_review_time:'unknown; not measured',
-      timing_scope:'root submission latency; independent AI review excluded',reasoning_parity:false,
+      timing_scope:'root submission latency; independent AI review excluded',reasoning_parity:new Set(actualConfiguration.workers.flatMap(w=>w.reasoning)).size===1,actual_configuration:actualConfiguration,
       profile_scope:'Task-controlled/default-configuration pilot. Legacy controlled run IDs do not establish model/tool parity.',
       root_reported_blocked:initial.root_reported_blocked,workflow_fully_complete:!initial.root_reported_blocked,
       max_request_input:maxInput,review_evidence:judged.evidence}};
@@ -54,10 +57,13 @@ fs.writeFileSync(path.join(directory,'details.json'),JSON.stringify(details,null
 const fmt=n=>n===null?'unknown':Math.round(n).toLocaleString('en-US');
 const time=s=>{const v=Math.round(s);return `${Math.floor(v/60)}m ${String(v%60).padStart(2,'0')}s`;};
 const average=a=>a.reduce((s,x)=>s+x,0)/a.length;
+const actualRootEffort=[...new Set(records.flatMap(r=>r.diagnostics.actual_configuration.root.reasoning))].join('/');
+const actualWorkerEffort=arm=>[...new Set(records.filter(r=>r.arm===arm).flatMap(r=>r.diagnostics.actual_configuration.workers.flatMap(w=>w.reasoning)))].join('/');
 const lines=[`# Native versus Pi pilot results`,
   ``, `Observed result for these current configurations: native used ${(100*(1-comparison.arms.native.tokens_all/comparison.arms.pi.tokens_all)).toFixed(1)}% fewer processed tokens, ${(100*(1-comparison.arms.native.elapsed_s_per_accepted/comparison.arms.pi.elapsed_s_per_accepted)).toFixed(1)}% less agent work time per accepted artifact, and ${(100*(1-comparison.arms.native.estimated_api_usd_all/comparison.arms.pi.estimated_api_usd_all)).toFixed(1)}% lower standard API-equivalent cost, including allowed repairs. This is a small pilot, not a universal backend verdict.`,
   ``, `Eight fresh Codex root chats. Two task types, two repetitions, both arms. No root was forked from previous trial. Sequential execution in frozen balanced order.`,
-  ``, `Scope: task-controlled/default-configuration pilot, not pure backend causal test. Root gpt-6.1-sol/xhigh; native readers xhigh; Pi readers high. Both readers can read actual source/skill files. Native may use read-only shell; Pi uses read/grep/find/ls. No manually recopied skill bodies. Host instructions/tool definitions differ.`,
+  ``, `Scope: task-controlled/default-configuration pilot, not pure backend causal test. Actual session logs: roots gpt-6.1-sol/${actualRootEffort}; native readers ${actualWorkerEffort('native')}; Pi readers ${actualWorkerEffort('pi')}. Both readers can read actual source/skill files. Native may use read-only shell; Pi uses read/grep/find/ls. No manually recopied skill bodies. Host instructions/tool definitions differ.`,
+  ...(manifest.configuration_correction?['',`Metadata correction: ${manifest.configuration_correction}`]:[]),
   ``, `Quality scores below come from fresh-session AI review with arm labels withheld, using same configured model family as solvers. No independent human review or human time-to-acceptance measured. Success means functional/evidence checks plus provisional AI rubric pass. Final 100/100 ratings are a scoring ceiling, not proof of quality equivalence. Objective first-pass defects are more informative here.`,
   ``, `| Measure | Native | Pi |`, `|---|---:|---:|`];
 for(const [label,fn] of [
@@ -91,7 +97,7 @@ lines.push('', '## Interpretation limits', '',
   '- Read isolation was enforced by instructions and separate folders, not a proved OS-level prohibition on reading evaluator files. No evaluator or prior outputs were supplied to solvers.',
   '- Different worker reasoning levels and host tool definitions limit backend attribution. Treat results as these default configurations, not universal native-versus-Pi performance. Earlier no-shell diagnostic runs are separate and excluded.',
   '- AI quality and verifiability ratings are provisional. Human review time and final human acceptance are unknown.',
-  '- Worker reasoning was xhigh for native versus high for Pi, and roots selected different additional skills. These are whole current-configuration results; backend causality cannot be isolated.',
+  `- Actual worker reasoning was ${actualWorkerEffort('native')} for native versus ${actualWorkerEffort('pi')} for Pi. Roots selected different additional skills; backend causality cannot be isolated.`,
   '', '## Reproduce public evidence', '',
   '`node scripts/check-precision.mjs results/2026-11-13-fair-read-pilot --public --first-pass` reproduces both original Pi precision failures and both native passes.',
   '', '`node scripts/check-precision.mjs results/2026-11-13-fair-read-pilot --public` verifies all four final implementations.',

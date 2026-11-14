@@ -4,7 +4,9 @@ Observed result for these current configurations: native used 25.8% fewer proces
 
 Eight fresh Codex root chats. Two task types, two repetitions, both arms. No root was forked from previous trial. Sequential execution in frozen balanced order.
 
-Scope: task-controlled/default-configuration pilot, not pure backend causal test. Root gpt-6.1-sol/xhigh; native readers xhigh; Pi readers high. Both readers can read actual source/skill files. Native may use read-only shell; Pi uses read/grep/find/ls. No manually recopied skill bodies. Host instructions/tool definitions differ.
+Scope: task-controlled/default-configuration pilot, not pure backend causal test. Actual session logs: roots gpt-6.1-sol/low; native readers low; Pi readers high. Both readers can read actual source/skill files. Native may use read-only shell; Pi uses read/grep/find/ls. No manually recopied skill bodies. Host instructions/tool definitions differ.
+
+Metadata correction: Earlier report incorrectly labelled roots/native workers xhigh based on pre-run diagnostics. All eight fair-read session logs show low roots, low native workers, high Pi workers. Time, tokens, cost, correctness and rankings unchanged.
 
 Quality scores below come from fresh-session AI review with arm labels withheld, using same configured model family as solvers. No independent human review or human time-to-acceptance measured. Success means functional/evidence checks plus provisional AI rubric pass. Final 100/100 ratings are a scoring ceiling, not proof of quality equivalence. Objective first-pass defects are more informative here.
 
@@ -57,7 +59,7 @@ Submission times sum actual initial and repair work segments. Study/evaluator qu
 - Read isolation was enforced by instructions and separate folders, not a proved OS-level prohibition on reading evaluator files. No evaluator or prior outputs were supplied to solvers.
 - Different worker reasoning levels and host tool definitions limit backend attribution. Treat results as these default configurations, not universal native-versus-Pi performance. Earlier no-shell diagnostic runs are separate and excluded.
 - AI quality and verifiability ratings are provisional. Human review time and final human acceptance are unknown.
-- Worker reasoning was xhigh for native versus high for Pi, and roots selected different additional skills. These are whole current-configuration results; backend causality cannot be isolated.
+- Actual worker reasoning was low for native versus high for Pi. Roots selected different additional skills; backend causality cannot be isolated.
 
 ## Reproduce public evidence
 

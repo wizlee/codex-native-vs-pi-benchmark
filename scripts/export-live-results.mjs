@@ -8,6 +8,10 @@ const read=name=>JSON.parse(fs.readFileSync(path.join(source,name),'utf8'));
 const write=(name,value)=>fs.writeFileSync(path.join(destination,name),JSON.stringify(value,null,2)+'\n');
 const schedule=read('schedule.json'),rates=read('rates.json');
 const originalRecords=fs.readFileSync(path.join(source,'results.jsonl'),'utf8').trim().split('\n').map(JSON.parse);
+const sourceManifest=read('manifest.json');
+const unique=values=>[...new Set(values)].join('/');
+const actualRootEffort=unique(originalRecords.flatMap(r=>r.diagnostics.actual_configuration.root.reasoning));
+const actualWorkerEffort=arm=>unique(originalRecords.filter(r=>r.arm===arm).flatMap(r=>r.diagnostics.actual_configuration.workers.flatMap(w=>w.reasoning)));
 const records=originalRecords.map(r=>{
   const aliases=new Map(r.expected_agent_ids.map((id,i)=>[id,`${r.run_id}:${i===0?'root':`worker-${i}`}`]));
   const diagnostics={...r.diagnostics};delete diagnostics.review_evidence;
@@ -40,7 +44,9 @@ write('manifest.json',{
   batch:'2026-11-13-fair-read-pilot',local_dates:'2026-11-13 through 2026-11-14',timezone:'Asia/Kuala_Lumpur',
   trials:8,task_types:2,repetitions_per_task_arm:2,ordering_seed:20261112,
   fresh_root_sessions:true,root_history_forked:false,workers_per_trial:2,
-  root_model:'gpt-6.1-sol',root_reasoning:'xhigh',native_worker_reasoning:'xhigh',pi_worker_reasoning:'high',
+  root_model:'gpt-6.1-sol',root_reasoning:actualRootEffort,native_worker_reasoning:actualWorkerEffort('native'),pi_worker_reasoning:actualWorkerEffort('pi'),
+  configuration_source:'Actual per-session source contexts, not config defaults or self-reports',
+  configuration_correction:sourceManifest.configuration_correction??null,
   read_policy:'Equivalent semantic read access; native read-only shell and Pi read/grep/find/ls. Root alone edits and executes tests.',
   skills:'Shared caveman/unslop required; roots selected additional role skills. Pi T02 handoffs included execution-dependent diagnose and readers reported blocked.',
   quality:'Independent fresh-session AI review with backend/time/cost labels withheld; same configured model family. No human review measured.',

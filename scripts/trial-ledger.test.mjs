@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {nativeUsage,piUsage} from './trial-ledger.mjs';
+import {nativeUsage,piUsage,verifyConfiguration} from './trial-ledger.mjs';
 
 function fixture(fn){
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'benchmark-ledger-'));
@@ -41,3 +41,15 @@ test('ledger reconciliation rejects inconsistent Pi totals',()=>fixture(director
     {type:'message',id:'one',timestamp:'2026-11-13T01:00:01Z',message:{role:'assistant',provider:'openai-codex',model:'example',usage:{input:60,cacheRead:30,cacheWrite:0,output:20,totalTokens:999}}}]);
   assert.equal(piUsage(file).reconciled,false);
 }));
+
+test('matched configuration validation fails wrong or missing effort instead of trusting manifest',()=>{
+  const collection={usage:[{agent_id:'r',role:'root',model:'openai/gpt-6.1-sol'},{agent_id:'a',role:'worker',model:'openai/gpt-6.1-sol'},{agent_id:'b',role:'worker',model:'openai-codex/gpt-6.1-sol'}],sources:[
+    {agent_id:'r',contexts:[{effort:'low'}]},{agent_id:'a',contexts:[{effort:'high'}]},{agent_id:'b',contexts:[{thinkingLevel:'high'}]},
+  ]};
+  const expected={root_model:'gpt-6.1-sol',root_reasoning:'low',worker_model:'gpt-6.1-sol',worker_reasoning:'high'};
+  assert.equal(verifyConfiguration(collection,expected).pass,true);
+  collection.sources[1].contexts=[{effort:'low'}];
+  assert.equal(verifyConfiguration(collection,expected).pass,false);
+  collection.sources[1].contexts=[];
+  assert.equal(verifyConfiguration(collection,expected).pass,false);
+});

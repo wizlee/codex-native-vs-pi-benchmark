@@ -79,6 +79,27 @@ export function collect(spec){
     expected_agent_ids:sources.map(s=>s.agent_id),usage:sources.flatMap(s=>s.ledger),
     sources:sources.map(({ledger,...s})=>s)};
 }
+export function configurationOf(collection){
+  const unique=values=>[...new Set(values)];
+  const agents=collection.sources.map((s,i)=>({
+    role:collection.usage.find(u=>u.agent_id===s.agent_id)?.role??(i===0?'root':'worker'),
+    models:unique(collection.usage.filter(u=>u.agent_id===s.agent_id).map(u=>u.model.split('/').at(-1))),
+    reasoning:unique(s.contexts.map(c=>c.effort??c.thinkingLevel).filter(Boolean)),
+  }));
+  return {root:agents.find(a=>a.role==='root'),workers:agents.filter(a=>a.role==='worker')};
+}
+export function verifyConfiguration(collection,expected){
+  const actual=configurationOf(collection),issues=[];
+  const exact=(values,value)=>values?.length===1&&values[0]===value;
+  if(!exact(actual.root?.models,expected.root_model))issues.push('root model mismatch or unknown');
+  if(!exact(actual.root?.reasoning,expected.root_reasoning))issues.push('root reasoning mismatch or unknown');
+  if(actual.workers.length!==2)issues.push('expected exactly two workers');
+  for(const [i,w] of actual.workers.entries()){
+    if(!exact(w.models,expected.worker_model))issues.push(`worker ${i+1} model mismatch or unknown`);
+    if(!exact(w.reasoning,expected.worker_reasoning))issues.push(`worker ${i+1} reasoning mismatch or unknown`);
+  }
+  return {pass:issues.length===0,expected,actual,issues};
+}
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   try{const spec=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));const result=collect(spec);
     fs.writeFileSync(process.argv[3],JSON.stringify(result,null,2)+'\n',{flag:'wx'});
