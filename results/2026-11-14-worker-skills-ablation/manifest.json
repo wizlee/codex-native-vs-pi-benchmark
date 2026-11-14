@@ -1,0 +1,40 @@
+{
+  "batch": "2026-11-14-worker-skills-ablation",
+  "timezone": "Asia/Kuala_Lumpur",
+  "matched_workers": true,
+  "root_model": "gpt-6.1-sol",
+  "root_reasoning": "low",
+  "worker_model": "gpt-6.1-sol",
+  "native_worker_reasoning": "high",
+  "pi_worker_reasoning": "high",
+  "worker_skills": {
+    "T02": [
+      "caveman",
+      "unslop"
+    ],
+    "T05": [
+      "caveman",
+      "unslop",
+      "technical-writing"
+    ]
+  },
+  "precision_case_predeclared": true,
+  "baseline_immutable": true,
+  "changes": [
+    "controller waits retained",
+    "complete native skill bodies count as loaded",
+    "additional skills use complete bounded reads",
+    "independent reads may share a tool response"
+  ],
+  "request_shape_telemetry": true,
+  "skill_loading": "invocation snapshots; no path-only loaded flags; native activation and gated additional reads preserved",
+  "trials": 4,
+  "repetitions_per_task_arm": 1,
+  "ordering_seed": null,
+  "ordering_method": "Predeclared balanced order: T02 native-first, T05 Pi-first, reversing controller batch.",
+  "quality": "Objective contract checks plus fresh blinded AI artifact review; human acceptance/time unknown.",
+  "timing": "Sum actual initial and repair solver-turn durations. Study overhead excluded; any quota gap disclosed separately.",
+  "phase_status": "Suspended after two observations: prompt-only policy falsified; recovered Pi retry exposed stale-error bridge bug. Corrective live ablation requires user direction. Original four-trial plan retained.",
+  "observed_trials": 2,
+  "unexecuted_trials": 2
+}

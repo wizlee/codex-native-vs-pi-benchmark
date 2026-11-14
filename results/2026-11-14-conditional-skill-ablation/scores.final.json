@@ -1,0 +1,88 @@
+{
+  "artifacts": [
+    {
+      "blind_id": "artifact-001",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete summary.mjs and supplied regression code. Independent frozen-input cases cover latest sequence, later tie, customer move, signed refunds, void history and revival, invalid entries, special customer keys, UTF-16 code-unit ordering, empty input and immutability.",
+        "8/8 independent cases pass. Reproduce all checks with node work/review.mjs from reviewer directory. Full concrete inputs and outputs retained in work/check-results.json.",
+        "Two Maps separate valid winner selection from grouping. >= implements later-position tie break; void winners retained until selection ends. BigInt accumulation preserves exact signed cancellation before conversion to safe final Number. Comparator uses < and >, matching code-unit order. No input writes or dependencies added.",
+        "Submitted regression suite rerun on copied implementation: exit 0. Includes useful winner, invalid-entry, void and immutable-input evidence; source implementation also inspected directly."
+      ]
+    },
+    {
+      "blind_id": "artifact-003",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete DECISION.md. Independently counted 303 whitespace-delimited words, below 600.",
+        "Recomputed authoritative N2 price: $10 + ceil((30000-10000)/10000)*$1 = $12. S1 qualifying price: $15 + ceil((30000-20000)/10000)*$2 + $4 retention = $21. Decision states both complete prices and rejects South under $14 budget.",
+        "Inline N1/N2 establish conditional North recommendation, EU-only selection and seven-day retention. N1/S1 establish current at-least-once semantics and stable-ID client deduplication. N1/M1 explicitly resolve superseded exactly-once marketing.",
+        "N3 measurement accurately retains 180 ms p95, 20 jobs/second, EU lab, 1 KB, single tenant and no induced failures. Document distinguishes observed sample from production guarantee and N1 absence of latency SLA. Identifies workload/failure unknowns and proposes bounded representative North trial measuring p95 with retry/deduplication check."
+      ]
+    },
+    {
+      "blind_id": "artifact-005",
+      "mandatory_pass": false,
+      "critical_defect": true,
+      "scores": {
+        "correctness": 0.5,
+        "verification": 2.5,
+        "simplicity": 1,
+        "research": 1.5,
+        "instructions": 2
+      },
+      "evidence": [
+        "Read complete summary.mjs and supplied regression code. Independent frozen-input cases cover latest sequence, later tie, customer move, signed refunds, void history and revival, invalid entries, special customer keys, UTF-16 code-unit ordering, empty input and immutability.",
+        "2/8 independent cases pass. Reproduce all checks with node work/review.mjs from reviewer directory. Full concrete inputs and outputs retained in work/check-results.json.",
+        "Primary API is unchanged original implementation. Reproduced duplicate input [{id:\"x\",customer:\"A\",sequence:1,cents:100,state:\"posted\"},{id:\"x\",customer:\"B\",sequence:2,cents:200,state:\"posted\"}]. Expected only B/200/count1; actual A/100/count1 plus B/200/count1.",
+        "Reproduced void history failure: x/A/sequence3/cents0/void followed by x/A/sequence2/cents7/posted. Expected []; actual A/7/count1. Input [null] must be ignored; API instead throws Cannot read properties of null (reading state). Independent ordering and exact signed-cancellation cases also fail.",
+        "Reproduced unauthorized shared-state mutation in isolated Node process: single valid event {id:\"x\",customer:\"__proto__\",sequence:0,cents:5,state:\"posted\"}. Expected [{customer:\"__proto__\",cents:5,count:1}] with no global mutation; actual [] and Object.prototype gains own cents/count properties, both NaN. Before call Object.hasOwn(Object.prototype,\"cents\") was false; after true. This demonstrates critical side effect beyond merely incomplete fix.",
+        "Supplied repro correctly exposes duplicate failure; one test fails, KEEP-byte test passes. Honest RUN_BLOCKED account receives no extra code penalty. Correctness rating reflects submitted API, not delegation failure."
+      ]
+    },
+    {
+      "blind_id": "artifact-007",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete DECISION.md. Independently counted 332 whitespace-delimited words, below 600.",
+        "Recomputed authoritative N2 price: $10 + ceil((30000-10000)/10000)*$1 = $12. S1 qualifying price: $15 + ceil((30000-20000)/10000)*$2 + $4 retention = $21. Decision states both complete prices and rejects South under $14 budget.",
+        "Inline N1/N2 establish conditional North recommendation, EU-only selection and seven-day retention. N1/S1 establish current at-least-once semantics and stable-ID client deduplication. N1/M1 explicitly resolve superseded exactly-once marketing.",
+        "N3 measurement accurately retains 180 ms p95, 20 jobs/second, EU lab, 1 KB, single tenant and no induced failures. Document distinguishes observed sample from production guarantee and N1 absence of latency SLA. Identifies workload/failure unknowns and proposes bounded representative North trial measuring p95 with retry/deduplication check.",
+        "Submitted Node verifier rerun on copied files: exit 0. Arithmetic, fixture bytes, word limit and citation markers pass. Prose separately checked against authoritative source packet."
+      ]
+    }
+  ],
+  "review_limits": [
+    "Provisional AI ratings only. Human review time unknown. No quality-equivalence claim. Scores use requested 0..4 dimensions; weights remain correctness40, verification20, simplicity15, research15, instructions10.",
+    "All 13 primary artifact bodies accessible and individually read without truncation. Supplied blind IDs are review-001 through review-013; preserved exactly rather than replacing with example artifact-* IDs.",
+    "Only authorized frozen blind-review.json read from benchmark folder. No other chats, benchmark files, raw logs, prior results, web research, external messages, solvers or subagents consulted. All execution used reviewer-owned copies.",
+    "Frozen packet contains selected files and alias declarations, not complete original directories. README/proof/metadata referenced by answers and some supporting fixtures unavailable. Missing material not assumed defective. KEEP/source preservation assessed using supplied flags and copied authoritative fixtures where applicable, not independent access to original directories.",
+    "T05 prose checked manually against original authoritative SOURCES.md in frozen packet. Price arithmetic independently recomputed and word counts measured. No real queue or production latency test performed; vendors fictional.",
+    "T02 tested ordinary array/plain-data events, including invalid primitive entries. No claims about throwing accessors/proxies or non-array top-level arguments, which public contract does not specify. Deterministic tests and source inspection cannot exhaust all JavaScript inputs.",
+    "Delegation status, requested/resolved models, tool-scope compliance, cost and run order excluded from quality scoring. Critical flags based on reproduced numeric data corruption or prototype mutation, not worker failures."
+  ]
+}

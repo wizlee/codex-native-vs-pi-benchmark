@@ -20,7 +20,7 @@ function category(calls){
   const code=calls.map(body).join('\n'),ns=calls.flatMap(names);
   if(/ALL_TOOLS/.test(code)||ns.some(n=>/pi_discover$|ctx_resume$/.test(n)))return 'setup';
   if(ns.some(n=>/pi_delegate$|^spawn_agent$/.test(n)))return 'launch';
-  const coord=ns.some(n=>/pi_status$|^list_agents$|^wait_agent$|^sleep$|^wait$/.test(n));
+  const coord=ns.some(n=>/pi_status$|pi_wait$|^list_agents$|^wait_agent$|^sleep$|^wait$/.test(n));
   const work=ns.some(n=>/exec_command$|apply_patch$|ctx_execute$/.test(n));
   if(coord)return work?'coordination_with_work':'coordination_only';
   return calls.length?'implementation_and_verification':'final';
@@ -35,6 +35,30 @@ function snapshots(value,found=[]){
     else Object.values(value).forEach(v=>snapshots(v,found));
   }
   return found;
+}
+function waitResults(value,found=[]){
+  if(typeof value==='string'){
+    if(/^[\s]*[\[{]/.test(value)){try{waitResults(JSON.parse(value),found);}catch{}}
+  }else if(Array.isArray(value))value.forEach(v=>waitResults(v,found));
+  else if(value&&typeof value==='object'){
+    if(typeof value.reason==='string'&&Array.isArray(value.workers))found.push(value);
+    else Object.values(value).forEach(v=>waitResults(v,found));
+  }
+  return found;
+}
+function errorCode(value){
+  if(typeof value==='string'){try{return errorCode(JSON.parse(value));}catch{return null;}}
+  if(!value||typeof value!=='object')return null;
+  if(typeof value.code==='string'&&/^[A-Z_]+$/.test(value.code))return value.code;
+  return Object.values(value).map(errorCode).find(Boolean)??null;
+}
+export function piCallOutcome(item,wait=false){
+  const result=wait?waitResults(item.result)[0]:snapshots(item.result)[0];
+  const duration=item.duration?item.duration.secs+item.duration.nanos/1e9:null;
+  const common={requested_wait_ms:item.arguments?.waitMs??(wait?60000:10000),duration_s:duration};
+  if(!result)return {...common,state:'unavailable',reason:'unavailable_result',error_code:errorCode(item.result),result_available:false,discovery:false,pending_ui:null,snapshot_chars:0,text_chars:0,inventory_skills:0};
+  if(wait)return {...common,reason:result.reason,states:result.workers.map(worker=>worker.state),pending_ui:sum(result.workers.map(worker=>worker.pendingUiCount??0)),snapshot_chars:JSON.stringify(result).length,result_available:true};
+  return {...common,discovery:Array.isArray(result.skills),state:result.state,snapshot_chars:JSON.stringify(result).length,text_chars:(result.text??'').length,inventory_skills:result.skills?.length??0,pending_ui:result.pendingUiCount,result_available:true};
 }
 export function rootTrace(events){
   let previous=-1;
@@ -125,12 +149,12 @@ export function analyzeBatch(batch){
     if(sum(root.map(c=>c.total_tokens))!==sum(u.ledger.map(c=>c.input_tokens+c.output_tokens)))throw Error('Root usage does not reconcile');
     const nativeCompletions=es.filter(e=>e.type==='event_msg'&&e.payload.type==='item_completed'&&e.payload.item?.type==='SubAgentActivity'&&e.payload.item.kind==='completed');
     const piStatus=es.filter(e=>e.type==='event_msg'&&e.payload.type==='item_completed'&&e.payload.item?.type==='McpToolCall'&&e.payload.item.tool==='pi_status').map(e=>{
-      const i=e.payload.item,s=snapshots(i.result)[0];if(!s)throw Error('Unrecognized Pi status result');
-      return {root_call:root.filter(c=>c.ordinal<e.ordinal).at(-1)?.call,discovery:Array.isArray(s.skills),state:s.state,
-        requested_wait_ms:i.arguments.waitMs??10000,duration_s:i.duration.secs+i.duration.nanos/1e9,
-        snapshot_chars:JSON.stringify(s).length,text_chars:(s.text??'').length,inventory_skills:s.skills?.length??0,pending_ui:s.pendingUiCount};});
+      return {root_call:root.filter(c=>c.ordinal<e.ordinal).at(-1)?.call,...piCallOutcome(e.payload.item)};});
+    const piWait=es.filter(e=>e.type==='event_msg'&&e.payload.type==='item_completed'&&e.payload.item?.type==='McpToolCall'&&e.payload.item.tool==='pi_wait').map(e=>{
+      return piCallOutcome(e.payload.item,true);
+    });
     return {run_id:r.run_id,arm:r.arm,task:r.task,repeat:r.repeat,root_source_sha256:hash(file),root,
-      native_completion_events:nativeCompletions.length,pi_status_calls:piStatus,
+      native_completion_events:nativeCompletions.length,pi_status_calls:piStatus,pi_wait_calls:piWait,
       workers:r.arm==='native'?spec.native_worker_ids.map(id=>nativeWorker(findNativeFile(id,spec.native_day_directory))):spec.pi_session_files.map(piWorker)};
   });
   return {method:'Selected recorded sessions only. Root totals are exact telemetry. Text sizes are characters, not estimated tokens. Tool-wrapper durations may include multiple operations. Worker spans include startup; they are not CPU times.',...summarize(runs),runs};

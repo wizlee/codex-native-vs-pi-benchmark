@@ -1,0 +1,852 @@
+{
+  "scope": "All completed observations from a stopped phase. Original plan retained. Missing trials were never started; failed observations are not discarded. Failed zero-usage records do not prove zero billing.",
+  "planned": 4,
+  "observed": 2,
+  "unexecuted": [
+    "controlled-T05-r1-native",
+    "controlled-T05-r1-pi"
+  ],
+  "observations": [
+    {
+      "run_id": "controlled-T02-r1-pi",
+      "task": "T02",
+      "arm": "pi",
+      "agent_work_s": 263.713,
+      "functional_checks": {
+        "task": "T02",
+        "functional_checks_pass": true,
+        "human_review_required": true,
+        "checks": [
+          {
+            "name": "unrelated user work preserved",
+            "pass": true
+          },
+          {
+            "name": "latest state, tie, customer move, signed amounts, sort",
+            "pass": true
+          },
+          {
+            "name": "invalid entries do not displace valid event",
+            "pass": true
+          },
+          {
+            "name": "special keys, void then recreation, empty",
+            "pass": true
+          },
+          {
+            "name": "customer ordering uses code units",
+            "pass": true
+          },
+          {
+            "name": "predeclared signed integer cancellation precision",
+            "pass": true,
+            "actual": [
+              {
+                "customer": "x",
+                "cents": 2,
+                "count": 3
+              }
+            ],
+            "expected": [
+              {
+                "customer": "x",
+                "cents": 2,
+                "count": 3
+              }
+            ]
+          }
+        ]
+      },
+      "workflow": {
+        "run_id": "controlled-T02-r1-pi",
+        "workers": [
+          {
+            "worker": 1,
+            "state": "completed"
+          },
+          {
+            "worker": 2,
+            "state": "completed"
+          }
+        ],
+        "workflow_fully_complete": true
+      },
+      "configuration": {
+        "pass": true,
+        "expected": {
+          "root_model": "gpt-6.1-sol",
+          "root_reasoning": "low",
+          "worker_model": "gpt-6.1-sol",
+          "worker_reasoning": "high"
+        },
+        "actual": {
+          "root": {
+            "role": "root",
+            "models": [
+              "gpt-6.1-sol"
+            ],
+            "reasoning": [
+              "low"
+            ]
+          },
+          "workers": [
+            {
+              "role": "worker",
+              "models": [
+                "gpt-6.1-sol"
+              ],
+              "reasoning": [
+                "high"
+              ]
+            },
+            {
+              "role": "worker",
+              "models": [
+                "gpt-6.1-sol"
+              ],
+              "reasoning": [
+                "high"
+              ]
+            }
+          ]
+        },
+        "issues": []
+      },
+      "usage_complete": true,
+      "observed_tokens_lower_bound": 728831,
+      "quality_review": "Not independently scored; no accepted-outcome cost claim.",
+      "usage": [
+        {
+          "event_id": "controlled-T02-r1-pi:call-1",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 1",
+          "scope": "exclusive_call",
+          "input_tokens": 25022,
+          "cached_input_tokens": 13312,
+          "cache_write_tokens": 0,
+          "output_tokens": 252,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-2",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 2",
+          "scope": "exclusive_call",
+          "input_tokens": 32607,
+          "cached_input_tokens": 25088,
+          "cache_write_tokens": 0,
+          "output_tokens": 638,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-3",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 3",
+          "scope": "exclusive_call",
+          "input_tokens": 33648,
+          "cached_input_tokens": 33024,
+          "cache_write_tokens": 0,
+          "output_tokens": 54,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-4",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 4",
+          "scope": "exclusive_call",
+          "input_tokens": 35677,
+          "cached_input_tokens": 33536,
+          "cache_write_tokens": 0,
+          "output_tokens": 623,
+          "reasoning_tokens": 36
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-5",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 5",
+          "scope": "exclusive_call",
+          "input_tokens": 36557,
+          "cached_input_tokens": 36096,
+          "cache_write_tokens": 0,
+          "output_tokens": 71,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-6",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 6",
+          "scope": "exclusive_call",
+          "input_tokens": 36658,
+          "cached_input_tokens": 36480,
+          "cache_write_tokens": 0,
+          "output_tokens": 34,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-7",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 7",
+          "scope": "exclusive_call",
+          "input_tokens": 36722,
+          "cached_input_tokens": 13312,
+          "cache_write_tokens": 0,
+          "output_tokens": 62,
+          "reasoning_tokens": 26
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-8",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 8",
+          "scope": "exclusive_call",
+          "input_tokens": 36814,
+          "cached_input_tokens": 36608,
+          "cache_write_tokens": 0,
+          "output_tokens": 57,
+          "reasoning_tokens": 21
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-9",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 9",
+          "scope": "exclusive_call",
+          "input_tokens": 37553,
+          "cached_input_tokens": 36736,
+          "cache_write_tokens": 0,
+          "output_tokens": 95,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-10",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 10",
+          "scope": "exclusive_call",
+          "input_tokens": 38256,
+          "cached_input_tokens": 37504,
+          "cache_write_tokens": 0,
+          "output_tokens": 1189,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-11",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 11",
+          "scope": "exclusive_call",
+          "input_tokens": 43063,
+          "cached_input_tokens": 39296,
+          "cache_write_tokens": 0,
+          "output_tokens": 522,
+          "reasoning_tokens": 28
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-12",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 12",
+          "scope": "exclusive_call",
+          "input_tokens": 43848,
+          "cached_input_tokens": 43392,
+          "cache_write_tokens": 0,
+          "output_tokens": 1130,
+          "reasoning_tokens": 138
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-13",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 13",
+          "scope": "exclusive_call",
+          "input_tokens": 45556,
+          "cached_input_tokens": 44800,
+          "cache_write_tokens": 0,
+          "output_tokens": 282,
+          "reasoning_tokens": 115
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-14",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 14",
+          "scope": "exclusive_call",
+          "input_tokens": 46465,
+          "cached_input_tokens": 36480,
+          "cache_write_tokens": 0,
+          "output_tokens": 530,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-15",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 15",
+          "scope": "exclusive_call",
+          "input_tokens": 47069,
+          "cached_input_tokens": 46848,
+          "cache_write_tokens": 0,
+          "output_tokens": 408,
+          "reasoning_tokens": 13
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-16",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 16",
+          "scope": "exclusive_call",
+          "input_tokens": 47522,
+          "cached_input_tokens": 45696,
+          "cache_write_tokens": 0,
+          "output_tokens": 438,
+          "reasoning_tokens": 9
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-17",
+          "agent_id": "controlled-T02-r1-pi:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 17",
+          "scope": "exclusive_call",
+          "input_tokens": 48274,
+          "cached_input_tokens": 47744,
+          "cache_write_tokens": 0,
+          "output_tokens": 60,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-18",
+          "agent_id": "controlled-T02-r1-pi:worker-1",
+          "role": "worker",
+          "model": "openai-codex/gpt-6.1-sol",
+          "source": "anonymized selected source, call 18",
+          "scope": "exclusive_call",
+          "input_tokens": 4321,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 117,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-19",
+          "agent_id": "controlled-T02-r1-pi:worker-1",
+          "role": "worker",
+          "model": "openai-codex/gpt-6.1-sol",
+          "source": "anonymized selected source, call 19",
+          "scope": "exclusive_call",
+          "input_tokens": 6524,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 56,
+          "reasoning_tokens": 32
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-20",
+          "agent_id": "controlled-T02-r1-pi:worker-1",
+          "role": "worker",
+          "model": "openai-codex/gpt-6.1-sol",
+          "source": "anonymized selected source, call 20",
+          "scope": "exclusive_call",
+          "input_tokens": 6609,
+          "cached_input_tokens": 6400,
+          "cache_write_tokens": 0,
+          "output_tokens": 110,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-21",
+          "agent_id": "controlled-T02-r1-pi:worker-1",
+          "role": "worker",
+          "model": "openai-codex/gpt-6.1-sol",
+          "source": "anonymized selected source, call 21",
+          "scope": "exclusive_call",
+          "input_tokens": 7032,
+          "cached_input_tokens": 4352,
+          "cache_write_tokens": 0,
+          "output_tokens": 809,
+          "reasoning_tokens": 374
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-22",
+          "agent_id": "controlled-T02-r1-pi:worker-2",
+          "role": "worker",
+          "model": "openai-codex/gpt-6.1-sol",
+          "source": "anonymized selected source, call 22",
+          "scope": "exclusive_call",
+          "input_tokens": 4323,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 117,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-23",
+          "agent_id": "controlled-T02-r1-pi:worker-2",
+          "role": "worker",
+          "model": "openai-codex/gpt-6.1-sol",
+          "source": "anonymized selected source, call 23",
+          "scope": "exclusive_call",
+          "input_tokens": 6526,
+          "cached_input_tokens": 4352,
+          "cache_write_tokens": 0,
+          "output_tokens": 68,
+          "reasoning_tokens": 44
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-24",
+          "agent_id": "controlled-T02-r1-pi:worker-2",
+          "role": "worker",
+          "model": "openai-codex/gpt-6.1-sol",
+          "source": "anonymized selected source, call 24",
+          "scope": "exclusive_call",
+          "input_tokens": 6623,
+          "cached_input_tokens": 6400,
+          "cache_write_tokens": 0,
+          "output_tokens": 88,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-pi:call-25",
+          "agent_id": "controlled-T02-r1-pi:worker-2",
+          "role": "worker",
+          "model": "openai-codex/gpt-6.1-sol",
+          "source": "anonymized selected source, call 25",
+          "scope": "exclusive_call",
+          "input_tokens": 7008,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 744,
+          "reasoning_tokens": 280
+        }
+      ],
+      "error_counts": [
+        {
+          "agent": "root",
+          "error_count": 0,
+          "reconciled": true
+        },
+        {
+          "agent": "worker-1",
+          "error_count": 0,
+          "reconciled": true
+        },
+        {
+          "agent": "worker-2",
+          "error_count": 0,
+          "reconciled": true
+        }
+      ]
+    },
+    {
+      "run_id": "controlled-T02-r1-native",
+      "task": "T02",
+      "arm": "native",
+      "agent_work_s": 178.509,
+      "functional_checks": {
+        "task": "T02",
+        "functional_checks_pass": true,
+        "human_review_required": true,
+        "checks": [
+          {
+            "name": "unrelated user work preserved",
+            "pass": true
+          },
+          {
+            "name": "latest state, tie, customer move, signed amounts, sort",
+            "pass": true
+          },
+          {
+            "name": "invalid entries do not displace valid event",
+            "pass": true
+          },
+          {
+            "name": "special keys, void then recreation, empty",
+            "pass": true
+          },
+          {
+            "name": "customer ordering uses code units",
+            "pass": true
+          },
+          {
+            "name": "predeclared signed integer cancellation precision",
+            "pass": true,
+            "actual": [
+              {
+                "customer": "x",
+                "cents": 2,
+                "count": 3
+              }
+            ],
+            "expected": [
+              {
+                "customer": "x",
+                "cents": 2,
+                "count": 3
+              }
+            ]
+          }
+        ]
+      },
+      "workflow": {
+        "run_id": "controlled-T02-r1-native",
+        "workers": [
+          {
+            "worker": 1,
+            "state": "completed"
+          },
+          {
+            "worker": 2,
+            "state": "completed"
+          }
+        ],
+        "workflow_fully_complete": true
+      },
+      "configuration": {
+        "pass": true,
+        "expected": {
+          "root_model": "gpt-6.1-sol",
+          "root_reasoning": "low",
+          "worker_model": "gpt-6.1-sol",
+          "worker_reasoning": "high"
+        },
+        "actual": {
+          "root": {
+            "role": "root",
+            "models": [
+              "gpt-6.1-sol"
+            ],
+            "reasoning": [
+              "low"
+            ]
+          },
+          "workers": [
+            {
+              "role": "worker",
+              "models": [
+                "gpt-6.1-sol"
+              ],
+              "reasoning": [
+                "high"
+              ]
+            },
+            {
+              "role": "worker",
+              "models": [
+                "gpt-6.1-sol"
+              ],
+              "reasoning": [
+                "high"
+              ]
+            }
+          ]
+        },
+        "issues": []
+      },
+      "usage_complete": true,
+      "observed_tokens_lower_bound": 614202,
+      "quality_review": "Not independently scored; no accepted-outcome cost claim.",
+      "usage": [
+        {
+          "event_id": "controlled-T02-r1-native:call-1",
+          "agent_id": "controlled-T02-r1-native:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 1",
+          "scope": "exclusive_call",
+          "input_tokens": 25024,
+          "cached_input_tokens": 13312,
+          "cache_write_tokens": 0,
+          "output_tokens": 253,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-2",
+          "agent_id": "controlled-T02-r1-native:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 2",
+          "scope": "exclusive_call",
+          "input_tokens": 31044,
+          "cached_input_tokens": 25088,
+          "cache_write_tokens": 0,
+          "output_tokens": 657,
+          "reasoning_tokens": 14
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-3",
+          "agent_id": "controlled-T02-r1-native:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 3",
+          "scope": "exclusive_call",
+          "input_tokens": 31870,
+          "cached_input_tokens": 31488,
+          "cache_write_tokens": 0,
+          "output_tokens": 460,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-4",
+          "agent_id": "controlled-T02-r1-native:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 4",
+          "scope": "exclusive_call",
+          "input_tokens": 32352,
+          "cached_input_tokens": 32128,
+          "cache_write_tokens": 0,
+          "output_tokens": 461,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-5",
+          "agent_id": "controlled-T02-r1-native:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 5",
+          "scope": "exclusive_call",
+          "input_tokens": 32835,
+          "cached_input_tokens": 32640,
+          "cache_write_tokens": 0,
+          "output_tokens": 889,
+          "reasoning_tokens": 26
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-6",
+          "agent_id": "controlled-T02-r1-native:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 6",
+          "scope": "exclusive_call",
+          "input_tokens": 34552,
+          "cached_input_tokens": 33536,
+          "cache_write_tokens": 0,
+          "output_tokens": 30,
+          "reasoning_tokens": 7
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-7",
+          "agent_id": "controlled-T02-r1-native:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 7",
+          "scope": "exclusive_call",
+          "input_tokens": 34607,
+          "cached_input_tokens": 34432,
+          "cache_write_tokens": 0,
+          "output_tokens": 50,
+          "reasoning_tokens": 33
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-8",
+          "agent_id": "controlled-T02-r1-native:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 8",
+          "scope": "exclusive_call",
+          "input_tokens": 34842,
+          "cached_input_tokens": 34432,
+          "cache_write_tokens": 0,
+          "output_tokens": 21,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-9",
+          "agent_id": "controlled-T02-r1-native:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 9",
+          "scope": "exclusive_call",
+          "input_tokens": 34888,
+          "cached_input_tokens": 34688,
+          "cache_write_tokens": 0,
+          "output_tokens": 89,
+          "reasoning_tokens": 18
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-10",
+          "agent_id": "controlled-T02-r1-native:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 10",
+          "scope": "exclusive_call",
+          "input_tokens": 35352,
+          "cached_input_tokens": 34688,
+          "cache_write_tokens": 0,
+          "output_tokens": 676,
+          "reasoning_tokens": 59
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-11",
+          "agent_id": "controlled-T02-r1-native:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 11",
+          "scope": "exclusive_call",
+          "input_tokens": 36101,
+          "cached_input_tokens": 35840,
+          "cache_write_tokens": 0,
+          "output_tokens": 879,
+          "reasoning_tokens": 22
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-12",
+          "agent_id": "controlled-T02-r1-native:root",
+          "role": "root",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 12",
+          "scope": "exclusive_call",
+          "input_tokens": 37416,
+          "cached_input_tokens": 36864,
+          "cache_write_tokens": 0,
+          "output_tokens": 103,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-13",
+          "agent_id": "controlled-T02-r1-native:worker-1",
+          "role": "worker",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 13",
+          "scope": "exclusive_call",
+          "input_tokens": 23674,
+          "cached_input_tokens": 13056,
+          "cache_write_tokens": 0,
+          "output_tokens": 109,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-14",
+          "agent_id": "controlled-T02-r1-native:worker-1",
+          "role": "worker",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 14",
+          "scope": "exclusive_call",
+          "input_tokens": 25876,
+          "cached_input_tokens": 23552,
+          "cache_write_tokens": 0,
+          "output_tokens": 94,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-15",
+          "agent_id": "controlled-T02-r1-native:worker-1",
+          "role": "worker",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 15",
+          "scope": "exclusive_call",
+          "input_tokens": 26922,
+          "cached_input_tokens": 25728,
+          "cache_write_tokens": 0,
+          "output_tokens": 568,
+          "reasoning_tokens": 247
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-16",
+          "agent_id": "controlled-T02-r1-native:worker-2",
+          "role": "worker",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 16",
+          "scope": "exclusive_call",
+          "input_tokens": 23675,
+          "cached_input_tokens": 23040,
+          "cache_write_tokens": 0,
+          "output_tokens": 132,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-17",
+          "agent_id": "controlled-T02-r1-native:worker-2",
+          "role": "worker",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 17",
+          "scope": "exclusive_call",
+          "input_tokens": 25912,
+          "cached_input_tokens": 23680,
+          "cache_write_tokens": 0,
+          "output_tokens": 101,
+          "reasoning_tokens": 54
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-18",
+          "agent_id": "controlled-T02-r1-native:worker-2",
+          "role": "worker",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 18",
+          "scope": "exclusive_call",
+          "input_tokens": 26025,
+          "cached_input_tokens": 25856,
+          "cache_write_tokens": 0,
+          "output_tokens": 133,
+          "reasoning_tokens": 0
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-19",
+          "agent_id": "controlled-T02-r1-native:worker-2",
+          "role": "worker",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 19",
+          "scope": "exclusive_call",
+          "input_tokens": 27171,
+          "cached_input_tokens": 25984,
+          "cache_write_tokens": 0,
+          "output_tokens": 365,
+          "reasoning_tokens": 206
+        },
+        {
+          "event_id": "controlled-T02-r1-native:call-20",
+          "agent_id": "controlled-T02-r1-native:worker-2",
+          "role": "worker",
+          "model": "openai/gpt-6.1-sol",
+          "source": "anonymized selected source, call 20",
+          "scope": "exclusive_call",
+          "input_tokens": 27548,
+          "cached_input_tokens": 27392,
+          "cache_write_tokens": 0,
+          "output_tokens": 446,
+          "reasoning_tokens": 88
+        }
+      ],
+      "error_counts": [
+        {
+          "agent": "root",
+          "error_count": 0,
+          "reconciled": true
+        },
+        {
+          "agent": "worker-1",
+          "error_count": 0,
+          "reconciled": true
+        },
+        {
+          "agent": "worker-2",
+          "error_count": 0,
+          "reconciled": true
+        }
+      ]
+    }
+  ]
+}

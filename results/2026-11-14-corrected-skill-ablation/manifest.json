@@ -1,0 +1,46 @@
+{
+  "batch": "2026-11-14-corrected-skill-ablation",
+  "local_dates": "2026-11-14",
+  "timezone": "Asia/Kuala_Lumpur",
+  "trials": 4,
+  "task_types": 2,
+  "repetitions_per_task_arm": 1,
+  "ordering_seed": null,
+  "ordering_method": "Predeclared balanced order: T02 native-first, T05 Pi-first.",
+  "fresh_root_sessions": true,
+  "root_history_forked": false,
+  "workers_per_trial": 2,
+  "root_model": "gpt-6.1-sol",
+  "root_reasoning": "low",
+  "native_worker_reasoning": "high",
+  "pi_worker_reasoning": "high",
+  "configuration_source": "Actual per-session source contexts, not config defaults or self-reports",
+  "configuration_correction": null,
+  "changes": [
+    "meaningful status waits",
+    "multi-worker controller waits",
+    "body-aware qualification of built-in skill loading hint",
+    "complete bounded additional skill reads",
+    "successful Pi-managed recovery clears provisional assistant error"
+  ],
+  "experiment_label": "Content-only context hook; complete cohort retained despite failed reread optimization",
+  "outcome_note": "Both complete native bodies and skills catalogs reached provider, but this hook did not qualify the rendered instruction. Four rereads observed. Final implementation uses provider-payload evidence instead.",
+  "matched_workers": true,
+  "read_policy": "Equivalent semantic read access; native read-only shell and Pi read/grep/find/ls. Root alone edits and executes tests.",
+  "skills": {
+    "T02": [
+      "caveman",
+      "unslop"
+    ],
+    "T05": [
+      "caveman",
+      "unslop",
+      "technical-writing"
+    ]
+  },
+  "quality": "Independent fresh-session AI review with backend/time/cost labels withheld; same configured model family. No human review measured.",
+  "timing": "Sum initial and allowed repair work segments. Study queue, calibration, orchestration, and AI judging excluded.",
+  "telemetry": "Exclusive per-call root and worker usage; cached/reasoning subsets counted once; all ledgers reconcile.",
+  "exclusions": "Prior diagnostic/default-configuration studies kept separate; no pooling or backend/model fallback.",
+  "privacy": "Chat/session IDs and local paths omitted. Primary synthetic artifacts unchanged; local orchestration metadata and supplementary proof files omitted."
+}

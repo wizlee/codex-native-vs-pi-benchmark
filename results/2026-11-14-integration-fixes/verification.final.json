@@ -1,0 +1,20 @@
+{
+  "bridge_protocol_checks": {"passed": 39, "failed": 0},
+  "benchmark_checks": {"passed": 33, "failed": 0},
+  "installed_discovery_checks": {"passed": 1, "failed": 0},
+  "conditional_patch_applied_to_valid_baseline": true,
+  "installed_source_and_test_files_matching_reapplied_patch": 10,
+  "final_cohort_runtime_fingerprints_unchanged": 14,
+  "final_pi_workers": 4,
+  "final_logical_provider_payloads": 12,
+  "qualified_provider_payloads": 12,
+  "redundant_native_skill_reads": 0,
+  "accepted_outcomes": {"native": "2/2", "pi": "1/2"},
+  "pi_interruption": "Approval-review quota interruption; same root resumed, worker access unavailable, failure retained without rerun.",
+  "overall_performance_win_established": false,
+  "optional_request_shape_telemetry_after_study": false,
+  "standalone_pi_configuration_preserved": true,
+  "fresh_human_dialog_retest": false,
+  "prior_real_human_dialog_verification": "2026-11-12; current adapter tests use synthetic dialogs",
+  "earlier_verification_json": "Historical content-only candidate record, superseded by this final verification."
+}

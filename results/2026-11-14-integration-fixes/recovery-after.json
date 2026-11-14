@@ -1,0 +1,14 @@
+{
+  "scope": "Synthetic RPC event replay only; no real worker, retry, provider, or permission decision",
+  "bridge_sha256": "2f762be2af91fe2468e86d0176369320698351333fc0ba4f54226446de84f368",
+  "recovery": {
+    "state": "completed",
+    "error_present": false,
+    "needs_reconciliation": false
+  },
+  "fatal": {
+    "state": "failed",
+    "error_preserved": true,
+    "needs_reconciliation": true
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "batch": "2026-11-14-controller-wait-ablation",
+  "local_dates": "2026-11-14",
+  "timezone": "Asia/Kuala_Lumpur",
+  "trials": 4,
+  "task_types": 2,
+  "repetitions_per_task_arm": 1,
+  "ordering_seed": null,
+  "ordering_method": "Predeclared balanced order: T02 Pi-first, T05 native-first; reversed in skills batch. One repetition per task and arm.",
+  "fresh_root_sessions": true,
+  "root_history_forked": false,
+  "workers_per_trial": 2,
+  "root_model": "gpt-6.1-sol",
+  "root_reasoning": "low",
+  "native_worker_reasoning": "high",
+  "pi_worker_reasoning": "high",
+  "configuration_source": "Actual per-session source contexts, not config defaults or self-reports",
+  "configuration_correction": null,
+  "changes": [
+    "meaningful status changes",
+    "multi-worker controller wait"
+  ],
+  "interruptions": [
+    {
+      "run_id": "controlled-T05-r1-pi",
+      "reason": "Account usage limit before worker creation; user resumed same root. Include failed turn and resumed work, disclose capacity gap separately.",
+      "failed_turn_s": 8.736,
+      "resumed_turn_s": 162.587,
+      "capacity_gap_s": 11717,
+      "wall_clock_s": 11888,
+      "work_segments_s": 171.323
+    }
+  ],
+  "matched_workers": true,
+  "read_policy": "Equivalent semantic read access; native read-only shell and Pi read/grep/find/ls. Root alone edits and executes tests.",
+  "skills": {
+    "T02": [
+      "caveman",
+      "unslop"
+    ],
+    "T05": [
+      "caveman",
+      "unslop",
+      "technical-writing"
+    ]
+  },
+  "quality": "Independent fresh-session AI review with backend/time/cost labels withheld; same configured model family. No human review measured.",
+  "timing": "Sum initial and allowed repair work segments. Study queue, calibration, orchestration, and AI judging excluded.",
+  "telemetry": "Exclusive per-call root and worker usage; cached/reasoning subsets counted once; all ledgers reconcile.",
+  "exclusions": "Prior diagnostic/default-configuration studies kept separate; no pooling or backend/model fallback.",
+  "privacy": "Chat/session IDs and local paths omitted. Primary synthetic artifacts unchanged; local orchestration metadata and supplementary proof files omitted."
+}

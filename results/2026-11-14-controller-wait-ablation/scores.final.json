@@ -1,0 +1,86 @@
+{
+  "artifacts": [
+    {
+      "blind_id": "artifact-001",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete summary.mjs and summary.test.mjs. Exact BigInt accumulation followed by Number conversion respects guaranteed safe final totals while permitting unsafe intermediate signed totals. No dependency added; two Maps keep validation/winner selection separate from grouping.",
+        "Independent harness passed 8/8 cases: latest sequence, later-position ties, customer move, void and recreation, signed refund/zero totals, invalid higher-sequence entries, special keys, genuine supplementary/BMP code-unit ordering, empty input, frozen-input immutability and output independence.",
+        "Copied API returns [{customer:'x',cents:2,count:3}] for distinct posted IDs with cents [9007199254740991,2,-9007199254740991], as required. Submitted suite reproduced 7/7 passing, including positive/negative cancellation and multiple extreme amounts. Commands: node work/check.mjs; node --test work/review-005/summary.test.mjs.",
+        "Code comment explains necessary exact-sum design from signed-input/final-safe-total requirements. Packet reports KEEP and source packet unchanged. No mandatory API defect found."
+      ]
+    },
+    {
+      "blind_id": "artifact-003",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 3.5,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete DECISION.md. Independently counted 288 whitespace-delimited words, within 600. Conditional QueueNorth recommendation and explicit refusal of unconditional production commitment match source limits.",
+        "Independently recalculated North $10 + 2*$1 = $12 including seven-day retention [N2]; South $15 + $2 + $4 = $21 [S1]. Document correctly addresses $14 budget and EU-only configuration [N1,S1].",
+        "Both at-least-once semantics, stable-ID client deduplication, N1 superseding M1 exactly-once claims, and unsupported M1 speed claim are correctly distinguished with decisive inline citations. N3's 180 ms p95 at 20 jobs/second, EU lab, 1 KB, single tenant and no induced failures remain measurements; absent production SLA [N1] remains explicit. Unknown peak traffic and bounded representative trial with retry/dedup validation are useful next steps.",
+        "Supporting verifier fails against authoritative supplied PROMPT.md: node work/review-002/outputs/verify.mjs expects literal '&lt;=250' and '&lt;=600', while original prompt contains '<=250' and '<=600'. Actual PROMPT buffer 645 bytes versus expected 651. This limits rerunnable proof, not primary document correctness. No invented decisive vendor evidence found."
+      ]
+    },
+    {
+      "blind_id": "artifact-005",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete summary.mjs and summary.test.mjs. Exact BigInt accumulation with final Number conversion meets safe-final-total promise. Validation rejects invalid events before winner selection; >= preserves later-position ties; void stays eligible to suppress older posts. Map grouping and relational sorting implement arbitrary customer keys and code-unit order simply.",
+        "Independent harness passed 8/8 cases covering latest sequence, later ties, winning customer, void and recreation, signed amounts, invalid entries, special keys, genuine supplementary/BMP code-unit ordering, empty input, frozen-input immutability and output independence.",
+        "Copied API returns [{customer:'x',cents:2,count:3}] for distinct posted IDs with cents [9007199254740991,2,-9007199254740991]. Submitted suite reproduced 6/6 passing, including positive/negative and zero-result cancellation. Commands: node work/check.mjs; node --test work/review-006/summary.test.mjs.",
+        "Necessary exact-summation choice is justified by code comment and regression cases. No dependencies or unrelated changes evident. Packet reports KEEP and source packet unchanged. No mandatory API defect found."
+      ]
+    },
+    {
+      "blind_id": "artifact-007",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete DECISION.md. Independently counted 282 whitespace-delimited words, within 600. North recommendation remains conditional on configuration, working deduplication and representative latency evidence.",
+        "Complete arithmetic is directly inspectable: North $10 + ceil(20000/10000)*$1 = $12 [N2]; South $15 + ceil(10000/10000)*$2 + $4 = $21 [S1]. Correct seven-day retention, EU-only availability, and budget comparison.",
+        "Document cites decisive N1/N2/N3/S1/M1 sections inline, correctly states current at-least-once semantics and stable-ID deduplication, resolves superseded exactly-once marketing, and separates N3's measured 180 ms lab p95 from absent production guarantee. Includes all benchmark conditions and sensible unknowns.",
+        "Limited EU-only pilot uses representative payloads and peak arrival pattern, measures <=250 ms p95, exercises retry/redelivery and deduplication, and confirms configuration. Evidence supports this useful next step without invented facts.",
+        "Supporting verifier cannot run from frozen packet alone: node work/review-004/outputs/verify.mjs raises ENOENT for work/fixture.json. That work file is excluded from supplied review materials; no artifact defect inferred from its omission. Primary document calculations and citations were independently checked."
+      ]
+    }
+  ],
+  "review_limits": [
+    "Provisional AI ratings only. Human review time unknown. No quality-equivalence or backend identity claims.",
+    "All six primary artifact bodies accessed completely, one artifact at a time, from the single authorized frozen JSON. Original T02 PROMPT.md and T05 SOURCES.md/PROMPT.md used as authoritative. Frozen blind_id values review-001 through review-006 retained rather than renamed to example artifact-* IDs.",
+    "No other chats, benchmark files, repository, raw logs, prior results, external messages, web research or subagents used. Reproductions ran only on copied files in reviewer work directory; originals unchanged.",
+    "Independent harness and detailed observations retained in work/check.mjs and work/independent-results.json. Supplied code suites all ran. DECISION.md prose, arithmetic, citations and word limits independently checked; source packet is fictional, so no external vendor claims assessed.",
+    "Supporting README/proof/metadata and some output copies are referenced but absent from frozen files. Their existence/content cannot be assessed. Excluded work/fixture.json absence does not establish review-004 artifact failure. Source/KEEP preservation relies on packet flags plus copied-fixture checks, not inspection outside authorized file.",
+    "Critical flags on review-001/003 reflect reproduced incorrect monetary totals under valid input. No unauthorized external side effects or fabricated decisive vendor facts demonstrated. Worker completion and tool-scope compliance deliberately not graded.",
+    "Ordinary array event data tested. Hostile getters/proxies and noniterable inputs have no specified contract; no defects invented for them. Finite independent cases and direct source inspection are not a formal proof."
+  ]
+}

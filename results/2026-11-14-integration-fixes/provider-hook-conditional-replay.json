@@ -1,0 +1,12 @@
+{
+  "scope": "Installed Pi ExtensionRunner with selected recorded catalog/native body; no model call or raw body output",
+  "hook_sha256": "284033ef16b8791adfca71a0c0ab747cdbbe5097ff9ab20efdcb9e962c4f18b7",
+  "hook_registered": true,
+  "renderer_input_unqualified": true,
+  "observer_received_qualified_payload": true,
+  "raw_payload_returned": true,
+  "input_identity_preserved": true,
+  "tools_identity_preserved": true,
+  "session_cache_key_preserved": true,
+  "parallel_tool_calls_preserved": true
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "run_id": "controlled-T02-r1-pi",
+    "root_fork_parent_present": false,
+    "resumed_states": [
+      {
+        "session_matches": true
+      }
+    ]
+  },
+  {
+    "run_id": "controlled-T02-r1-native",
+    "root_fork_parent_present": false,
+    "resumed_states": [
+      {
+        "session_matches": true
+      }
+    ]
+  },
+  {
+    "run_id": "controlled-T05-r1-native",
+    "root_fork_parent_present": false,
+    "resumed_states": []
+  },
+  {
+    "run_id": "controlled-T05-r1-pi",
+    "root_fork_parent_present": false,
+    "resumed_states": [
+      {
+        "session_matches": true
+      }
+    ]
+  }
+]

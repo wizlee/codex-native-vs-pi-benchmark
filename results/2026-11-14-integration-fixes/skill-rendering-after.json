@@ -1,0 +1,11 @@
+{
+  "scope": "Selected recorded system/native skill bodies through installed Pi renderer; no model call or raw body output",
+  "hook_sha256": "d0aba597a188dcb8a63457e1c0d779719bc95aaf38ea7adfb0a8c03bcc774a3a",
+  "renderer_sha256": "f27664e8761b986b64adc7c5aedf98449f68aa6b6b94e9fae43aa05b0a73aa52",
+  "matched_native_bodies": 1,
+  "hint_qualified_before": false,
+  "hint_qualified_after": true,
+  "tool_additions_preserved": true,
+  "tool_removals_preserved": true,
+  "section_order_preserved": true
+}

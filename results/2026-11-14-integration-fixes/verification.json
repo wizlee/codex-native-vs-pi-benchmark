@@ -1,0 +1,19 @@
+{
+  "bridge_protocol_checks": 38,
+  "benchmark_checks": 32,
+  "installed_discovery_checks": 1,
+  "corrected_patch_applied_to_valid_baseline": true,
+  "installed_files_match_corrected_patch": true,
+  "standalone_configuration_preserved_by_installed_check": true,
+  "fresh_human_dialog_retest": false,
+  "prior_human_dialog_verification": "2026-11-12 retained; new adapter checks use synthetic dialogs",
+  "corrected_live_ablation": "pending user direction",
+  "patches": {
+    "bridge.patch": {
+      "sha256": "ea43d819b29ed2c501c5857bf8a966588061b108d7a4c9efef238c40ff90fc7f"
+    },
+    "bridge-corrected.patch": {
+      "sha256": "dfcf4d85c41762cc7afb992e8a52db03c56e1540099f0ad6ee0ee4d6682a5b01"
+    }
+  }
+}

@@ -22,8 +22,12 @@ const records=originalRecords.map(r=>{
 fs.writeFileSync(path.join(destination,'results.jsonl'),records.map(JSON.stringify).join('\n')+'\n');
 write('schedule.json',schedule);write('rates.json',rates);
 write('comparison.json',analyze(schedule,records,rates));
-for(const name of ['scores.first-pass.json','scores.final.json','precision.first-pass.json','precision.final.json','scope-audit.json','fresh-context-audit.json'])write(name,read(name));
-for(const name of ['delivery-copy-audit.json','reviewer-skills-audit.json','review-input-validation.json'])if(fs.existsSync(path.join(source,name)))write(name,read(name));
+for(const name of ['scores.first-pass.json','scores.final.json','precision.first-pass.json','precision.final.json','scope-audit.json','fresh-context-audit.json']){
+  const value=read(name);
+  if(name==='scope-audit.json'&&/[A-Z]:[\\/]+Users[\\/]|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i.test(JSON.stringify(value)))throw Error('Scope audit needs privacy-safe manual review before export');
+  write(name,value);
+}
+for(const name of ['delivery-copy-audit.json','reviewer-skills-audit.json','review-input-validation.json','worker-completion-audit.json','cache.json','cache-request-shape.json','orchestration.json','source-inspection.json','source-fingerprints.json','status-probe.json'])if(fs.existsSync(path.join(source,name)))write(name,read(name));
 for(const r of schedule.runs){const file=path.join(source,`${r.run_id}.configuration.json`);if(fs.existsSync(file)){fs.mkdirSync(path.join(destination,'configurations'),{recursive:true});write(`configurations/${r.run_id}.json`,JSON.parse(fs.readFileSync(file,'utf8')));}}
 const details=read('details.json').map(({reviewer,...r})=>r);
 write('details.json',details);
@@ -43,12 +47,18 @@ for(const r of schedule.runs){
 }
 fs.copyFileSync(path.join(source,'RESULTS.md'),path.join(destination,'RESULTS.md'));
 write('manifest.json',{
-  batch:path.basename(source),local_dates:sourceManifest.matched_workers?'2026-11-14':'2026-11-13 through 2026-11-14',timezone:'Asia/Kuala_Lumpur',
-  trials:8,task_types:2,repetitions_per_task_arm:2,ordering_seed:20261112,
+  batch:path.basename(source),local_dates:sourceManifest.local_dates??(sourceManifest.matched_workers?'2026-11-14':'2026-11-13 through 2026-11-14'),timezone:'Asia/Kuala_Lumpur',
+  trials:records.length,task_types:new Set(schedule.runs.map(r=>r.task)).size,repetitions_per_task_arm:new Set(schedule.runs.map(r=>r.repeat)).size,
+  ordering_seed:Object.hasOwn(sourceManifest,'ordering_seed')?sourceManifest.ordering_seed:20261112,
+  ...(sourceManifest.ordering_method?{ordering_method:sourceManifest.ordering_method}:{}),
   fresh_root_sessions:true,root_history_forked:false,workers_per_trial:2,
   root_model:'gpt-6.1-sol',root_reasoning:actualRootEffort,native_worker_reasoning:actualWorkerEffort('native'),pi_worker_reasoning:actualWorkerEffort('pi'),
   configuration_source:'Actual per-session source contexts, not config defaults or self-reports',
   configuration_correction:sourceManifest.configuration_correction??null,
+  ...(sourceManifest.changes?{changes:sourceManifest.changes}:{}),
+  ...(sourceManifest.experiment_label?{experiment_label:sourceManifest.experiment_label}:{}),
+  ...(sourceManifest.outcome_note?{outcome_note:sourceManifest.outcome_note}:{}),
+  ...(sourceManifest.interruptions?{interruptions:sourceManifest.interruptions}:{}),
   matched_workers:sourceManifest.matched_workers??false,
   read_policy:'Equivalent semantic read access; native read-only shell and Pi read/grep/find/ls. Root alone edits and executes tests.',
   skills:sourceManifest.matched_workers?sourceManifest.worker_skills:'Shared caveman/unslop required; roots selected additional role skills. Pi T02 handoffs included execution-dependent diagnose and readers reported blocked.',

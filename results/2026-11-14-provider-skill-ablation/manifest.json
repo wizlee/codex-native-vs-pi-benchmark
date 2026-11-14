@@ -1,0 +1,39 @@
+{
+  "batch": "2026-11-14-provider-skill-ablation",
+  "timezone": "Asia/Kuala_Lumpur",
+  "matched_workers": true,
+  "root_model": "gpt-6.1-sol",
+  "root_reasoning": "low",
+  "worker_model": "gpt-6.1-sol",
+  "native_worker_reasoning": "high",
+  "pi_worker_reasoning": "high",
+  "worker_skills": {
+    "T02": [
+      "caveman",
+      "unslop"
+    ],
+    "T05": [
+      "caveman",
+      "unslop",
+      "technical-writing"
+    ]
+  },
+  "precision_case_predeclared": true,
+  "trials": 4,
+  "repetitions_per_task_arm": 1,
+  "ordering_seed": null,
+  "ordering_method": "Predeclared balanced order: T02 Pi-first, T05 native-first.",
+  "changes": [
+    "controller waits retained",
+    "qualify actual final provider instructions from current native-body and catalog evidence",
+    "no lifecycle loaded-skill state",
+    "actual installed ExtensionRunner replay verifies raw-payload forwarding",
+    "request observer verifies qualified payload on every logical request"
+  ],
+  "request_shape_telemetry": true,
+  "quality": "Independent fresh blinded AI review; human acceptance/time unknown.",
+  "timing": "All initial and allowed root-only repair work segments included. Study setup/analysis/judging excluded. Failed and falsified prior cohorts retained separately.",
+  "phase_status": "Stopped after first Pi probe: final provider hook qualified all requests, but retained unconditional read sentence and both workers reread injected skill. No resource comparison claimed; three remaining trials never started.",
+  "observed_trials": 1,
+  "unexecuted_trials": 3
+}

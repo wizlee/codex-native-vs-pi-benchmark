@@ -1,0 +1,1644 @@
+{
+  "method": "Selected recorded sessions only. Root totals are exact telemetry. Text sizes are characters, not estimated tokens. Tool-wrapper durations may include multiple operations. Worker spans include startup; they are not CPU times.",
+  "arms": {
+    "native": {
+      "root_calls": 24,
+      "root_tokens": 842414,
+      "root_input": 832485,
+      "root_output": 9929,
+      "root_cached_input": 785024,
+      "root_output_chars": 67450,
+      "root_mean_tokens": 35100.583333333336,
+      "by_category": {
+        "coordination_only": {
+          "calls": 5,
+          "tokens": 183141
+        },
+        "final": {
+          "calls": 2,
+          "tokens": 80147
+        },
+        "implementation_and_verification": {
+          "calls": 9,
+          "tokens": 330282
+        },
+        "launch": {
+          "calls": 4,
+          "tokens": 135184
+        },
+        "setup": {
+          "calls": 4,
+          "tokens": 113660
+        }
+      },
+      "worker_calls": 12,
+      "worker_tokens": 323719,
+      "worker_mean_span_s": 37.491,
+      "worker_input": 319260,
+      "worker_cached_input": 264320,
+      "worker_output": 4459,
+      "worker_mean_first_input": 23833.5,
+      "pi_reported_tool_duration_s": null,
+      "worker_tools": {
+        "shell": 11
+      },
+      "worker_skill_read_steps": 7,
+      "pi_status_snapshots": 0,
+      "pi_status_active": 0,
+      "pi_status_active_no_text": 0,
+      "pi_status_snapshot_chars": 0,
+      "discovery_inventory_chars": 0,
+      "status_wrappers_below_one_second": 0,
+      "native_completion_events": 4,
+      "exact_status_timing": {
+        "active_calls": 0,
+        "below_one_second": 0,
+        "median_s": null
+      },
+      "reread_injected_skill_steps": 0,
+      "compressed_worker_results": 0,
+      "paginated_worker_reads": 0,
+      "worker_tool_errors": 0
+    },
+    "pi": {
+      "root_calls": 25,
+      "root_tokens": 987808,
+      "root_input": 978873,
+      "root_output": 8935,
+      "root_cached_input": 888832,
+      "root_output_chars": 117882,
+      "root_mean_tokens": 39512.32,
+      "by_category": {
+        "coordination_only": {
+          "calls": 8,
+          "tokens": 311523
+        },
+        "coordination_with_work": {
+          "calls": 4,
+          "tokens": 152931
+        },
+        "final": {
+          "calls": 2,
+          "tokens": 95866
+        },
+        "implementation_and_verification": {
+          "calls": 4,
+          "tokens": 187235
+        },
+        "launch": {
+          "calls": 2,
+          "tokens": 76171
+        },
+        "setup": {
+          "calls": 5,
+          "tokens": 164082
+        }
+      },
+      "worker_calls": 12,
+      "worker_tokens": 86494,
+      "worker_mean_span_s": 44.24175,
+      "worker_input": 81607,
+      "worker_cached_input": 39552,
+      "worker_output": 4887,
+      "worker_mean_first_input": 4557.25,
+      "pi_reported_tool_duration_s": 0.13599999999999998,
+      "worker_tools": {
+        "read": 19
+      },
+      "worker_skill_read_steps": 6,
+      "pi_status_snapshots": 2,
+      "pi_status_active": 0,
+      "pi_status_active_no_text": 0,
+      "pi_status_snapshot_chars": 6238,
+      "discovery_inventory_chars": 15982,
+      "status_wrappers_below_one_second": 0,
+      "native_completion_events": 0,
+      "exact_status_timing": {
+        "active_calls": 0,
+        "below_one_second": 0,
+        "median_s": null
+      },
+      "reread_injected_skill_steps": 0,
+      "compressed_worker_results": 0,
+      "paginated_worker_reads": 1,
+      "worker_tool_errors": 0
+    }
+  },
+  "root_token_gap": 145394,
+  "root_gap_decomposition": {
+    "method": "Symmetric arithmetic decomposition of calls × mean inclusive tokens per call; descriptive, not causal attribution",
+    "extra_rounds": 37306.45166666667,
+    "larger_average_round": 108087.54833333327
+  },
+  "total_token_gap": -91831,
+  "runs": [
+    {
+      "run_id": "controlled-T02-r1-pi",
+      "arm": "pi",
+      "task": "T02",
+      "repeat": 1,
+      "root_source_sha256": "e58bf2539ff4e4c72a78c4e63dd532f88374133fa1943a2632fcee9982d1b20a",
+      "root": [
+        {
+          "call": 1,
+          "ordinal": 18,
+          "category": "setup",
+          "tools": [
+            "exec_command"
+          ],
+          "input_tokens": 25036,
+          "output_tokens": 266,
+          "total_tokens": 25302,
+          "cached_input_tokens": 13312,
+          "cache_write_tokens": 0,
+          "output_chars": 30955,
+          "snapshots": [],
+          "seconds_from_first_response": 0
+        },
+        {
+          "call": 2,
+          "ordinal": 23,
+          "category": "setup",
+          "tools": [
+            "mcp__context_mode__ctx_resume",
+            "mcp__pi__pi_discover",
+            "exec_command"
+          ],
+          "input_tokens": 32712,
+          "output_tokens": 587,
+          "total_tokens": 33299,
+          "cached_input_tokens": 25088,
+          "cache_write_tokens": 0,
+          "output_chars": 2699,
+          "snapshots": [
+            {
+              "state": "starting",
+              "discovery": true,
+              "inventory_skills": 0,
+              "snapshot_chars": 591,
+              "text_chars": 0,
+              "pending_ui": 0,
+              "status_call": false,
+              "wrapper_elapsed_s": 3.625,
+              "requested_wait_ms": []
+            }
+          ],
+          "seconds_from_first_response": 19.129
+        },
+        {
+          "call": 3,
+          "ordinal": 30,
+          "category": "coordination_with_work",
+          "tools": [
+            "exec_command",
+            "exec_command",
+            "mcp__pi__pi_status"
+          ],
+          "input_tokens": 34111,
+          "output_tokens": 559,
+          "total_tokens": 34670,
+          "cached_input_tokens": 33152,
+          "cache_write_tokens": 0,
+          "output_chars": 120,
+          "snapshots": [],
+          "seconds_from_first_response": 38.789
+        },
+        {
+          "call": 4,
+          "ordinal": 36,
+          "category": "coordination_with_work",
+          "tools": [
+            "exec_command",
+            "exec_command",
+            "mcp__pi__pi_status"
+          ],
+          "input_tokens": 34715,
+          "output_tokens": 265,
+          "total_tokens": 34980,
+          "cached_input_tokens": 34432,
+          "cache_write_tokens": 0,
+          "output_chars": 8808,
+          "snapshots": [
+            {
+              "state": "completed",
+              "discovery": true,
+              "inventory_skills": 20,
+              "snapshot_chars": 7400,
+              "text_chars": 0,
+              "pending_ui": 0,
+              "status_call": true,
+              "wrapper_elapsed_s": 3.69,
+              "requested_wait_ms": [
+                10000
+              ]
+            }
+          ],
+          "seconds_from_first_response": 48.268
+        },
+        {
+          "call": 5,
+          "ordinal": 47,
+          "category": "launch",
+          "tools": [
+            "mcp__pi__pi_delegate"
+          ],
+          "input_tokens": 37125,
+          "output_tokens": 637,
+          "total_tokens": 37762,
+          "cached_input_tokens": 34816,
+          "cache_write_tokens": 0,
+          "output_chars": 875,
+          "snapshots": [
+            {
+              "state": "starting",
+              "discovery": false,
+              "inventory_skills": 0,
+              "snapshot_chars": 314,
+              "text_chars": 0,
+              "pending_ui": 0,
+              "status_call": false,
+              "wrapper_elapsed_s": 0.077,
+              "requested_wait_ms": []
+            },
+            {
+              "state": "starting",
+              "discovery": false,
+              "inventory_skills": 0,
+              "snapshot_chars": 314,
+              "text_chars": 0,
+              "pending_ui": 0,
+              "status_call": false,
+              "wrapper_elapsed_s": 0.077,
+              "requested_wait_ms": []
+            }
+          ],
+          "seconds_from_first_response": 69.346
+        },
+        {
+          "call": 6,
+          "ordinal": 53,
+          "category": "coordination_only",
+          "tools": [
+            "mcp__pi__pi_wait"
+          ],
+          "input_tokens": 38022,
+          "output_tokens": 74,
+          "total_tokens": 38096,
+          "cached_input_tokens": 37632,
+          "cache_write_tokens": 0,
+          "output_chars": 65,
+          "snapshots": [],
+          "seconds_from_first_response": 73.256
+        },
+        {
+          "call": 7,
+          "ordinal": 57,
+          "category": "coordination_only",
+          "tools": [
+            "wait"
+          ],
+          "input_tokens": 38126,
+          "output_tokens": 34,
+          "total_tokens": 38160,
+          "cached_input_tokens": 37888,
+          "cache_write_tokens": 0,
+          "output_chars": 64,
+          "snapshots": [],
+          "seconds_from_first_response": 109.194
+        },
+        {
+          "call": 8,
+          "ordinal": 63,
+          "category": "coordination_only",
+          "tools": [
+            "wait"
+          ],
+          "input_tokens": 38190,
+          "output_tokens": 51,
+          "total_tokens": 38241,
+          "cached_input_tokens": 38016,
+          "cache_write_tokens": 0,
+          "output_chars": 3282,
+          "snapshots": [],
+          "seconds_from_first_response": 114.625
+        },
+        {
+          "call": 9,
+          "ordinal": 72,
+          "category": "coordination_only",
+          "tools": [
+            "mcp__pi__pi_wait"
+          ],
+          "input_tokens": 39067,
+          "output_tokens": 107,
+          "total_tokens": 39174,
+          "cached_input_tokens": 38016,
+          "cache_write_tokens": 0,
+          "output_chars": 562,
+          "snapshots": [],
+          "seconds_from_first_response": 119.714
+        },
+        {
+          "call": 10,
+          "ordinal": 96,
+          "category": "setup",
+          "tools": [
+            "mcp__pi__pi_wait"
+          ],
+          "input_tokens": 46970,
+          "output_tokens": 140,
+          "total_tokens": 47110,
+          "cached_input_tokens": 13312,
+          "cache_write_tokens": 0,
+          "output_chars": 3937,
+          "snapshots": [],
+          "seconds_from_first_response": 32175.875
+        },
+        {
+          "call": 11,
+          "ordinal": 105,
+          "category": "coordination_with_work",
+          "tools": [
+            "exec_command",
+            "mcp__pi__pi_status"
+          ],
+          "input_tokens": 47923,
+          "output_tokens": 187,
+          "total_tokens": 48110,
+          "cached_input_tokens": 46976,
+          "cache_write_tokens": 0,
+          "output_chars": 1720,
+          "snapshots": [],
+          "seconds_from_first_response": 32187.532
+        },
+        {
+          "call": 12,
+          "ordinal": 113,
+          "category": "implementation_and_verification",
+          "tools": [
+            "apply_patch",
+            "exec_command"
+          ],
+          "input_tokens": 48562,
+          "output_tokens": 337,
+          "total_tokens": 48899,
+          "cached_input_tokens": 47872,
+          "cache_write_tokens": 0,
+          "output_chars": 1462,
+          "snapshots": [],
+          "seconds_from_first_response": 32199.431
+        },
+        {
+          "call": 13,
+          "ordinal": 119,
+          "category": "implementation_and_verification",
+          "tools": [
+            "apply_patch",
+            "exec_command"
+          ],
+          "input_tokens": 49409,
+          "output_tokens": 837,
+          "total_tokens": 50246,
+          "cached_input_tokens": 48768,
+          "cache_write_tokens": 0,
+          "output_chars": 206,
+          "snapshots": [],
+          "seconds_from_first_response": 32228.19
+        },
+        {
+          "call": 14,
+          "ordinal": 126,
+          "category": "final",
+          "tools": [],
+          "input_tokens": 50319,
+          "output_tokens": 99,
+          "total_tokens": 50418,
+          "cached_input_tokens": 50048,
+          "cache_write_tokens": 0,
+          "output_chars": 0,
+          "snapshots": [],
+          "seconds_from_first_response": 32235.431
+        }
+      ],
+      "native_completion_events": 0,
+      "pi_status_calls": [
+        {
+          "root_call": 4,
+          "requested_wait_ms": 10000,
+          "duration_s": 0.001536,
+          "discovery": true,
+          "state": "completed",
+          "snapshot_chars": 7400,
+          "text_chars": 0,
+          "inventory_skills": 20,
+          "pending_ui": 0,
+          "result_available": true
+        },
+        {
+          "root_call": 11,
+          "requested_wait_ms": 10000,
+          "duration_s": 0.0014802,
+          "state": "unavailable",
+          "reason": "unavailable_result",
+          "error_code": "UNKNOWN_WORKER",
+          "result_available": false,
+          "discovery": false,
+          "pending_ui": null,
+          "snapshot_chars": 0,
+          "text_chars": 0,
+          "inventory_skills": 0
+        }
+      ],
+      "pi_wait_calls": [
+        {
+          "requested_wait_ms": 60000,
+          "duration_s": 37.0480665,
+          "reason": "settled",
+          "states": [
+            "running",
+            "completed"
+          ],
+          "pending_ui": 0,
+          "snapshot_chars": 3054,
+          "result_available": true
+        },
+        {
+          "requested_wait_ms": 60000,
+          "duration_s": 0,
+          "state": "unavailable",
+          "reason": "unavailable_result",
+          "error_code": null,
+          "result_available": false,
+          "discovery": false,
+          "pending_ui": null,
+          "snapshot_chars": 0,
+          "text_chars": 0,
+          "inventory_skills": 0
+        },
+        {
+          "requested_wait_ms": 60000,
+          "duration_s": 0.0033056,
+          "state": "unavailable",
+          "reason": "unavailable_result",
+          "error_code": "UNKNOWN_WORKER",
+          "result_available": false,
+          "discovery": false,
+          "pending_ui": null,
+          "snapshot_chars": 0,
+          "text_chars": 0,
+          "inventory_skills": 0
+        }
+      ],
+      "workers": [
+        {
+          "input_tokens": 17373,
+          "cached_input_tokens": 10624,
+          "output_tokens": 1410,
+          "first_input_tokens": 4465,
+          "calls": 3,
+          "tokens": 18783,
+          "span_s": 52.325,
+          "command_batches": 0,
+          "source_read_commands": 0,
+          "tool_steps": [
+            {
+              "tool": "read",
+              "skill_read": true,
+              "source_read": false,
+              "file": "unslop/SKILL.md",
+              "offset": 1,
+              "limit": 200,
+              "compressed_to_search": false,
+              "error": false
+            },
+            {
+              "tool": "read",
+              "skill_read": false,
+              "source_read": true,
+              "file": "summary.mjs",
+              "offset": 1,
+              "limit": 20,
+              "compressed_to_search": false,
+              "error": false
+            },
+            {
+              "tool": "read",
+              "skill_read": false,
+              "source_read": true,
+              "file": "PROMPT.md",
+              "offset": 1,
+              "limit": 20,
+              "compressed_to_search": false,
+              "error": false
+            },
+            {
+              "tool": "read",
+              "skill_read": false,
+              "source_read": true,
+              "file": "package.json",
+              "offset": 1,
+              "limit": 10,
+              "compressed_to_search": false,
+              "error": false
+            },
+            {
+              "tool": "read",
+              "skill_read": false,
+              "source_read": true,
+              "file": "KEEP.txt",
+              "offset": 1,
+              "limit": 5,
+              "compressed_to_search": false,
+              "error": false
+            }
+          ],
+          "injected_skills": [
+            "caveman"
+          ],
+          "reported_tool_duration_s": 0.036,
+          "reread_injected_skill_steps": 0,
+          "tools_per_tool_response": [
+            1,
+            4
+          ],
+          "source_sha256": "ef3e62e069f9a6b44c061b8db76722041283d62ed8497a0155d26071f49d66f9",
+          "start_from_first_root_response_s": 69.632,
+          "end_from_first_root_response_s": 121.957
+        },
+        {
+          "input_tokens": 17324,
+          "cached_input_tokens": 10624,
+          "output_tokens": 1133,
+          "first_input_tokens": 4466,
+          "calls": 3,
+          "tokens": 18457,
+          "span_s": 45.105,
+          "command_batches": 0,
+          "source_read_commands": 0,
+          "tool_steps": [
+            {
+              "tool": "read",
+              "skill_read": true,
+              "source_read": false,
+              "file": "unslop/SKILL.md",
+              "offset": 1,
+              "limit": 200,
+              "compressed_to_search": false,
+              "error": false
+            },
+            {
+              "tool": "read",
+              "skill_read": false,
+              "source_read": true,
+              "file": "PROMPT.md",
+              "offset": 1,
+              "limit": 20,
+              "compressed_to_search": false,
+              "error": false
+            },
+            {
+              "tool": "read",
+              "skill_read": false,
+              "source_read": true,
+              "file": "summary.mjs",
+              "offset": 1,
+              "limit": 20,
+              "compressed_to_search": false,
+              "error": false
+            },
+            {
+              "tool": "read",
+              "skill_read": false,
+              "source_read": true,
+              "file": "package.json",
+              "offset": 1,
+              "limit": 20,
+              "compressed_to_search": false,
+              "error": false
+            },
+            {
+              "tool": "read",
+              "skill_read": false,
+              "source_read": true,
+              "file": "KEEP.txt",
+              "offset": 1,
+              "limit": 20,
+              "compressed_to_search": false,
+              "error": false
+            }
+          ],
+          "injected_skills": [
+            "caveman"
+          ],
+          "reported_tool_duration_s": 0.046,
+          "reread_injected_skill_steps": 0,
+          "tools_per_tool_response": [
+            1,
+            4
+          ],
+          "source_sha256": "74f9edc83da37373d56c6c83b136ed30d53973b8b8dd73a898a8daf76825ee7b",
+          "start_from_first_root_response_s": 69.652,
+          "end_from_first_root_response_s": 114.757
+        }
+      ]
+    },
+    {
+      "run_id": "controlled-T02-r1-native",
+      "arm": "native",
+      "task": "T02",
+      "repeat": 1,
+      "root_source_sha256": "f29b94b11b02217c2236ee9e771b77ed21ea55bd122935947eaa89b4365201d1",
+      "root": [
+        {
+          "call": 1,
+          "ordinal": 18,
+          "category": "setup",
+          "tools": [
+            "exec_command"
+          ],
+          "input_tokens": 25059,
+          "output_tokens": 241,
+          "total_tokens": 25300,
+          "cached_input_tokens": 13312,
+          "cache_write_tokens": 0,
+          "output_chars": 22902,
+          "snapshots": [],
+          "seconds_from_first_response": 0
+        },
+        {
+          "call": 2,
+          "ordinal": 23,
+          "category": "setup",
+          "tools": [
+            "exec_command"
+          ],
+          "input_tokens": 31064,
+          "output_tokens": 614,
+          "total_tokens": 31678,
+          "cached_input_tokens": 25088,
+          "cache_write_tokens": 0,
+          "output_chars": 707,
+          "snapshots": [],
+          "seconds_from_first_response": 18.388
+        },
+        {
+          "call": 3,
+          "ordinal": 29,
+          "category": "launch",
+          "tools": [
+            "spawn_agent"
+          ],
+          "input_tokens": 31910,
+          "output_tokens": 629,
+          "total_tokens": 32539,
+          "cached_input_tokens": 31488,
+          "cache_write_tokens": 0,
+          "output_chars": 43,
+          "snapshots": [],
+          "seconds_from_first_response": 40.993
+        },
+        {
+          "call": 4,
+          "ordinal": 36,
+          "category": "launch",
+          "tools": [
+            "spawn_agent"
+          ],
+          "input_tokens": 32561,
+          "output_tokens": 630,
+          "total_tokens": 33191,
+          "cached_input_tokens": 32384,
+          "cache_write_tokens": 0,
+          "output_chars": 41,
+          "snapshots": [],
+          "seconds_from_first_response": 57.886
+        },
+        {
+          "call": 5,
+          "ordinal": 46,
+          "category": "implementation_and_verification",
+          "tools": [
+            "exec_command"
+          ],
+          "input_tokens": 33213,
+          "output_tokens": 928,
+          "total_tokens": 34141,
+          "cached_input_tokens": 33024,
+          "cache_write_tokens": 0,
+          "output_chars": 5561,
+          "snapshots": [],
+          "seconds_from_first_response": 82.69
+        },
+        {
+          "call": 6,
+          "ordinal": 57,
+          "category": "coordination_only",
+          "tools": [
+            "wait_agent"
+          ],
+          "input_tokens": 36621,
+          "output_tokens": 21,
+          "total_tokens": 36642,
+          "cached_input_tokens": 33920,
+          "cache_write_tokens": 0,
+          "output_chars": 46,
+          "snapshots": [],
+          "seconds_from_first_response": 86.141
+        },
+        {
+          "call": 7,
+          "ordinal": 67,
+          "category": "implementation_and_verification",
+          "tools": [
+            "exec_command"
+          ],
+          "input_tokens": 36667,
+          "output_tokens": 613,
+          "total_tokens": 37280,
+          "cached_input_tokens": 36480,
+          "cache_write_tokens": 0,
+          "output_chars": 1113,
+          "snapshots": [],
+          "seconds_from_first_response": 112.944
+        },
+        {
+          "call": 8,
+          "ordinal": 76,
+          "category": "implementation_and_verification",
+          "tools": [
+            "exec_command"
+          ],
+          "input_tokens": 38046,
+          "output_tokens": 939,
+          "total_tokens": 38985,
+          "cached_input_tokens": 37120,
+          "cache_write_tokens": 0,
+          "output_chars": 1296,
+          "snapshots": [],
+          "seconds_from_first_response": 140.468
+        },
+        {
+          "call": 9,
+          "ordinal": 82,
+          "category": "final",
+          "tools": [],
+          "input_tokens": 39406,
+          "output_tokens": 106,
+          "total_tokens": 39512,
+          "cached_input_tokens": 38784,
+          "cache_write_tokens": 0,
+          "output_chars": 0,
+          "snapshots": [],
+          "seconds_from_first_response": 146.467
+        }
+      ],
+      "native_completion_events": 2,
+      "pi_status_calls": [],
+      "pi_wait_calls": [],
+      "workers": [
+        {
+          "input_tokens": 77096,
+          "cached_input_tokens": 63488,
+          "output_tokens": 1101,
+          "first_input_tokens": 23870,
+          "calls": 3,
+          "tokens": 78197,
+          "span_s": 38.988,
+          "command_batches": 1,
+          "source_read_commands": 1,
+          "tool_steps": [
+            {
+              "tool": "shell",
+              "skill_read": true,
+              "source_read": true
+            }
+          ],
+          "source_sha256": "ee015f5cd73ef9db48da4a2611715cdaff236000b18dc0df49b06c1611c01fbe",
+          "start_from_first_root_response_s": 41.039,
+          "end_from_first_root_response_s": 80.027
+        },
+        {
+          "input_tokens": 105457,
+          "cached_input_tokens": 87040,
+          "output_tokens": 1280,
+          "first_input_tokens": 23871,
+          "calls": 4,
+          "tokens": 106737,
+          "span_s": 43.266,
+          "command_batches": 4,
+          "source_read_commands": 3,
+          "tool_steps": [
+            {
+              "tool": "shell",
+              "skill_read": true,
+              "source_read": true
+            },
+            {
+              "tool": "shell",
+              "skill_read": true,
+              "source_read": true
+            },
+            {
+              "tool": "shell",
+              "skill_read": false,
+              "source_read": true
+            },
+            {
+              "tool": "shell",
+              "skill_read": false,
+              "source_read": false
+            }
+          ],
+          "source_sha256": "9ea74d7d038ea7763ac1ae6ae992c47c43dbf9b0344c72d59617cfaf0bbb5da0",
+          "start_from_first_root_response_s": 57.886,
+          "end_from_first_root_response_s": 101.152
+        }
+      ]
+    },
+    {
+      "run_id": "controlled-T05-r1-native",
+      "arm": "native",
+      "task": "T05",
+      "repeat": 1,
+      "root_source_sha256": "cac01c3e76d8048c7ce1faede4ea731344b38821a5b8c8109a196181f44bf63b",
+      "root": [
+        {
+          "call": 1,
+          "ordinal": 18,
+          "category": "setup",
+          "tools": [
+            "exec_command"
+          ],
+          "input_tokens": 25286,
+          "output_tokens": 176,
+          "total_tokens": 25462,
+          "cached_input_tokens": 13312,
+          "cache_write_tokens": 0,
+          "output_chars": 22606,
+          "snapshots": [],
+          "seconds_from_first_response": 0
+        },
+        {
+          "call": 2,
+          "ordinal": 23,
+          "category": "setup",
+          "tools": [
+            "mcp__context_mode__ctx_resume",
+            "exec_command"
+          ],
+          "input_tokens": 31097,
+          "output_tokens": 123,
+          "total_tokens": 31220,
+          "cached_input_tokens": 25344,
+          "cache_write_tokens": 0,
+          "output_chars": 5056,
+          "snapshots": [],
+          "seconds_from_first_response": 6.41
+        },
+        {
+          "call": 3,
+          "ordinal": 29,
+          "category": "implementation_and_verification",
+          "tools": [
+            "apply_patch"
+          ],
+          "input_tokens": 32441,
+          "output_tokens": 1000,
+          "total_tokens": 33441,
+          "cached_input_tokens": 31104,
+          "cache_write_tokens": 0,
+          "output_chars": 1880,
+          "snapshots": [],
+          "seconds_from_first_response": 34.998
+        },
+        {
+          "call": 4,
+          "ordinal": 36,
+          "category": "launch",
+          "tools": [
+            "spawn_agent"
+          ],
+          "input_tokens": 33868,
+          "output_tokens": 570,
+          "total_tokens": 34438,
+          "cached_input_tokens": 33280,
+          "cache_write_tokens": 0,
+          "output_chars": 37,
+          "snapshots": [],
+          "seconds_from_first_response": 53.293
+        },
+        {
+          "call": 5,
+          "ordinal": 42,
+          "category": "launch",
+          "tools": [
+            "spawn_agent"
+          ],
+          "input_tokens": 34460,
+          "output_tokens": 556,
+          "total_tokens": 35016,
+          "cached_input_tokens": 34304,
+          "cache_write_tokens": 0,
+          "output_chars": 41,
+          "snapshots": [],
+          "seconds_from_first_response": 68.483
+        },
+        {
+          "call": 6,
+          "ordinal": 52,
+          "category": "implementation_and_verification",
+          "tools": [
+            "exec_command"
+          ],
+          "input_tokens": 35038,
+          "output_tokens": 131,
+          "total_tokens": 35169,
+          "cached_input_tokens": 34816,
+          "cache_write_tokens": 0,
+          "output_chars": 2131,
+          "snapshots": [],
+          "seconds_from_first_response": 73.221
+        },
+        {
+          "call": 7,
+          "ordinal": 59,
+          "category": "implementation_and_verification",
+          "tools": [
+            "exec_command"
+          ],
+          "input_tokens": 35734,
+          "output_tokens": 68,
+          "total_tokens": 35802,
+          "cached_input_tokens": 34944,
+          "cache_write_tokens": 0,
+          "output_chars": 739,
+          "snapshots": [],
+          "seconds_from_first_response": 77.896
+        },
+        {
+          "call": 8,
+          "ordinal": 67,
+          "category": "coordination_only",
+          "tools": [
+            "wait_agent"
+          ],
+          "input_tokens": 36084,
+          "output_tokens": 29,
+          "total_tokens": 36113,
+          "cached_input_tokens": 35584,
+          "cache_write_tokens": 0,
+          "output_chars": 23,
+          "snapshots": [],
+          "seconds_from_first_response": 81.455
+        },
+        {
+          "call": 9,
+          "ordinal": 73,
+          "category": "coordination_only",
+          "tools": [
+            "wait_agent"
+          ],
+          "input_tokens": 36700,
+          "output_tokens": 21,
+          "total_tokens": 36721,
+          "cached_input_tokens": 35968,
+          "cache_write_tokens": 0,
+          "output_chars": 46,
+          "snapshots": [],
+          "seconds_from_first_response": 83.286
+        },
+        {
+          "call": 10,
+          "ordinal": 80,
+          "category": "coordination_only",
+          "tools": [
+            "wait_agent"
+          ],
+          "input_tokens": 36746,
+          "output_tokens": 31,
+          "total_tokens": 36777,
+          "cached_input_tokens": 36480,
+          "cache_write_tokens": 0,
+          "output_chars": 46,
+          "snapshots": [],
+          "seconds_from_first_response": 95.113
+        },
+        {
+          "call": 11,
+          "ordinal": 88,
+          "category": "implementation_and_verification",
+          "tools": [
+            "send_message"
+          ],
+          "input_tokens": 36802,
+          "output_tokens": 53,
+          "total_tokens": 36855,
+          "cached_input_tokens": 36608,
+          "cache_write_tokens": 0,
+          "output_chars": 0,
+          "snapshots": [],
+          "seconds_from_first_response": 107.582
+        },
+        {
+          "call": 12,
+          "ordinal": 93,
+          "category": "coordination_only",
+          "tools": [
+            "wait_agent"
+          ],
+          "input_tokens": 36867,
+          "output_tokens": 21,
+          "total_tokens": 36888,
+          "cached_input_tokens": 36736,
+          "cache_write_tokens": 0,
+          "output_chars": 47,
+          "snapshots": [],
+          "seconds_from_first_response": 109.552
+        },
+        {
+          "call": 13,
+          "ordinal": 102,
+          "category": "implementation_and_verification",
+          "tools": [
+            "apply_patch",
+            "exec_command"
+          ],
+          "input_tokens": 37430,
+          "output_tokens": 1296,
+          "total_tokens": 38726,
+          "cached_input_tokens": 36736,
+          "cache_write_tokens": 0,
+          "output_chars": 391,
+          "snapshots": [],
+          "seconds_from_first_response": 143.253
+        },
+        {
+          "call": 14,
+          "ordinal": 110,
+          "category": "implementation_and_verification",
+          "tools": [
+            "exec_command",
+            "apply_patch",
+            "exec_command"
+          ],
+          "input_tokens": 38830,
+          "output_tokens": 1053,
+          "total_tokens": 39883,
+          "cached_input_tokens": 38528,
+          "cache_write_tokens": 0,
+          "output_chars": 2698,
+          "snapshots": [],
+          "seconds_from_first_response": 174.755
+        },
+        {
+          "call": 15,
+          "ordinal": 118,
+          "category": "final",
+          "tools": [],
+          "input_tokens": 40555,
+          "output_tokens": 80,
+          "total_tokens": 40635,
+          "cached_input_tokens": 39680,
+          "cache_write_tokens": 0,
+          "output_chars": 0,
+          "snapshots": [],
+          "seconds_from_first_response": 184.815
+        }
+      ],
+      "native_completion_events": 2,
+      "pi_status_calls": [],
+      "pi_wait_calls": [],
+      "workers": [
+        {
+          "input_tokens": 52965,
+          "cached_input_tokens": 36864,
+          "output_tokens": 882,
+          "first_input_tokens": 23795,
+          "calls": 2,
+          "tokens": 53847,
+          "span_s": 27.732,
+          "command_batches": 1,
+          "source_read_commands": 1,
+          "tool_steps": [
+            {
+              "tool": "shell",
+              "skill_read": true,
+              "source_read": true
+            }
+          ],
+          "source_sha256": "da3457dad283140cb4a937913a40d6e8907e7bf9fd8fd65fc49ae48f5b64ba6d",
+          "start_from_first_root_response_s": 53.356,
+          "end_from_first_root_response_s": 81.088
+        },
+        {
+          "input_tokens": 83742,
+          "cached_input_tokens": 76928,
+          "output_tokens": 1196,
+          "first_input_tokens": 23798,
+          "calls": 3,
+          "tokens": 84938,
+          "span_s": 39.978,
+          "command_batches": 5,
+          "source_read_commands": 5,
+          "tool_steps": [
+            {
+              "tool": "shell",
+              "skill_read": false,
+              "source_read": true
+            },
+            {
+              "tool": "shell",
+              "skill_read": true,
+              "source_read": true
+            },
+            {
+              "tool": "shell",
+              "skill_read": true,
+              "source_read": true
+            },
+            {
+              "tool": "shell",
+              "skill_read": true,
+              "source_read": true
+            },
+            {
+              "tool": "shell",
+              "skill_read": false,
+              "source_read": false
+            }
+          ],
+          "source_sha256": "370bb5e1b5917a0fd07469c4a08be4f1890ec3b65ff9e2c3af8e5ff08a2d1681",
+          "start_from_first_root_response_s": 68.518,
+          "end_from_first_root_response_s": 108.496
+        }
+      ]
+    },
+    {
+      "run_id": "controlled-T05-r1-pi",
+      "arm": "pi",
+      "task": "T05",
+      "repeat": 1,
+      "root_source_sha256": "a98f1b3bf2b3a3f697ae14fe7b0b847c7a676b3a77d458a53e8abc509ddae0f6",
+      "root": [
+        {
+          "call": 1,
+          "ordinal": 18,
+          "category": "setup",
+          "tools": [
+            "exec_command"
+          ],
+          "input_tokens": 25270,
+          "output_tokens": 189,
+          "total_tokens": 25459,
+          "cached_input_tokens": 13312,
+          "cache_write_tokens": 0,
+          "output_chars": 30661,
+          "snapshots": [],
+          "seconds_from_first_response": 0
+        },
+        {
+          "call": 2,
+          "ordinal": 23,
+          "category": "setup",
+          "tools": [
+            "mcp__context_mode__ctx_resume",
+            "mcp__pi__pi_discover",
+            "exec_command"
+          ],
+          "input_tokens": 32739,
+          "output_tokens": 173,
+          "total_tokens": 32912,
+          "cached_input_tokens": 25344,
+          "cache_write_tokens": 0,
+          "output_chars": 5963,
+          "snapshots": [
+            {
+              "state": "starting",
+              "discovery": true,
+              "inventory_skills": 0,
+              "snapshot_chars": 591,
+              "text_chars": 0,
+              "pending_ui": 0,
+              "status_call": false,
+              "wrapper_elapsed_s": 3.152,
+              "requested_wait_ms": []
+            }
+          ],
+          "seconds_from_first_response": 7.696
+        },
+        {
+          "call": 3,
+          "ordinal": 34,
+          "category": "coordination_with_work",
+          "tools": [
+            "exec_command",
+            "mcp__pi__pi_status"
+          ],
+          "input_tokens": 34377,
+          "output_tokens": 794,
+          "total_tokens": 35171,
+          "cached_input_tokens": 32768,
+          "cache_write_tokens": 0,
+          "output_chars": 8646,
+          "snapshots": [
+            {
+              "state": "completed",
+              "discovery": true,
+              "inventory_skills": 20,
+              "snapshot_chars": 7400,
+              "text_chars": 0,
+              "pending_ui": 0,
+              "status_call": true,
+              "wrapper_elapsed_s": 2.395,
+              "requested_wait_ms": [
+                10000
+              ]
+            }
+          ],
+          "seconds_from_first_response": 33.684
+        },
+        {
+          "call": 4,
+          "ordinal": 42,
+          "category": "launch",
+          "tools": [
+            "exec_command",
+            "mcp__pi__pi_delegate"
+          ],
+          "input_tokens": 37260,
+          "output_tokens": 1149,
+          "total_tokens": 38409,
+          "cached_input_tokens": 34944,
+          "cache_write_tokens": 0,
+          "output_chars": 977,
+          "snapshots": [
+            {
+              "state": "starting",
+              "discovery": false,
+              "inventory_skills": 0,
+              "snapshot_chars": 314,
+              "text_chars": 0,
+              "pending_ui": 0,
+              "status_call": false,
+              "wrapper_elapsed_s": 2.052,
+              "requested_wait_ms": []
+            },
+            {
+              "state": "starting",
+              "discovery": false,
+              "inventory_skills": 0,
+              "snapshot_chars": 314,
+              "text_chars": 0,
+              "pending_ui": 0,
+              "status_call": false,
+              "wrapper_elapsed_s": 2.052,
+              "requested_wait_ms": []
+            }
+          ],
+          "seconds_from_first_response": 66.838
+        },
+        {
+          "call": 5,
+          "ordinal": 49,
+          "category": "coordination_only",
+          "tools": [
+            "mcp__pi__pi_wait"
+          ],
+          "input_tokens": 38712,
+          "output_tokens": 84,
+          "total_tokens": 38796,
+          "cached_input_tokens": 38272,
+          "cache_write_tokens": 0,
+          "output_chars": 65,
+          "snapshots": [],
+          "seconds_from_first_response": 72.598
+        },
+        {
+          "call": 6,
+          "ordinal": 54,
+          "category": "coordination_only",
+          "tools": [
+            "wait"
+          ],
+          "input_tokens": 38826,
+          "output_tokens": 34,
+          "total_tokens": 38860,
+          "cached_input_tokens": 38656,
+          "cache_write_tokens": 0,
+          "output_chars": 2608,
+          "snapshots": [],
+          "seconds_from_first_response": 106.381
+        },
+        {
+          "call": 7,
+          "ordinal": 62,
+          "category": "coordination_only",
+          "tools": [
+            "mcp__pi__pi_wait"
+          ],
+          "input_tokens": 39525,
+          "output_tokens": 109,
+          "total_tokens": 39634,
+          "cached_input_tokens": 38656,
+          "cache_write_tokens": 0,
+          "output_chars": 3294,
+          "snapshots": [],
+          "seconds_from_first_response": 111.273
+        },
+        {
+          "call": 8,
+          "ordinal": 69,
+          "category": "coordination_only",
+          "tools": [
+            "mcp__pi__pi_status"
+          ],
+          "input_tokens": 40468,
+          "output_tokens": 94,
+          "total_tokens": 40562,
+          "cached_input_tokens": 39424,
+          "cache_write_tokens": 0,
+          "output_chars": 6642,
+          "snapshots": [
+            {
+              "state": "completed",
+              "discovery": false,
+              "inventory_skills": 0,
+              "snapshot_chars": 3495,
+              "text_chars": 2876,
+              "pending_ui": 0,
+              "status_call": true,
+              "wrapper_elapsed_s": 0.072,
+              "requested_wait_ms": []
+            },
+            {
+              "state": "completed",
+              "discovery": false,
+              "inventory_skills": 0,
+              "snapshot_chars": 2743,
+              "text_chars": 2151,
+              "pending_ui": 0,
+              "status_call": true,
+              "wrapper_elapsed_s": 0.072,
+              "requested_wait_ms": []
+            }
+          ],
+          "seconds_from_first_response": 117.402
+        },
+        {
+          "call": 9,
+          "ordinal": 77,
+          "category": "implementation_and_verification",
+          "tools": [
+            "apply_patch",
+            "exec_command"
+          ],
+          "input_tokens": 42290,
+          "output_tokens": 1349,
+          "total_tokens": 43639,
+          "cached_input_tokens": 40320,
+          "cache_write_tokens": 0,
+          "output_chars": 423,
+          "snapshots": [],
+          "seconds_from_first_response": 153.182
+        },
+        {
+          "call": 10,
+          "ordinal": 85,
+          "category": "implementation_and_verification",
+          "tools": [
+            "apply_patch",
+            "exec_command"
+          ],
+          "input_tokens": 43756,
+          "output_tokens": 695,
+          "total_tokens": 44451,
+          "cached_input_tokens": 43520,
+          "cache_write_tokens": 0,
+          "output_chars": 3848,
+          "snapshots": [],
+          "seconds_from_first_response": 176.685
+        },
+        {
+          "call": 11,
+          "ordinal": 92,
+          "category": "final",
+          "tools": [],
+          "input_tokens": 45363,
+          "output_tokens": 85,
+          "total_tokens": 45448,
+          "cached_input_tokens": 44288,
+          "cache_write_tokens": 0,
+          "output_chars": 0,
+          "snapshots": [],
+          "seconds_from_first_response": 183.949
+        }
+      ],
+      "native_completion_events": 0,
+      "pi_status_calls": [
+        {
+          "root_call": 3,
+          "requested_wait_ms": 10000,
+          "duration_s": 0.0016634,
+          "discovery": true,
+          "state": "completed",
+          "snapshot_chars": 7400,
+          "text_chars": 0,
+          "inventory_skills": 20,
+          "pending_ui": 0,
+          "result_available": true
+        },
+        {
+          "root_call": 7,
+          "requested_wait_ms": 10000,
+          "duration_s": 0.0008477,
+          "discovery": false,
+          "state": "completed",
+          "snapshot_chars": 3495,
+          "text_chars": 2876,
+          "inventory_skills": 0,
+          "pending_ui": 0,
+          "result_available": true
+        },
+        {
+          "root_call": 7,
+          "requested_wait_ms": 10000,
+          "duration_s": 0.0008456,
+          "discovery": false,
+          "state": "completed",
+          "snapshot_chars": 2743,
+          "text_chars": 2151,
+          "inventory_skills": 0,
+          "pending_ui": 0,
+          "result_available": true
+        }
+      ],
+      "pi_wait_calls": [
+        {
+          "requested_wait_ms": 60000,
+          "duration_s": 29.0600619,
+          "reason": "settled",
+          "states": [
+            "running",
+            "completed"
+          ],
+          "pending_ui": 0,
+          "snapshot_chars": 2442,
+          "result_available": true
+        },
+        {
+          "requested_wait_ms": 60000,
+          "duration_s": 0.001022,
+          "reason": "settled",
+          "states": [
+            "completed"
+          ],
+          "pending_ui": 0,
+          "snapshot_chars": 3111,
+          "result_available": true
+        }
+      ],
+      "workers": [
+        {
+          "input_tokens": 23368,
+          "cached_input_tokens": 13696,
+          "output_tokens": 1242,
+          "first_input_tokens": 4649,
+          "calls": 3,
+          "tokens": 24610,
+          "span_s": 43.336,
+          "command_batches": 0,
+          "source_read_commands": 0,
+          "tool_steps": [
+            {
+              "tool": "read",
+              "skill_read": true,
+              "source_read": false,
+              "file": "unslop/SKILL.md",
+              "offset": 1,
+              "limit": 200,
+              "compressed_to_search": false,
+              "error": false
+            },
+            {
+              "tool": "read",
+              "skill_read": true,
+              "source_read": false,
+              "file": "technical-writing/SKILL.md",
+              "offset": 1,
+              "limit": 200,
+              "compressed_to_search": false,
+              "error": false
+            },
+            {
+              "tool": "read",
+              "skill_read": false,
+              "source_read": true,
+              "file": "SOURCES.md",
+              "offset": 1,
+              "limit": 100,
+              "compressed_to_search": false,
+              "error": false
+            },
+            {
+              "tool": "read",
+              "skill_read": false,
+              "source_read": true,
+              "file": "PROMPT.md",
+              "offset": 1,
+              "limit": 100,
+              "compressed_to_search": false,
+              "error": false
+            }
+          ],
+          "injected_skills": [
+            "caveman"
+          ],
+          "reported_tool_duration_s": 0.025,
+          "reread_injected_skill_steps": 0,
+          "tools_per_tool_response": [
+            2,
+            2
+          ],
+          "source_sha256": "19ecd61a377dc2678059e5da964405a84901bec9455081a4947fa327f163fa58",
+          "start_from_first_root_response_s": 68.903,
+          "end_from_first_root_response_s": 112.239
+        },
+        {
+          "input_tokens": 23542,
+          "cached_input_tokens": 4608,
+          "output_tokens": 1102,
+          "first_input_tokens": 4649,
+          "calls": 3,
+          "tokens": 24644,
+          "span_s": 36.201,
+          "command_batches": 0,
+          "source_read_commands": 0,
+          "tool_steps": [
+            {
+              "tool": "read",
+              "skill_read": true,
+              "source_read": false,
+              "file": "unslop/SKILL.md",
+              "offset": 1,
+              "limit": 200,
+              "compressed_to_search": false,
+              "error": false
+            },
+            {
+              "tool": "read",
+              "skill_read": true,
+              "source_read": false,
+              "file": "technical-writing/SKILL.md",
+              "offset": 1,
+              "limit": 200,
+              "compressed_to_search": false,
+              "error": false
+            },
+            {
+              "tool": "read",
+              "skill_read": false,
+              "source_read": true,
+              "file": "PROMPT.md",
+              "offset": 1,
+              "limit": 20,
+              "compressed_to_search": false,
+              "error": false
+            },
+            {
+              "tool": "read",
+              "skill_read": false,
+              "source_read": true,
+              "file": "SOURCES.md",
+              "offset": 1,
+              "limit": 20,
+              "compressed_to_search": false,
+              "error": false
+            },
+            {
+              "tool": "read",
+              "skill_read": false,
+              "source_read": true,
+              "file": "SOURCES.md",
+              "offset": 21,
+              "limit": 20,
+              "compressed_to_search": false,
+              "error": false
+            }
+          ],
+          "injected_skills": [
+            "caveman"
+          ],
+          "reported_tool_duration_s": 0.029,
+          "reread_injected_skill_steps": 0,
+          "tools_per_tool_response": [
+            2,
+            3
+          ],
+          "source_sha256": "1d379c9b5135abbd529936a018503f66f3ff0440e010d1d15381b0339eb0ac86",
+          "start_from_first_root_response_s": 68.913,
+          "end_from_first_root_response_s": 105.114
+        }
+      ]
+    }
+  ]
+}

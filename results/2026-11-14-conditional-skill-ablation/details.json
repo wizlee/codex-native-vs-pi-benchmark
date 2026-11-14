@@ -1,0 +1,222 @@
+[
+  {
+    "run_id": "controlled-T02-r1-pi",
+    "task": "T02",
+    "repeat": 1,
+    "arm": "pi",
+    "blind_id": "artifact-005",
+    "success": false,
+    "quality": 31.875,
+    "first_pass_success": false,
+    "first_pass_quality": 31.875,
+    "first_delivery_s": 199.054,
+    "first_tokens": 601707,
+    "repair_rounds": 0,
+    "workflow_fully_complete": false,
+    "delivery_s": 199.054,
+    "tokens": 601707,
+    "observed_tokens": 601707,
+    "root_tokens": 564467,
+    "worker_tokens": 37240,
+    "uncached_input": 74408,
+    "cached_input": 520576,
+    "output_tokens": 6723,
+    "standard_api_equivalent_usd": 0.26810360000000005,
+    "checks": {
+      "task": "T02",
+      "functional_checks_pass": false,
+      "human_review_required": true,
+      "checks": [
+        {
+          "name": "unrelated user work preserved",
+          "pass": true
+        },
+        {
+          "name": "latest state, tie, customer move, signed amounts, sort",
+          "pass": false,
+          "detail": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    {\n+     cents: 100,\n-     cents: 9,\n      count: 1,\n+     customer: 'Z'\n-     customer: 'A'\n    },\n    {\n+     cents: 145,\n+     count: 3,\n-     cents: 170,\n-     count: 2,\n      customer: 'B'\n    },\n+   {\n+     cents: 59,\n+     count: 2,\n+     customer: 'A'\n+   }\n  ]\n"
+        },
+        {
+          "name": "invalid entries do not displace valid event",
+          "pass": false,
+          "detail": "Cannot read properties of null (reading 'state')"
+        },
+        {
+          "name": "special keys, void then recreation, empty",
+          "pass": false,
+          "detail": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    {\n-     cents: 5,\n-     count: 1,\n-     customer: '__proto__'\n-   },\n-   {\n      cents: 7,\n      count: 1,\n      customer: 'a'\n    }\n  ]\n"
+        },
+        {
+          "name": "customer ordering uses code units",
+          "pass": false,
+          "detail": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    {\n+     cents: 1,\n-     cents: 2,\n      count: 1,\n+     customer: 'a'\n-     customer: 'Z'\n    },\n    {\n+     cents: 2,\n-     cents: 1,\n      count: 1,\n+     customer: 'Z'\n-     customer: 'a'\n    }\n  ]\n"
+        },
+        {
+          "name": "predeclared signed integer cancellation precision",
+          "pass": false,
+          "actual": [
+            {
+              "customer": "x",
+              "cents": 1,
+              "count": 3
+            }
+          ],
+          "expected": [
+            {
+              "customer": "x",
+              "cents": 2,
+              "count": 3
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "run_id": "controlled-T02-r1-native",
+    "task": "T02",
+    "repeat": 1,
+    "arm": "native",
+    "blind_id": "artifact-001",
+    "success": true,
+    "quality": 100,
+    "first_pass_success": true,
+    "first_pass_quality": 100,
+    "first_delivery_s": 157.336,
+    "first_tokens": 494202,
+    "repair_rounds": 0,
+    "workflow_fully_complete": true,
+    "delivery_s": 157.336,
+    "tokens": 494202,
+    "observed_tokens": 494202,
+    "root_tokens": 309268,
+    "worker_tokens": 184934,
+    "uncached_input": 54972,
+    "cached_input": 432128,
+    "output_tokens": 7102,
+    "standard_api_equivalent_usd": 0.2241768,
+    "checks": {
+      "task": "T02",
+      "functional_checks_pass": true,
+      "human_review_required": true,
+      "checks": [
+        {
+          "name": "unrelated user work preserved",
+          "pass": true
+        },
+        {
+          "name": "latest state, tie, customer move, signed amounts, sort",
+          "pass": true
+        },
+        {
+          "name": "invalid entries do not displace valid event",
+          "pass": true
+        },
+        {
+          "name": "special keys, void then recreation, empty",
+          "pass": true
+        },
+        {
+          "name": "customer ordering uses code units",
+          "pass": true
+        },
+        {
+          "name": "predeclared signed integer cancellation precision",
+          "pass": true,
+          "actual": [
+            {
+              "customer": "x",
+              "cents": 2,
+              "count": 3
+            }
+          ],
+          "expected": [
+            {
+              "customer": "x",
+              "cents": 2,
+              "count": 3
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "run_id": "controlled-T05-r1-native",
+    "task": "T05",
+    "repeat": 1,
+    "arm": "native",
+    "blind_id": "artifact-007",
+    "success": true,
+    "quality": 100,
+    "first_pass_success": true,
+    "first_pass_quality": 100,
+    "first_delivery_s": 195.825,
+    "first_tokens": 671931,
+    "repair_rounds": 0,
+    "workflow_fully_complete": true,
+    "delivery_s": 195.825,
+    "tokens": 671931,
+    "observed_tokens": 671931,
+    "root_tokens": 533146,
+    "worker_tokens": 138785,
+    "uncached_input": 47429,
+    "cached_input": 617216,
+    "output_tokens": 7286,
+    "standard_api_equivalent_usd": 0.22943960000000002,
+    "checks": {
+      "task": "T05",
+      "functional_checks_pass": true,
+      "human_review_required": true,
+      "checks": [
+        {
+          "name": "unrelated user work preserved",
+          "pass": true
+        },
+        {
+          "name": "required human-review artifact exists",
+          "pass": true
+        }
+      ]
+    }
+  },
+  {
+    "run_id": "controlled-T05-r1-pi",
+    "task": "T05",
+    "repeat": 1,
+    "arm": "pi",
+    "blind_id": "artifact-003",
+    "success": true,
+    "quality": 100,
+    "first_pass_success": true,
+    "first_pass_quality": 100,
+    "first_delivery_s": 196.494,
+    "first_tokens": 472595,
+    "repair_rounds": 0,
+    "workflow_fully_complete": true,
+    "delivery_s": 196.494,
+    "tokens": 472595,
+    "observed_tokens": 472595,
+    "root_tokens": 423341,
+    "worker_tokens": 49254,
+    "uncached_input": 57688,
+    "cached_input": 407808,
+    "output_tokens": 7099,
+    "standard_api_equivalent_usd": 0.22714679999999998,
+    "checks": {
+      "task": "T05",
+      "functional_checks_pass": true,
+      "human_review_required": true,
+      "checks": [
+        {
+          "name": "unrelated user work preserved",
+          "pass": true
+        },
+        {
+          "name": "required human-review artifact exists",
+          "pass": true
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,45 @@
+{
+  "pi_version": "1.5.2",
+  "sources": [
+    {
+      "source": "bridge/src/bridge.mjs",
+      "sha256": "df196091760c4c19cf1f20b0e4ec79e82658aecad1c292181fc9f5971b9bf3c0"
+    },
+    {
+      "source": "bridge/src/server.mjs",
+      "sha256": "1e6162e89b3d944e52d728bb0588c7bca3ccc785ce346dc07de50e3a7a22729e"
+    },
+    {
+      "source": "bridge/src/rpc.mjs",
+      "sha256": "aa463621f833304bffe8f7979cb3fc022aa6342864e5a4a1f69881517678d2a1"
+    },
+    {
+      "source": "bridge/src/worker-prompt.mjs",
+      "sha256": "ac4009ee39db375c042c2bd53af0e8269dad28c8168df7e8b00ec3918d104e51"
+    },
+    {
+      "source": "bridge/src/request-shape.mjs",
+      "sha256": "66037fd74df7dd0bc54e222c39c47d7e2370868e36ac19960d3db9c47da3c5b2"
+    },
+    {
+      "source": "pi/package.json",
+      "sha256": "18b422b7d80f2caa2551d253c0a8409e1caa54b954bfb7d18252e507bb8a0318"
+    },
+    {
+      "source": "pi/dist/core/agent-session.js",
+      "sha256": "ee756f6f74afe9f8930ebf216c95334605d913a275a0eec2c9702f101baef3c3"
+    },
+    {
+      "source": "pi/dist/core/skills.js",
+      "sha256": "806fe63a39cdb5ab6ff4dbbc917e24a3019ead482ede621518ffffc134de2b15"
+    },
+    {
+      "source": "pi/dist/core/system-prompt.js",
+      "sha256": "5f68e89c31ba3d4d1af8ad2bfd0c7c548879d47ee6ab4aabee50a826100da32c"
+    },
+    {
+      "source": "pi/node_modules/@earendil-works/pi-ai/dist/api/openai-codex-responses.js",
+      "sha256": "4a756bd6c87a6357a811ee512f47d5c3991026bcd213e00a4330be7b0fb4a80d"
+    }
+  ]
+}

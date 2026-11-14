@@ -1,0 +1,58 @@
+[
+  {
+    "run_id": "controlled-T02-r1-pi",
+    "workers": [
+      {
+        "worker": 1,
+        "state": "lost_after_interruption"
+      },
+      {
+        "worker": 2,
+        "state": "lost_after_interruption"
+      }
+    ],
+    "workflow_fully_complete": false
+  },
+  {
+    "run_id": "controlled-T02-r1-native",
+    "workers": [
+      {
+        "worker": 1,
+        "state": "completed"
+      },
+      {
+        "worker": 2,
+        "state": "completed"
+      }
+    ],
+    "workflow_fully_complete": true
+  },
+  {
+    "run_id": "controlled-T05-r1-native",
+    "workers": [
+      {
+        "worker": 1,
+        "state": "completed"
+      },
+      {
+        "worker": 2,
+        "state": "completed"
+      }
+    ],
+    "workflow_fully_complete": true
+  },
+  {
+    "run_id": "controlled-T05-r1-pi",
+    "workers": [
+      {
+        "worker": 1,
+        "state": "completed"
+      },
+      {
+        "worker": 2,
+        "state": "completed"
+      }
+    ],
+    "workflow_fully_complete": true
+  }
+]

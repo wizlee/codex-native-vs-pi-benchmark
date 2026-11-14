@@ -4,7 +4,7 @@ import {taskFiles} from './cases.mjs';
 const batch=process.argv[2]??'runs/2026-11-13-fair-read-pilot';
 const schedule=JSON.parse(fs.readFileSync(path.join(batch,'schedule.json'),'utf8'));
 const artifacts=[];
-for(const r of schedule.runs){
+for(const r of schedule.runs.filter(run=>!process.argv.includes('--observed-only')||fs.existsSync(path.join(batch,`${run.run_id}.observation.json`)))){
   const tag=process.argv.includes('--final')&&fs.existsSync(path.join(batch,`${r.run_id}.repair1.observation.json`))?'.repair1':'';
   const original=JSON.parse(fs.readFileSync(path.join(batch,'artifacts',`${r.blind_id}${tag}.json`),'utf8'));
   const observation=JSON.parse(fs.readFileSync(path.join(batch,`${r.run_id}${tag}.observation.json`),'utf8'));
@@ -26,6 +26,7 @@ for(const r of schedule.runs){
 }
 artifacts.sort((a,b)=>a.blind_id.localeCompare(b.blind_id));
 const packet={tasks:{T02:taskFiles('T02'),T05:taskFiles('T05')},artifacts};
+const count=artifacts.length;
 const batchName=path.basename(batch);
 const repairedIds=new Set(schedule.runs.filter(r=>fs.existsSync(path.join(batch,`${r.run_id}.repair1.observation.json`))).map(r=>r.blind_id));
 const packetPath=path.resolve(batch,process.argv.includes('--final')?'blind-review-packet.final.local.json':'blind-review-packet.local.json');
@@ -46,5 +47,5 @@ ORIGINAL TASKS AND ANONYMIZED ARTIFACTS:
 ${JSON.stringify(packet)}
 `;
 const marker='ORIGINAL TASKS AND ANONYMIZED ARTIFACTS:';
-const filePrompt=prompt.slice(0,prompt.indexOf(marker))+`ORIGINAL TASKS AND ANONYMIZED ARTIFACTS: Read exactly this frozen anonymous JSON file: ${packetPath}. This is an explicit exception to the repository-read restriction for this one file only. Do not read anything else in the benchmark folder. Parse JSON and inspect one artifact at a time; do not print the full packet. Confirm all eight primary artifact bodies were accessible before final scoring. If any tool output truncates, read a smaller selected artifact/file rather than grading missing evidence.\n`;
+const filePrompt=prompt.slice(0,prompt.indexOf(marker)).replaceAll('Eight anonymized artifacts',`${count} anonymized artifacts`).replaceAll('all eight exactly once',`all ${count} exactly once`)+`ORIGINAL TASKS AND ANONYMIZED ARTIFACTS: Read exactly this frozen anonymous JSON file: ${packetPath}. This is an explicit exception to the repository-read restriction for this one file only. Do not read anything else in the benchmark folder. Parse JSON and inspect one artifact at a time; do not print the full packet. Confirm all ${count} primary artifact bodies were accessible before final scoring. If any tool output truncates, read a smaller selected artifact/file rather than grading missing evidence.\n`;
 console.log(JSON.stringify(process.argv.includes('--updates-only')?{artifacts:artifacts.filter(a=>repairedIds.has(a.blind_id))}:{title:`Blind review ${batchName}`,directoryName:`${batchName}-blind-review`,prompt:filePrompt}));

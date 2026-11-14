@@ -1,0 +1,357 @@
+diff --git a/src/bridge.mjs b/src/bridge.mjs
+index eb447ec..b90e471 100644
+--- a/src/bridge.mjs
++++ b/src/bridge.mjs
+@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto';
+ import { access, mkdir, realpath, stat } from 'node:fs/promises';
+ import path from 'node:path';
+ import { PiRpc } from './rpc.mjs';
++import { skillLoadingPolicy } from './worker-prompt.mjs';
+ 
+ export class BridgeError extends Error {
+   constructor(code, message, fallbackAllowed = false) {
+@@ -92,6 +93,8 @@ export class Bridge {
+     const sessionDir = path.join(this.root, 'sessions');
+     await mkdir(sessionDir, { recursive: true });
+     const args = ['--session-id', worker.id, '--session-dir', sessionDir, '--name', `Codex worker ${worker.id.slice(0, 8)}`];
++    if (!worker.discovery && this.config.requestShapeTelemetry) args.push('--extension', path.join(this.root, 'src', 'request-shape.mjs'));
++    if (!worker.discovery) args.push('--append-system-prompt', skillLoadingPolicy);
+     if (worker.access === 'read') args.push('--tools', 'read,grep,find,ls', '--exclude-tools', 'mcp__*');
+     if (options.model) args.push('--model', options.model);
+     if (options.thinking) args.push('--thinking', options.thinking);
+@@ -128,7 +131,7 @@ export class Bridge {
+     for (const [index, name] of selected.entries()) {
+       const skill = worker.availableSkills.find((entry) => entry.name === name);
+       if (!skill?.path) throw new BridgeError('SKILL_MISSING', `Required skill '${name}' is unavailable in this Pi invocation. Do not substitute a native agent to bypass this requirement.`);
+-      if (index > 0) skillReads.push(`Use Pi's read tool to load and follow skill ${JSON.stringify(name)} at ${JSON.stringify(skill.path)}. Resolve supporting paths relative to ${JSON.stringify(path.dirname(skill.path))}.`);
++      if (index > 0) skillReads.push(`Use Pi's read tool to load and follow skill ${JSON.stringify(name)} at ${JSON.stringify(skill.path)} with explicit offset 1 and limit 200. Continue with explicit bounds until the entire body is available; never treat a truncated or compressed snippet as the full skill. Resolve supporting paths relative to ${JSON.stringify(path.dirname(skill.path))}.`);
+     }
+     worker.selectedSkills = selected;
+     const handoff = [
+@@ -139,7 +142,7 @@ export class Bridge {
+       'If a selected skill requires unavailable tools or host-specific workflow state, stop and report the incompatibility rather than silently omitting it.',
+       worker.excludedSkills.length ? `Do not activate or follow these excluded skills: ${worker.excludedSkills.join(', ')}.` : '',
+       options.context ? `Relevant parent context and constraints:\n${options.context}` : '',
+-      skillReads.length ? `Before doing any task work, load every additional required skill through Pi's read tool so its skill/path permission gates apply. If any load is denied or fails, stop; never read it with a shell or another workaround.\n${skillReads.join('\n')}` : '',
++      skillReads.length ? `Before doing any task work, load every additional required skill through Pi's read tool so its skill/path permission gates apply. Independent reads may share one tool-use response. If any load is denied or fails, stop; never read it with a shell or another workaround.\n${skillReads.join('\n')}` : '',
+       `Task:\n${options.task}`,
+     ].filter(Boolean).join('\n\n');
+     if (worker.state !== 'starting') return;
+@@ -160,6 +163,8 @@ export class Bridge {
+   }
+ 
+   onRecord(worker, event) {
++    // RPC streaming records are activity, not changes to the public snapshot.
++    const before = [worker.state, worker.text, worker.error, worker.pendingUi.length, worker.notices];
+     if (event.type === 'extension_error') {
+       this.fail(worker, new BridgeError('EXTENSION_FAILURE', `Pi extension failed: ${event.extensionPath}: ${event.error}`)); return;
+     }
+@@ -183,7 +188,8 @@ export class Bridge {
+       worker.needsReconciliation = worker.state !== 'completed';
+       worker.pendingUi = [];
+     }
+-    this.change(worker);
++    if (worker.state !== before[0] || worker.text !== before[1] || worker.error !== before[2]
++      || worker.pendingUi.length !== before[3] || worker.notices !== before[4]) this.change(worker);
+   }
+ 
+   fail(worker, error) {
+@@ -244,6 +250,39 @@ export class Bridge {
+     return this.snapshot(worker);
+   }
+ 
++  async wait(ids, { waitMs = 60000, handleUi, signal } = {}) {
++    const workers = [...new Set(ids)].map((id) => this.get(id));
++    if (!workers.length) throw new BridgeError('INVALID_WORKERS', 'Select at least one worker.');
++    const ready = () => workers.some((worker) => !active(worker) || worker.pendingUi.length);
++    if (!ready() && waitMs && !signal?.aborted) {
++      await new Promise((resolve) => {
++        const done = () => {
++          clearTimeout(timer);
++          for (const worker of workers) worker.changes.off('change', changed);
++          signal?.removeEventListener('abort', done);
++          resolve();
++        };
++        const changed = () => { if (ready()) done(); };
++        const timer = setTimeout(done, Math.min(Math.max(waitMs, 0), 60000));
++        for (const worker of workers) worker.changes.on('change', changed);
++        signal?.addEventListener('abort', done, { once: true });
++        if (ready() || signal?.aborted) done();
++      });
++    }
++    const attention = workers.filter((worker) => worker.pendingUi.length);
++    // Use the same fail-closed human adapter as pi_status; no model answers.
++    for (const worker of attention) await this.status(worker.id, { handleUi });
++    return {
++      reason: signal?.aborted ? 'interrupted' : attention.length ? 'attention'
++        : workers.some((worker) => !active(worker)) ? 'settled' : 'timeout',
++      workers: workers.map((worker) => ({
++        id: worker.id, state: worker.state, pendingUiCount: worker.pendingUi.length,
++        ...(!active(worker) ? { text: clip(worker.text), error: worker.error,
++          fallbackAllowed: worker.fallbackAllowed, needsReconciliation: worker.needsReconciliation } : {}),
++      })),
++    };
++  }
++
+   async cancel(id) {
+     const worker = this.get(id);
+     if (!active(worker)) return this.snapshot(worker);
+diff --git a/src/server.mjs b/src/server.mjs
+index 16a5fd0..3ec1cef 100644
+--- a/src/server.mjs
++++ b/src/server.mjs
+@@ -6,7 +6,7 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
+ import { z } from 'zod';
+ import { Bridge, BridgeError } from './bridge.mjs';
+ 
+-const instructions = `Use Pi for delegated agents while Codex may work directly. Call pi_discover to check this project's Pi resources, then pi_status for its inventory. In pi_delegate explicitly name applicable portable active skills, relevant context, and user-requested overrides; active Codex skills are not automatically visible here. Poll pi_status while a task is active; it forwards pending dialogs to the native user UI. Never answer permission dialogs yourself. There is no answer or raw-RPC tool. Coordinate direct Codex writes with workers: parallel readers are allowed, but modifying work must not overlap. Native fallback requires fallbackAllowed=true before task execution and an explicit announcement to the user. Never fall back after task submission, denial, missing skills, or an approval/compatibility gate. Worker IDs are local to this server process. After failure/restart, inspect partial work and ask the user before rerunning. Skill exclusions are handoff instructions, not a sandbox. Read-only workers expose only read/grep/find/ls; extensions still run with their normal OS permissions. Modifying workers remain locked until the user verifies desktop approval forwarding.`;
++const instructions = `Use Pi for delegated agents while Codex may work directly. Call pi_discover to check this project's Pi resources, then pi_status for its inventory. In pi_delegate explicitly name applicable portable active skills, relevant context, and user-requested overrides; active Codex skills are not automatically visible here. For active task workers use pi_wait with up to 60000 ms and all remaining worker IDs; it forwards human dialogs internally and returns compact completion or attention results. Omit settled IDs on later waits. Use pi_status for discovery and detailed diagnostics. Avoid sleep/status loops. Never answer permission dialogs yourself. There is no answer or raw-RPC tool. Coordinate direct Codex writes with workers: parallel readers are allowed, but modifying work must not overlap. Native fallback requires fallbackAllowed=true before task execution and an explicit announcement to the user. Never fall back after task submission, denial, missing skills, or an approval/compatibility gate. Worker IDs are local to this server process. After failure/restart, inspect partial work and ask the user before rerunning. Skill exclusions are handoff instructions, not a sandbox. Read-only workers expose only read/grep/find/ls; extensions still run with their normal OS permissions. Modifying workers remain locked until the user verifies desktop approval forwarding.`;
+ 
+ export function createServer({ config, root }) {
+   const bridge = new Bridge({ config, root });
+@@ -71,6 +71,14 @@ export function createServer({ config, root }) {
+     annotations: { readOnlyHint: false },
+   }, guard(({ id, waitMs }, extra) => bridge.status(id, { waitMs, handleUi: (request) => dialog(request, extra) })));
+ 
++  server.registerTool('pi_wait', {
++    description: 'Wait for any selected worker to finish or need human input. For active task workers prefer this over sleep/status loops. Returns compact states and settled results; omit already settled IDs on later waits. Human dialogs use the same native approval adapter as pi_status.',
++    inputSchema: { ids: z.array(z.string()).min(1).max(4), waitMs: z.number().int().min(0).max(60000).default(60000) },
++    annotations: { readOnlyHint: false },
++  }, guard(({ ids, waitMs }, extra) => bridge.wait(ids, {
++    waitMs, signal: extra.signal, handleUi: (request) => dialog(request, extra),
++  })));
++
+   server.registerTool('pi_follow_up', {
+     description: 'Give a successfully completed task worker another task in the same session, keeping its existing access, model, context and skill policy. No follow-up after failed/cancelled work.',
+     inputSchema: { id: z.string(), task: z.string().min(1).max(50000) },
+diff --git a/src/worker-prompt.mjs b/src/worker-prompt.mjs
+new file mode 100644
+index 0000000..605adce
+--- /dev/null
++++ b/src/worker-prompt.mjs
+@@ -0,0 +1,3 @@
++// Invocation-local clarification. No file bodies, global settings, or persistent
++// loaded-skill claims. Pi itself expands the first skill after its input gate.
++export const skillLoadingPolicy = `Skill loading is idempotent within this invocation. A complete native <skill name="..." location="..."> body already present in the current conversation counts as loaded: follow that body without rereading its SKILL.md merely to activate it. A name, path, catalog entry, summary, or claim of prior loading alone does not count. When no complete body is present, load the required skill through Pi's permitted read tool. Supporting files and newly requested skills still require normal permitted reads. Never bypass a denial or substitute another tool. Existing bodies are invocation snapshots, not proof of current on-disk contents; reread through normal gates when asked to refresh or verify changed instructions.`;
+diff --git a/src/request-shape.mjs b/src/request-shape.mjs
+new file mode 100644
+index 0000000..a6f75f0
+--- /dev/null
++++ b/src/request-shape.mjs
+@@ -0,0 +1,32 @@
++import { createHash } from 'node:crypto';
++import { appendFileSync } from 'node:fs';
++
++const hash = value => createHash('sha256').update(JSON.stringify(value ?? null)).digest('hex');
++
++// No headers, credentials, response bodies, reasoning items, or raw prompts.
++export function requestShape(payload) {
++  if (!payload || typeof payload !== 'object') return { unsupported: true };
++  const input = Array.isArray(payload.input) ? payload.input : [];
++  return {
++    model: payload.model,
++    instructions_hash: hash(payload.instructions),
++    instructions_chars: typeof payload.instructions === 'string' ? payload.instructions.length : 0,
++    tools_hash: hash(payload.tools),
++    tool_names: (payload.tools ?? []).map(tool => tool.name ?? tool.type),
++    cache_key_hash: payload.prompt_cache_key ? hash(payload.prompt_cache_key) : null,
++    parallel_tool_calls: payload.parallel_tool_calls,
++    input_shape: input.map(item => ({ type: item.type, role: item.role,
++      // Only user text is compared. Assistant/hidden reasoning is never recorded.
++      ...(item.role === 'user' ? { content_hash: hash(item.content) } : {}),
++    })),
++  };
++}
++
++export default function requestShapeExtension(pi) {
++  let calls = 0;
++  pi.on('before_provider_request', (event, ctx) => {
++    const file = ctx.sessionManager.getSessionFile();
++    if (!file) throw new Error('Request-shape telemetry requires a session file.');
++    appendFileSync(`${file}.request-shape.jsonl`, JSON.stringify({ call: ++calls, ...requestShape(event.payload) }) + '\n');
++  });
++}
+diff --git a/test/bridge.test.mjs b/test/bridge.test.mjs
+index 5c5dd46..649f447 100644
+--- a/test/bridge.test.mjs
++++ b/test/bridge.test.mjs
+@@ -1,6 +1,9 @@
+ import assert from 'node:assert/strict';
+ import { fileURLToPath } from 'node:url';
+ import { test } from 'node:test';
++import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
++import { tmpdir } from 'node:os';
++import path from 'node:path';
+ import { Bridge } from '../src/bridge.mjs';
+ 
+ const root = fileURLToPath(new URL('../', import.meta.url));
+@@ -28,6 +31,34 @@ test('a background worker inherits the selected portable skill and normal Pi mod
+   assert.equal(result.fallbackAllowed, false);
+ });
+ 
++test('worker loading policy requires complete bodies, preserves refresh and permission gates', async t => {
++  const bridge = new Bridge({ config, root });
++  t.after(() => bridge.close());
++  const worker = await bridge.delegate({ cwd: root, task: 'report-skill-policy', skills: ['caveman'] });
++  const result = JSON.parse((await finished(bridge, worker.id)).text);
++  assert.match(result.policy, /complete native <skill/);
++  assert.match(result.policy, /name, path, catalog entry, summary, or claim of prior loading alone does not count/);
++  assert.match(result.policy, /reread through normal gates when asked to refresh/);
++  assert.match(result.policy, /Never bypass a denial/);
++  assert.match(result.prompt, /Use concise language/);
++});
++
++test('fresh invocations expand changed skill bytes rather than trusting a path-only loaded flag', async t => {
++  const directory = await mkdtemp(path.join(tmpdir(), 'pi-skill-version-'));
++  const skillDirectory = path.join(directory, 'versioned');
++  await mkdir(skillDirectory);
++  const skillPath = path.join(skillDirectory, 'SKILL.md');
++  const bridge = new Bridge({ config, root });
++  t.after(async () => { await bridge.close(); await rm(directory, { recursive: true, force: true }); });
++  for (const version of ['original instruction', 'changed instruction']) {
++    await writeFile(skillPath, `---\nname: versioned\ndescription: fixture\n---\n${version}\n`);
++    const worker = await bridge.delegate({ cwd: root, task: 'echo-handoff', skills: ['versioned'], skillPaths: [skillPath] });
++    const result = await finished(bridge, worker.id);
++    assert.match(result.text, new RegExp(version));
++    if (version.startsWith('changed')) assert.doesNotMatch(result.text, /original instruction/);
++  }
++});
++
+ test('read-only workers expose only safe declared tools without disabling extensions or bypassing project trust', async (t) => {
+   const bridge = new Bridge({ config, root });
+   t.after(() => bridge.close());
+diff --git a/test/mcp.test.mjs b/test/mcp.test.mjs
+index 7e0367f..7aae182 100644
+--- a/test/mcp.test.mjs
++++ b/test/mcp.test.mjs
+@@ -25,7 +25,7 @@ async function connect(t, respond, capabilities = { elicitation: { form: {} } })
+ test('MCP exposes delegation but no model-callable approval-answer or raw RPC tool', async (t) => {
+   const { client, call } = await connect(t);
+   const names = (await client.listTools()).tools.map((tool) => tool.name);
+-  assert.deepEqual(names.sort(), ['pi_approval_probe', 'pi_cancel', 'pi_delegate', 'pi_discover', 'pi_follow_up', 'pi_status'].sort());
++  assert.deepEqual(names.sort(), ['pi_approval_probe', 'pi_cancel', 'pi_delegate', 'pi_discover', 'pi_follow_up', 'pi_status', 'pi_wait'].sort());
+   const result = await call('pi_delegate', { cwd: root, task: 'edit', access: 'write' });
+   assert.equal(result.code, 'APPROVAL_NOT_VERIFIED');
+   assert.equal(result.fallbackAllowed, false);
+@@ -90,3 +90,18 @@ test('clients without elicitation support cannot grant worker approvals', async
+   assert.equal(status.needsReconciliation, true);
+ });
+ 
++for (const response of [{ action: 'accept', content: { choice: 'No' } }, { action: 'accept', content: {} }]) {
++  test(`multi-worker wait forwards synthetic human dialog, fails closed for ${JSON.stringify(response.content)}`, async t => {
++    let dialogs = 0;
++    const { call } = await connect(t, async () => { dialogs++; return response; });
++    const worker = await call('pi_delegate', { cwd: root, task: 'require-approval' });
++    let result;
++    for (let i = 0; i < 10; i++) {
++      result = await call('pi_wait', { ids: [worker.id], waitMs: 1000 });
++      if (['completed', 'failed'].includes(result.workers[0].state)) break;
++    }
++    assert.equal(dialogs, 1);
++    assert.equal(result.workers[0].state, response.content.choice ? 'completed' : 'failed');
++    assert.equal(result.workers[0].fallbackAllowed, false);
++  });
++}
+diff --git a/test/fake-pi.mjs b/test/fake-pi.mjs
+index cd1e553..a74af91 100644
+--- a/test/fake-pi.mjs
++++ b/test/fake-pi.mjs
+@@ -24,7 +24,8 @@ function complete() {
+   if (promptText.includes('provider-failure')) {
+     emit({ type: 'message_end', message: { role: 'assistant', stopReason: 'error', errorMessage: 'Provider failed' } });
+   } else {
+-    text = promptText.includes('report-tool-policy')
++    text = promptText.includes('report-skill-policy') ? JSON.stringify({ policy: value('--append-system-prompt'), prompt: promptText })
++      : promptText.includes('report-tool-policy')
+       ? JSON.stringify({ tools: value('--tools'), excludedTools: value('--exclude-tools'), extensionsDisabled: args.includes('--no-extensions'), trustForced: args.includes('--approve'), contextDisabled: args.includes('--no-context-files') })
+       : promptText.includes('echo-handoff') ? promptText : 'Done: 雪\u2028line\u2029end';
+     // The multibyte character is deliberately split across stdout chunks.
+diff --git a/test/status.test.mjs b/test/status.test.mjs
+new file mode 100644
+index 0000000..6f35228
+--- /dev/null
++++ b/test/status.test.mjs
+@@ -0,0 +1,65 @@
++import { test } from 'node:test';
++import assert from 'node:assert/strict';
++import { EventEmitter } from 'node:events';
++import { Bridge } from '../src/bridge.mjs';
++
++function setup(t) {
++  const bridge = new Bridge({ config: {}, root: '.' });
++  t.after(() => { clearInterval(bridge.reaper); });
++  const worker = { id: 'one', cwd: '.', state: 'running', text: '', notices: [], pendingUi: [], changes: new EventEmitter() };
++  bridge.workers.set(worker.id, worker);
++  return { bridge, worker };
++}
++test('stream activity does not consume a status wait', async t => {
++  const { bridge, worker } = setup(t);
++  const start = performance.now();
++  const pending = bridge.status(worker.id, { waitMs: 100 });
++  bridge.onRecord(worker, { type: 'message_update', assistantMessageEvent: { type: 'text_delta', delta: 'x' } });
++  assert.equal((await pending).state, 'running');
++  assert.ok(performance.now() - start >= 80);
++});
++test('completion and pending human input wake immediately', async t => {
++  for (const event of [{ type: 'agent_settled' }, { type: 'extension_ui_request', method: 'confirm', id: 'synthetic' }]) {
++    const { bridge, worker } = setup(t);
++    const pending = bridge.status(worker.id, { waitMs: 1000 });
++    bridge.onRecord(worker, event);
++    const result = await pending;
++    assert.notEqual(result.state, 'running');
++  }
++});
++test('multi-worker wait ignores intermediate text and returns first settled result', async t => {
++  const { bridge, worker } = setup(t);
++  const other = { ...worker, id: 'two', changes: new EventEmitter() };
++  bridge.workers.set(other.id, other);
++  let resolved = false;
++  const pending = bridge.wait([worker.id, other.id], { waitMs: 1000 }).then(value => { resolved = true; return value; });
++  bridge.onRecord(worker, { type: 'message_end', message: { role: 'assistant', content: [{ type: 'text', text: 'Working' }] } });
++  await new Promise(resolve => setTimeout(resolve, 10));
++  assert.equal(resolved, false);
++  bridge.onRecord(other, { type: 'agent_settled' });
++  const result = await pending;
++  assert.equal(result.reason, 'settled');
++  assert.equal(result.workers[0].text, undefined);
++  assert.equal(result.workers[1].state, 'completed');
++  assert.equal(worker.changes.listenerCount('change'), 0);
++});
++test('wait timeout and cancellation release all listeners without cancelling workers', async t => {
++  const { bridge, worker } = setup(t);
++  assert.equal((await bridge.wait([worker.id], { waitMs: 10 })).reason, 'timeout');
++  const controller = new AbortController();
++  const pending = bridge.wait([worker.id], { signal: controller.signal });
++  controller.abort();
++  assert.equal((await pending).reason, 'interrupted');
++  assert.equal(worker.state, 'running');
++  assert.equal(worker.changes.listenerCount('change'), 0);
++});
++test('failure wakes wait and retains reconciliation and fallback fields', async t => {
++  const { bridge, worker } = setup(t);
++  worker.submitted = true;
++  const pending = bridge.wait([worker.id]);
++  bridge.fail(worker, new Error('provider broke'));
++  const result = await pending;
++  assert.equal(result.workers[0].state, 'failed');
++  assert.equal(result.workers[0].needsReconciliation, true);
++  assert.equal(result.workers[0].fallbackAllowed, false);
++});
+diff --git a/test/request-shape.test.mjs b/test/request-shape.test.mjs
+new file mode 100644
+index 0000000..26730cf
+--- /dev/null
++++ b/test/request-shape.test.mjs
+@@ -0,0 +1,12 @@
++import { test } from 'node:test';
++import assert from 'node:assert/strict';
++import { requestShape } from '../src/request-shape.mjs';
++test('request shape compares prefixes without capturing secrets or reasoning', () => {
++  const payload = { model: 'test', instructions: 'private instructions', tools: [{ name: 'read' }],
++    prompt_cache_key: 'private session', input: [{ type: 'reasoning', summary: 'hidden' },
++      { role: 'user', content: 'private prompt' }, { role: 'assistant', content: 'hidden output' }] };
++  const shape = requestShape(payload);
++  for (const secret of ['private instructions', 'private session', 'hidden', 'private prompt']) assert.ok(!JSON.stringify(shape).includes(secret));
++  assert.deepEqual(shape, requestShape(structuredClone(payload)));
++  assert.notEqual(shape.instructions_hash, requestShape({ ...payload, instructions: 'changed' }).instructions_hash);
++});

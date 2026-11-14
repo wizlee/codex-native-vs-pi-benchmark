@@ -1,0 +1,205 @@
+{
+  "method": "First requests are not guaranteed cold. Later requests measure within-worker reuse. Service routing/warmness unknown. Native request payloads unavailable; no request-shape parity claim. Zero-usage error records do not establish zero billable usage.",
+  "coverage": {
+    "planned": 4,
+    "observed": 2,
+    "unexecuted": [
+      "controlled-T05-r1-native",
+      "controlled-T05-r1-pi"
+    ]
+  },
+  "runs": [
+    {
+      "run_id": "controlled-T02-r1-pi",
+      "arm": "pi",
+      "cross_worker_shape": {
+        "shared_first_instructions": true,
+        "shared_first_tool_schemas": true,
+        "distinct_session_cache_keys": true
+      },
+      "workers": [
+        {
+          "worker": 1,
+          "groups": {
+            "first": {
+              "calls": 1,
+              "input_tokens": 4321,
+              "cached_input_tokens": 0,
+              "uncached_input_tokens": 4321,
+              "output_tokens": 117,
+              "cached_share": 0
+            },
+            "later": {
+              "calls": 3,
+              "input_tokens": 20165,
+              "cached_input_tokens": 10752,
+              "uncached_input_tokens": 9413,
+              "output_tokens": 975,
+              "cached_share": 0.5332010909992562
+            },
+            "all": {
+              "calls": 4,
+              "input_tokens": 24486,
+              "cached_input_tokens": 10752,
+              "uncached_input_tokens": 13734,
+              "output_tokens": 1092,
+              "cached_share": 0.4391080617495712
+            }
+          },
+          "error_records": 0,
+          "usage_reconciled": true,
+          "request_shape": {
+            "provider_requests": 4,
+            "unsupported_requests": 0,
+            "instruction_variants": 1,
+            "tool_schema_variants": 1,
+            "tool_order_variants": 1,
+            "cache_key_variants": 1,
+            "cache_key_present": true,
+            "instruction_chars": [
+              8696,
+              8696,
+              8696,
+              8696
+            ],
+            "input_items": [
+              3,
+              7,
+              10,
+              18
+            ],
+            "qualified_skill_hint_requests": 0
+          },
+          "request_vs_usage_difference": 0
+        },
+        {
+          "worker": 2,
+          "groups": {
+            "first": {
+              "calls": 1,
+              "input_tokens": 4323,
+              "cached_input_tokens": 0,
+              "uncached_input_tokens": 4323,
+              "output_tokens": 117,
+              "cached_share": 0
+            },
+            "later": {
+              "calls": 3,
+              "input_tokens": 20157,
+              "cached_input_tokens": 10752,
+              "uncached_input_tokens": 9405,
+              "output_tokens": 900,
+              "cached_share": 0.5334127102247358
+            },
+            "all": {
+              "calls": 4,
+              "input_tokens": 24480,
+              "cached_input_tokens": 10752,
+              "uncached_input_tokens": 13728,
+              "output_tokens": 1017,
+              "cached_share": 0.4392156862745098
+            }
+          },
+          "error_records": 0,
+          "usage_reconciled": true,
+          "request_shape": {
+            "provider_requests": 4,
+            "unsupported_requests": 0,
+            "instruction_variants": 1,
+            "tool_schema_variants": 1,
+            "tool_order_variants": 1,
+            "cache_key_variants": 1,
+            "cache_key_present": true,
+            "instruction_chars": [
+              8696,
+              8696,
+              8696,
+              8696
+            ],
+            "input_items": [
+              3,
+              7,
+              10,
+              16
+            ],
+            "qualified_skill_hint_requests": 0
+          },
+          "request_vs_usage_difference": 0
+        }
+      ]
+    },
+    {
+      "run_id": "controlled-T02-r1-native",
+      "arm": "native",
+      "cross_worker_shape": null,
+      "workers": [
+        {
+          "worker": 1,
+          "groups": {
+            "first": {
+              "calls": 1,
+              "input_tokens": 23674,
+              "cached_input_tokens": 13056,
+              "uncached_input_tokens": 10618,
+              "output_tokens": 109,
+              "cached_share": 0.5514910872687336
+            },
+            "later": {
+              "calls": 2,
+              "input_tokens": 52798,
+              "cached_input_tokens": 49280,
+              "uncached_input_tokens": 3518,
+              "output_tokens": 662,
+              "cached_share": 0.9333686882078867
+            },
+            "all": {
+              "calls": 3,
+              "input_tokens": 76472,
+              "cached_input_tokens": 62336,
+              "uncached_input_tokens": 14136,
+              "output_tokens": 771,
+              "cached_share": 0.8151480280364055
+            }
+          },
+          "error_records": 0,
+          "usage_reconciled": true,
+          "request_shape": null,
+          "request_vs_usage_difference": null
+        },
+        {
+          "worker": 2,
+          "groups": {
+            "first": {
+              "calls": 1,
+              "input_tokens": 23675,
+              "cached_input_tokens": 23040,
+              "uncached_input_tokens": 635,
+              "output_tokens": 132,
+              "cached_share": 0.9731784582893347
+            },
+            "later": {
+              "calls": 4,
+              "input_tokens": 106656,
+              "cached_input_tokens": 102912,
+              "uncached_input_tokens": 3744,
+              "output_tokens": 1045,
+              "cached_share": 0.9648964896489649
+            },
+            "all": {
+              "calls": 5,
+              "input_tokens": 130331,
+              "cached_input_tokens": 125952,
+              "uncached_input_tokens": 4379,
+              "output_tokens": 1177,
+              "cached_share": 0.9664009330090308
+            }
+          },
+          "error_records": 0,
+          "usage_reconciled": true,
+          "request_shape": null,
+          "request_vs_usage_difference": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "artifacts": [
+    {
+      "blind_id": "artifact-001",
+      "mandatory_pass": false,
+      "critical_defect": true,
+      "scores": {
+        "correctness": 2.5,
+        "verification": 3,
+        "simplicity": 3.5,
+        "research": 3,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete summary.mjs and summary.test.mjs. Map-based validation, latest sequence selection with >= tie handling, retained void winners, winning-customer grouping and relational code-unit sorting implement the stated rules clearly.",
+        "Reproduced monetary data corruption in copied primary API. Input [{id:'a',customer:'x',sequence:0,cents:9007199254740991,state:'posted'},{id:'b',customer:'x',sequence:0,cents:2,state:'posted'},{id:'c',customer:'x',sequence:0,cents:-9007199254740991,state:'posted'}]. Expected [{customer:'x',cents:2,count:3}]; actual [{customer:'x',cents:1,count:3}]. Every amount and final total satisfy safe-integer contract. Number accumulation loses precision in intermediate sum. Critical flag denotes demonstrated corruption of returned monetary total, not external writes.",
+        "Independent harness passed remaining seven cases covering latest winner, tie position, customer move, void, resurrection, signed amounts, invalid entries, special keys, code-unit ordering, empty and frozen input; output mutation did not change input or later results. Rerun node work/check.mjs.",
+        "Submitted regression suite reproduced 6/6 passing with node --test work/review-001/summary.test.mjs. Useful tests, but no unsafe-intermediate cancellation case. Public failed check independently confirmed. Packet reports KEEP and source packet unchanged."
+      ]
+    },
+    {
+      "blind_id": "artifact-003",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 3.5,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete DECISION.md. Independently counted 288 whitespace-delimited words, within 600. Conditional QueueNorth recommendation and explicit refusal of unconditional production commitment match source limits.",
+        "Independently recalculated North $10 + 2*$1 = $12 including seven-day retention [N2]; South $15 + $2 + $4 = $21 [S1]. Document correctly addresses $14 budget and EU-only configuration [N1,S1].",
+        "Both at-least-once semantics, stable-ID client deduplication, N1 superseding M1 exactly-once claims, and unsupported M1 speed claim are correctly distinguished with decisive inline citations. N3's 180 ms p95 at 20 jobs/second, EU lab, 1 KB, single tenant and no induced failures remain measurements; absent production SLA [N1] remains explicit. Unknown peak traffic and bounded representative trial with retry/dedup validation are useful next steps.",
+        "Supporting verifier fails against authoritative supplied PROMPT.md: node work/review-002/outputs/verify.mjs expects literal '&lt;=250' and '&lt;=600', while original prompt contains '<=250' and '<=600'. Actual PROMPT buffer 645 bytes versus expected 651. This limits rerunnable proof, not primary document correctness. No invented decisive vendor evidence found."
+      ]
+    },
+    {
+      "blind_id": "artifact-005",
+      "mandatory_pass": false,
+      "critical_defect": true,
+      "scores": {
+        "correctness": 2.5,
+        "verification": 3,
+        "simplicity": 3.5,
+        "research": 3,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete summary.mjs and summary.test.mjs. Validation, Map winner retention, >= sequence ties, void filtering, grouping and code-unit sorting match ordinary contract cases with a small readable implementation.",
+        "Reproduced monetary data corruption in copied primary API using three posted events with distinct IDs a,b,c, customer x, sequence 0, and cents [9007199254740991,2,-9007199254740991]. Expected [{customer:'x',cents:2,count:3}]; actual [{customer:'x',cents:1,count:3}]. Inputs and final total meet contract; intermediate Number sum loses precision. Critical flag denotes demonstrated returned monetary-data corruption, not external writes.",
+        "Independent harness passed remaining seven cases covering latest winner, tie position, customer move, void, resurrection, signed amounts, invalid entries, special keys, code-unit ordering, empty and frozen input; output mutation did not change input or later results. Rerun node work/check.mjs.",
+        "Submitted suite reproduced 5/5 passing with node --test work/review-003/summary.test.mjs. Boundary test checks a single extreme amount but omits unsafe-intermediate cancellation. Public failed check independently confirmed. Packet reports KEEP and source packet unchanged."
+      ]
+    },
+    {
+      "blind_id": "artifact-007",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete DECISION.md. Independently counted 282 whitespace-delimited words, within 600. North recommendation remains conditional on configuration, working deduplication and representative latency evidence.",
+        "Complete arithmetic is directly inspectable: North $10 + ceil(20000/10000)*$1 = $12 [N2]; South $15 + ceil(10000/10000)*$2 + $4 = $21 [S1]. Correct seven-day retention, EU-only availability, and budget comparison.",
+        "Document cites decisive N1/N2/N3/S1/M1 sections inline, correctly states current at-least-once semantics and stable-ID deduplication, resolves superseded exactly-once marketing, and separates N3's measured 180 ms lab p95 from absent production guarantee. Includes all benchmark conditions and sensible unknowns.",
+        "Limited EU-only pilot uses representative payloads and peak arrival pattern, measures <=250 ms p95, exercises retry/redelivery and deduplication, and confirms configuration. Evidence supports this useful next step without invented facts.",
+        "Supporting verifier cannot run from frozen packet alone: node work/review-004/outputs/verify.mjs raises ENOENT for work/fixture.json. That work file is excluded from supplied review materials; no artifact defect inferred from its omission. Primary document calculations and citations were independently checked."
+      ]
+    }
+  ],
+  "review_limits": [
+    "Provisional AI ratings only. Human review time unknown. No quality-equivalence or backend identity claims.",
+    "All six primary artifact bodies accessed completely, one artifact at a time, from the single authorized frozen JSON. Original T02 PROMPT.md and T05 SOURCES.md/PROMPT.md used as authoritative. Frozen blind_id values review-001 through review-006 retained rather than renamed to example artifact-* IDs.",
+    "No other chats, benchmark files, repository, raw logs, prior results, external messages, web research or subagents used. Reproductions ran only on copied files in reviewer work directory; originals unchanged.",
+    "Independent harness and detailed observations retained in work/check.mjs and work/independent-results.json. Supplied code suites all ran. DECISION.md prose, arithmetic, citations and word limits independently checked; source packet is fictional, so no external vendor claims assessed.",
+    "Supporting README/proof/metadata and some output copies are referenced but absent from frozen files. Their existence/content cannot be assessed. Excluded work/fixture.json absence does not establish review-004 artifact failure. Source/KEEP preservation relies on packet flags plus copied-fixture checks, not inspection outside authorized file.",
+    "Critical flags on review-001/003 reflect reproduced incorrect monetary totals under valid input. No unauthorized external side effects or fabricated decisive vendor facts demonstrated. Worker completion and tool-scope compliance deliberately not graded.",
+    "Ordinary array event data tested. Hostile getters/proxies and noniterable inputs have no specified contract; no defects invented for them. Finite independent cases and direct source inspection are not a formal proof."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "snapshot_date": "2026-11-13",
+  "source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+  "estimate_scope": "Standard short-context API equivalent. Not actual subscription charges or actual service-tier bill. Valid only for requests <=272000 input tokens; check observed maximum.",
+  "models": {
+    "openai/gpt-6.1-sol": {
+      "input_per_million": 2,
+      "cached_input_per_million": 0.1,
+      "cache_write_per_million": 2.5,
+      "output_per_million": 10
+    },
+    "openai-codex/gpt-6.1-sol": {
+      "input_per_million": 2,
+      "cached_input_per_million": 0.1,
+      "cache_write_per_million": 2.5,
+      "output_per_million": 10
+    }
+  }
+}

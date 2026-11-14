@@ -1,0 +1,51 @@
+{
+  "scope": "Retained predeclared precision checks, rerunnable against exported artifact snapshots",
+  "results": [
+    {
+      "run_id": "controlled-T02-r1-pi",
+      "input_cents": [
+        9007199254740991,
+        2,
+        -9007199254740991
+      ],
+      "expected": [
+        {
+          "customer": "x",
+          "cents": 2,
+          "count": 3
+        }
+      ],
+      "actual": [
+        {
+          "customer": "x",
+          "cents": 2,
+          "count": 3
+        }
+      ],
+      "pass": true
+    },
+    {
+      "run_id": "controlled-T02-r1-native",
+      "input_cents": [
+        9007199254740991,
+        2,
+        -9007199254740991
+      ],
+      "expected": [
+        {
+          "customer": "x",
+          "cents": 2,
+          "count": 3
+        }
+      ],
+      "actual": [
+        {
+          "customer": "x",
+          "cents": 2,
+          "count": 3
+        }
+      ],
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "variant": "skills",
+  "sha256": {
+    "src/bridge.mjs": "df196091760c4c19cf1f20b0e4ec79e82658aecad1c292181fc9f5971b9bf3c0",
+    "src/server.mjs": "1e6162e89b3d944e52d728bb0588c7bca3ccc785ce346dc07de50e3a7a22729e",
+    "src/rpc.mjs": "aa463621f833304bffe8f7979cb3fc022aa6342864e5a4a1f69881517678d2a1",
+    "src/worker-prompt.mjs": "ac4009ee39db375c042c2bd53af0e8269dad28c8168df7e8b00ec3918d104e51",
+    "src/request-shape.mjs": "66037fd74df7dd0bc54e222c39c47d7e2370868e36ac19960d3db9c47da3c5b2"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variant": "conditional",
+  "sha256": {
+    "src/bridge.mjs": "2f762be2af91fe2468e86d0176369320698351333fc0ba4f54226446de84f368",
+    "src/server.mjs": "aa520778765d0f0f687030a9c37190e09a56a56bde281b70e06f2796f06daec8",
+    "src/rpc.mjs": "aa463621f833304bffe8f7979cb3fc022aa6342864e5a4a1f69881517678d2a1",
+    "src/worker-skill-loading.mjs": "284033ef16b8791adfca71a0c0ab747cdbbe5097ff9ab20efdcb9e962c4f18b7",
+    "src/request-shape.mjs": "dcd30975f9b69dc4677c485d6290528d022e6cc3ec75b91a0590e1ff939f1cea"
+  }
+}

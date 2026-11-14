@@ -1,0 +1,39 @@
+[
+  {
+    "run_id": "controlled-T02-r1-native",
+    "native_read_commands": 8,
+    "native_commands_needing_manual_review": [],
+    "native_file_changes": 0,
+    "pi_tool_names": [],
+    "pi_workers_reporting_blocked": 0
+  },
+  {
+    "run_id": "controlled-T02-r1-pi",
+    "native_read_commands": 0,
+    "native_commands_needing_manual_review": [],
+    "native_file_changes": 0,
+    "pi_tool_names": [
+      "read"
+    ],
+    "pi_workers_reporting_blocked": 0
+  },
+  {
+    "run_id": "controlled-T05-r1-pi",
+    "native_read_commands": 0,
+    "native_commands_needing_manual_review": [],
+    "native_file_changes": 0,
+    "pi_tool_names": [
+      "read",
+      "ls"
+    ],
+    "pi_workers_reporting_blocked": 0
+  },
+  {
+    "run_id": "controlled-T05-r1-native",
+    "native_read_commands": 8,
+    "native_commands_needing_manual_review": [],
+    "native_file_changes": 0,
+    "pi_tool_names": [],
+    "pi_workers_reporting_blocked": 0
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "batch": "2026-11-14-final-skill-ablation",
+  "timezone": "Asia/Kuala_Lumpur",
+  "matched_workers": true,
+  "root_model": "gpt-6.1-sol",
+  "root_reasoning": "low",
+  "worker_model": "gpt-6.1-sol",
+  "native_worker_reasoning": "high",
+  "pi_worker_reasoning": "high",
+  "worker_skills": {
+    "T02": [
+      "caveman",
+      "unslop"
+    ],
+    "T05": [
+      "caveman",
+      "unslop",
+      "technical-writing"
+    ]
+  },
+  "precision_case_predeclared": true,
+  "trials": 4,
+  "repetitions_per_task_arm": 1,
+  "ordering_seed": null,
+  "ordering_method": "Predeclared balanced order: T02 Pi-first, T05 native-first; reverse of content-only hook cohort.",
+  "changes": [
+    "meaningful status and controller waits retained",
+    "qualify structured system sections as well as legacy content",
+    "provider-renderer replay proves instruction qualification",
+    "safe provider-payload flag verifies qualification on each live request",
+    "Pi-managed recovery clears provisional error; fatal errors remain terminal"
+  ],
+  "request_shape_telemetry": true,
+  "quality": "Fresh blinded AI artifact review; human acceptance/time unknown.",
+  "timing": "Sum initial and allowed root-only repair turns, including setup, skill loading, waits and recorded usage. Study setup, analysis and judging excluded. Prior unsuccessful candidates retained separately.",
+  "experiment_label": "Structured-section context hook, stopped after T02 pair",
+  "phase_status": "Provider qualification flag stayed false; original plan retained, remaining T05 trials never started. Provider-boundary correction tested separately.",
+  "observed_trials": 2,
+  "unexecuted_trials": 2
+}

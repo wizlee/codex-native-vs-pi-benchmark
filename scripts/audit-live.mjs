@@ -25,7 +25,8 @@ for(const r of plan.runs){
     if(item?.type==='CommandExecution'){
       commands++;const code=item.command.at(-1);
       for(const name of skillsFrom(code))skillNames.add(name);
-      if(!/^(Get-Content|Get-ChildItem|Get-Location|Get-Item|Get-FileHash|Format-Hex|Select-String|rg\b|\[.*ReadAllText)/.test(code.trim())||/\b(Set-Content|WriteAll|Remove-Item|node|python|npm|apply_patch)\b/i.test(code))flagged.push(code);
+      const literalByteInspection=/^\[Convert\]::ToHexString\(\[System\.IO\.File\]::ReadAllBytes\('[^']*'\)\)\s*$/.test(code.trim());
+      if((!literalByteInspection&&!/^(Get-Content|Get-ChildItem|Get-Location|Get-Item|Get-FileHash|Format-Hex|Select-String|rg\b|\[.*ReadAllText)/.test(code.trim()))||/\b(Set-Content|WriteAll|Remove-Item|node|python|npm|apply_patch)\b/i.test(code))flagged.push(code);
     }
   }observedSkills.push([...skillNames].sort());}
   for(const file of spec.pi_session_files??[]){

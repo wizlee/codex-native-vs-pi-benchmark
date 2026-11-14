@@ -1,0 +1,22 @@
+[
+  {
+    "run_id": "controlled-T02-r1-pi",
+    "delivered_copy_present": true,
+    "matches_working_artifact": true
+  },
+  {
+    "run_id": "controlled-T02-r1-native",
+    "delivered_copy_present": true,
+    "matches_working_artifact": true
+  },
+  {
+    "run_id": "controlled-T05-r1-native",
+    "delivered_copy_present": true,
+    "matches_working_artifact": true
+  },
+  {
+    "run_id": "controlled-T05-r1-pi",
+    "delivered_copy_present": true,
+    "matches_working_artifact": true
+  }
+]
