@@ -4,6 +4,8 @@ Use paired trials. Same task, same starting files, same acceptance checks. Chang
 
 Kit prepared 2026-11-12. Latest [matched-worker pilot](results/2026-11-14-matched-workers-pilot/RESULTS.md) uses gpt-6.1-sol/high workers in both arms, low root defaults, and identical reviewer skills. Eight fresh root sessions, two task types, two repetitions per arm. [Earlier default-configuration pilot](results/2026-11-13-fair-read-pilot/RESULTS.md) remains separate; its reasoning labels were corrected from actual session logs.
 
+[Trace investigation of Pi parent overhead](results/2026-11-14-matched-workers-pilot/ORCHESTRATION.md) explains early status wakeups, extra model rounds, and reader pagination. Includes public replay data and a no-model bridge probe. Proposed optimizations have not been applied or benchmarked.
+
 Start with 8-run pilot. Expand only after prompts, scoring, and telemetry work.
 
 ```powershell

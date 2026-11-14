@@ -1,0 +1,41 @@
+{
+  "inspected_date": "2026-11-14",
+  "scope": "Current installed source; behavioral evidence comes from selected trial logs. Historical extension/provider binary versions were not pinned by the benchmark.",
+  "bridge": {
+    "file": "pi-bridge/src/bridge.mjs",
+    "sha256": "38ce879e3af4874d226600336e4636417b00153879254cde6d49aa5c7692dfc1",
+    "snapshot_lines": [
+      38,
+      52
+    ],
+    "event_lines": [
+      162,
+      186
+    ],
+    "wait_lines": [
+      206,
+      232
+    ]
+  },
+  "context_mode": {
+    "version": "2.1.10",
+    "file": "context-mode/pi/index.js",
+    "sha256": "ff29c4caec683e3b95ca390724ae322717bdfe253b6dc00073c2296023dcc531",
+    "replacement_guard_lines": [
+      20581,
+      20599
+    ],
+    "recovery_hint_line": 20616,
+    "bounded_read_lines": [
+      20628,
+      20629
+    ]
+  },
+  "provider": {
+    "package": "@earendil-works/pi-coding-agent",
+    "version": "1.5.2",
+    "file": "openai-codex-responses-TEQRB65N.js",
+    "sha256": "0165f251129fd7a63ada4dc300591458d63fefc30ed9682f7f268ebba5bdbbe9",
+    "parallel_tool_calls_true": true
+  }
+}

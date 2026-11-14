@@ -30,6 +30,8 @@ Quality scores below come from fresh-session AI review with arm labels withheld,
 
 Recorded model calls: native 68, comprising 41 root and 27 worker calls; Pi 140, comprising 59 root and 81 worker calls. Pi workers used fewer processed tokens in this sample, but larger parent orchestration use outweighed that saving. This identifies where to investigate, not a proof of one causal mechanism.
 
+The [follow-up trace investigation](ORCHESTRATION.md) locates the parent gap in repeated polling/sleep responses and explains the effects of early status wakeups, serial reads, duplicate skill loading, and compressed read recovery. No production optimization or new model trial was performed in that investigation.
+
 Evaluation input note: initial inline delivery truncated one artifact for the reviewer. It explicitly marked the review incomplete. Final assessments read the complete frozen anonymous file. This was an evaluator transport issue, not a solver defect or repair; review overhead is excluded from both arms.
 
 API-equivalent estimates use standard short-context rates from [official model page](https://developers.openai.com/api/docs/models/gpt-6.1-sol), retrieved 2026-11-13: $2/M uncached input, $0.10/M cached input, $10/M output. Actual subscription charges and quota attribution unknown. Every observed request stayed below 272K input tokens.

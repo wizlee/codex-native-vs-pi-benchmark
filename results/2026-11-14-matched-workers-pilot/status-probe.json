@@ -1,0 +1,27 @@
+{
+  "scope": "Synthetic events on installed Bridge class; no model calls, real workers, settings changes, or permission answers",
+  "bridge_source_sha256": "38ce879e3af4874d226600336e4636417b00153879254cde6d49aa5c7692dfc1",
+  "results": [
+    {
+      "case": "stream_delta",
+      "requested_wait_ms": 1000,
+      "observed_wait_ms": 35.1453,
+      "state": "running",
+      "visible_text_chars": 0
+    },
+    {
+      "case": "completion",
+      "requested_wait_ms": 1000,
+      "observed_wait_ms": 32.110499999999995,
+      "state": "completed"
+    },
+    {
+      "case": "pending_dialog",
+      "requested_wait_ms": 1000,
+      "observed_wait_ms": 39.453900000000004,
+      "state": "waiting_for_user",
+      "pending_ui": 1,
+      "answer_supplied": false
+    }
+  ]
+}
