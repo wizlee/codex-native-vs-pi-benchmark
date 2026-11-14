@@ -104,6 +104,7 @@ export function measureRecord(r,rates={}) {
   need(!r.first_pass_accepted || (ok&&r.repair_rounds===0),'First-pass acceptance contradicts final record');
   need(r.repair_rounds!==0 || r.first_pass_accepted===ok,'No-repair final acceptance must equal first pass');
   for(const k of ['elapsed_s','delivery_s','review_s','intervention_s']) nonnegative(r[k],k);
+  if(r.human_effort_measured!==undefined) bool(r.human_effort_measured,'human_effort_measured');
   need(r.delivery_s+r.review_s<=r.elapsed_s+1,'Delivery/review exceeds elapsed time');
   need(r.review_s+r.intervention_s<=r.elapsed_s+1,'Human active time exceeds elapsed time');
   need(Array.isArray(r.usage),'Missing usage array');
@@ -146,7 +147,7 @@ export function measureRecord(r,rates={}) {
   return {...r,quality:q,accepted:ok,tokens,observed_tokens:observed,estimated_api_usd,
     root_tokens:r.usage_complete?sum(calls.filter(c=>c.role==='root').map(c=>c.tokens)):null,
     worker_tokens:r.usage_complete?sum(calls.filter(c=>c.role==='worker').map(c=>c.tokens)):null,
-    human_s:r.review_s+r.intervention_s};
+    human_s:r.human_effort_measured===false?null:r.review_s+r.intervention_s};
 }
 
 function armSummary(rows) {
@@ -163,8 +164,9 @@ function armSummary(rows) {
     estimated_api_usd_all:dollars,estimated_api_usd_per_accepted:ratio(dollars,acceptedCount),
     elapsed_median_s:median(rows.map(r=>r.elapsed_s)),successful_elapsed_median_s:median(successful.map(r=>r.elapsed_s)),
     elapsed_s_per_accepted:ratio(sum(rows.map(r=>r.elapsed_s)),acceptedCount),
-    delivery_median_s:median(rows.map(r=>r.delivery_s)),review_median_s:median(rows.map(r=>r.review_s)),
-    human_s_all:sum(rows.map(r=>r.human_s)),repair_rounds:sum(rows.map(r=>r.repair_rounds)),
+    delivery_median_s:median(rows.map(r=>r.delivery_s)),review_median_s:rows.every(r=>r.human_effort_measured!==false)?median(rows.map(r=>r.review_s)):null,
+    human_effort_measured:rows.every(r=>r.human_effort_measured!==false),
+    human_s_all:fullSum(rows.map(r=>r.human_s)),repair_rounds:sum(rows.map(r=>r.repair_rounds)),
     critical_defects:rows.filter(r=>r.critical_defect).length};
 }
 

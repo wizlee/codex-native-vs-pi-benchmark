@@ -1,0 +1,158 @@
+[
+  {
+    "run_id": "controlled-T02-r1-pi",
+    "expected": [
+      "caveman",
+      "unslop"
+    ],
+    "observed": [
+      [
+        "caveman",
+        "unslop"
+      ],
+      [
+        "caveman",
+        "unslop"
+      ]
+    ],
+    "match": true
+  },
+  {
+    "run_id": "controlled-T02-r1-native",
+    "expected": [
+      "caveman",
+      "unslop"
+    ],
+    "observed": [
+      [
+        "caveman",
+        "unslop"
+      ],
+      [
+        "caveman",
+        "unslop"
+      ]
+    ],
+    "match": true
+  },
+  {
+    "run_id": "controlled-T05-r1-pi",
+    "expected": [
+      "caveman",
+      "technical-writing",
+      "unslop"
+    ],
+    "observed": [
+      [
+        "caveman",
+        "technical-writing",
+        "unslop"
+      ],
+      [
+        "caveman",
+        "technical-writing",
+        "unslop"
+      ]
+    ],
+    "match": true
+  },
+  {
+    "run_id": "controlled-T05-r1-native",
+    "expected": [
+      "caveman",
+      "technical-writing",
+      "unslop"
+    ],
+    "observed": [
+      [
+        "caveman",
+        "technical-writing",
+        "unslop"
+      ],
+      [
+        "caveman",
+        "technical-writing",
+        "unslop"
+      ]
+    ],
+    "match": true
+  },
+  {
+    "run_id": "controlled-T02-r2-native",
+    "expected": [
+      "caveman",
+      "unslop"
+    ],
+    "observed": [
+      [
+        "caveman",
+        "unslop"
+      ],
+      [
+        "caveman",
+        "unslop"
+      ]
+    ],
+    "match": true
+  },
+  {
+    "run_id": "controlled-T02-r2-pi",
+    "expected": [
+      "caveman",
+      "unslop"
+    ],
+    "observed": [
+      [
+        "caveman",
+        "unslop"
+      ],
+      [
+        "caveman",
+        "unslop"
+      ]
+    ],
+    "match": true
+  },
+  {
+    "run_id": "controlled-T05-r2-native",
+    "expected": [
+      "caveman",
+      "technical-writing",
+      "unslop"
+    ],
+    "observed": [
+      [
+        "caveman",
+        "technical-writing",
+        "unslop"
+      ],
+      [
+        "caveman",
+        "technical-writing",
+        "unslop"
+      ]
+    ],
+    "match": true
+  },
+  {
+    "run_id": "controlled-T05-r2-pi",
+    "expected": [
+      "caveman",
+      "technical-writing",
+      "unslop"
+    ],
+    "observed": [
+      [
+        "caveman",
+        "technical-writing",
+        "unslop"
+      ],
+      [
+        "caveman",
+        "technical-writing",
+        "unslop"
+      ]
+    ],
+    "match": true
+  }
+]

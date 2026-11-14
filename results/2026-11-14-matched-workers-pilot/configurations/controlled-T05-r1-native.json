@@ -1,0 +1,41 @@
+{
+  "pass": true,
+  "expected": {
+    "root_model": "gpt-6.1-sol",
+    "root_reasoning": "low",
+    "worker_model": "gpt-6.1-sol",
+    "worker_reasoning": "high"
+  },
+  "actual": {
+    "root": {
+      "role": "root",
+      "models": [
+        "gpt-6.1-sol"
+      ],
+      "reasoning": [
+        "low"
+      ]
+    },
+    "workers": [
+      {
+        "role": "worker",
+        "models": [
+          "gpt-6.1-sol"
+        ],
+        "reasoning": [
+          "high"
+        ]
+      },
+      {
+        "role": "worker",
+        "models": [
+          "gpt-6.1-sol"
+        ],
+        "reasoning": [
+          "high"
+        ]
+      }
+    ]
+  },
+  "issues": []
+}

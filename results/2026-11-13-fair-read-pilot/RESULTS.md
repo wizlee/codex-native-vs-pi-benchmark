@@ -4,7 +4,7 @@ Observed result for these current configurations: native used 25.8% fewer proces
 
 Eight fresh Codex root chats. Two task types, two repetitions, both arms. No root was forked from previous trial. Sequential execution in frozen balanced order.
 
-Scope: task-controlled/default-configuration pilot, not pure backend causal test. Actual session logs: roots gpt-6.1-sol/low; native readers low; Pi readers high. Both readers can read actual source/skill files. Native may use read-only shell; Pi uses read/grep/find/ls. No manually recopied skill bodies. Host instructions/tool definitions differ.
+Scope: task-controlled/default-configuration pilot. Actual session logs: roots gpt-6.1-sol/low; native readers low; Pi readers high. Both readers can read actual source/skill files. Native may use read-only shell; Pi uses read/grep/find/ls. No manually recopied skill bodies. Host instructions/tool definitions still differ, so this is not a fully isolated backend causal test.
 
 Metadata correction: Earlier report incorrectly labelled roots/native workers xhigh based on pre-run diagnostics. All eight fair-read session logs show low roots, low native workers, high Pi workers. Time, tokens, cost, correctness and rankings unchanged.
 
@@ -22,11 +22,15 @@ Quality scores below come from fresh-session AI review with arm labels withheld,
 | Mean first submission time | 2m 32s | 2m 57s |
 | Total submission time | 10m 07s | 13m 34s |
 | Total processed tokens | 2,179,913 | 2,938,823 |
+| Parent/root processed tokens | 1,541,152 | 2,464,935 |
+| Worker processed tokens | 638,761 | 473,888 |
 | Tokens per provisional success | 544,978 | 734,706 |
 | Total uncached input | 204,189 | 234,572 |
 | Total cached input | 1,947,776 | 2,673,664 |
 | Total output including reasoning | 27,948 | 30,587 |
 | Standard API-equivalent total | $0.883 | $1.042 |
+
+Recorded model calls: native 70, comprising 46 root and 24 worker calls; Pi 137, comprising 64 root and 73 worker calls. Pi workers used fewer processed tokens in this sample, but larger parent orchestration use outweighed that saving. This identifies where to investigate, not a proof of one causal mechanism.
 
 API-equivalent estimates use standard short-context rates from [official model page](https://developers.openai.com/api/docs/models/gpt-6.1-sol), retrieved 2026-11-13: $2/M uncached input, $0.10/M cached input, $10/M output. Actual subscription charges and quota attribution unknown. Every observed request stayed below 272K input tokens.
 
@@ -63,9 +67,9 @@ Submission times sum actual initial and repair work segments. Study/evaluator qu
 
 ## Reproduce public evidence
 
-`node scripts/check-precision.mjs results/2026-11-13-fair-read-pilot --public --first-pass` reproduces both original Pi precision failures and both native passes.
+`node scripts/check-precision.mjs results/2026-11-13-fair-read-pilot --public --first-pass` reproduces first-pass precision results.
 
-`node scripts/check-precision.mjs results/2026-11-13-fair-read-pilot --public` verifies all four final implementations.
+`node scripts/check-precision.mjs results/2026-11-13-fair-read-pilot --public` verifies final implementations.
 
 `node scripts/benchmark.mjs analyze results/2026-11-13-fair-read-pilot/schedule.json results/2026-11-13-fair-read-pilot/results.jsonl results/2026-11-13-fair-read-pilot/rates.json` reproduces resource arithmetic. Published call/agent IDs are anonymized; local original lineage retained privately.
 

@@ -15,7 +15,7 @@ const actualWorkerEffort=arm=>unique(originalRecords.filter(r=>r.arm===arm).flat
 const records=originalRecords.map(r=>{
   const aliases=new Map(r.expected_agent_ids.map((id,i)=>[id,`${r.run_id}:${i===0?'root':`worker-${i}`}`]));
   const diagnostics={...r.diagnostics};delete diagnostics.review_evidence;
-  diagnostics.profile_scope='Equivalent semantic read access; default model reasoning and root-selected extra skills not matched.';
+  diagnostics.profile_scope=sourceManifest.matched_workers?'Log-validated matching worker model/effort and fixed reviewer skill scopes; host harness differences remain.':'Equivalent semantic read access; default model reasoning and root-selected extra skills not matched.';
   return {...r,diagnostics,expected_agent_ids:[...aliases.values()],usage:r.usage.map((u,i)=>({...u,
     event_id:`${r.run_id}:call-${i+1}`,agent_id:aliases.get(u.agent_id),source:`anonymized local source, call ${i+1}`}))};
 });
@@ -23,6 +23,8 @@ fs.writeFileSync(path.join(destination,'results.jsonl'),records.map(JSON.stringi
 write('schedule.json',schedule);write('rates.json',rates);
 write('comparison.json',analyze(schedule,records,rates));
 for(const name of ['scores.first-pass.json','scores.final.json','precision.first-pass.json','precision.final.json','scope-audit.json','fresh-context-audit.json'])write(name,read(name));
+for(const name of ['delivery-copy-audit.json','reviewer-skills-audit.json','review-input-validation.json'])if(fs.existsSync(path.join(source,name)))write(name,read(name));
+for(const r of schedule.runs){const file=path.join(source,`${r.run_id}.configuration.json`);if(fs.existsSync(file)){fs.mkdirSync(path.join(destination,'configurations'),{recursive:true});write(`configurations/${r.run_id}.json`,JSON.parse(fs.readFileSync(file,'utf8')));}}
 const details=read('details.json').map(({reviewer,...r})=>r);
 write('details.json',details);
 for(const r of schedule.runs){
@@ -41,18 +43,19 @@ for(const r of schedule.runs){
 }
 fs.copyFileSync(path.join(source,'RESULTS.md'),path.join(destination,'RESULTS.md'));
 write('manifest.json',{
-  batch:'2026-11-13-fair-read-pilot',local_dates:'2026-11-13 through 2026-11-14',timezone:'Asia/Kuala_Lumpur',
+  batch:path.basename(source),local_dates:sourceManifest.matched_workers?'2026-11-14':'2026-11-13 through 2026-11-14',timezone:'Asia/Kuala_Lumpur',
   trials:8,task_types:2,repetitions_per_task_arm:2,ordering_seed:20261112,
   fresh_root_sessions:true,root_history_forked:false,workers_per_trial:2,
   root_model:'gpt-6.1-sol',root_reasoning:actualRootEffort,native_worker_reasoning:actualWorkerEffort('native'),pi_worker_reasoning:actualWorkerEffort('pi'),
   configuration_source:'Actual per-session source contexts, not config defaults or self-reports',
   configuration_correction:sourceManifest.configuration_correction??null,
+  matched_workers:sourceManifest.matched_workers??false,
   read_policy:'Equivalent semantic read access; native read-only shell and Pi read/grep/find/ls. Root alone edits and executes tests.',
-  skills:'Shared caveman/unslop required; roots selected additional role skills. Pi T02 handoffs included execution-dependent diagnose and readers reported blocked.',
+  skills:sourceManifest.matched_workers?sourceManifest.worker_skills:'Shared caveman/unslop required; roots selected additional role skills. Pi T02 handoffs included execution-dependent diagnose and readers reported blocked.',
   quality:'Independent fresh-session AI review with backend/time/cost labels withheld; same configured model family. No human review measured.',
   timing:'Sum initial and allowed repair work segments. Study queue, calibration, orchestration, and AI judging excluded.',
   telemetry:'Exclusive per-call root and worker usage; cached/reasoning subsets counted once; all ledgers reconcile.',
-  exclusions:'Four earlier no-shell diagnostic runs excluded after methodology flaw. One diagnostic hit account usage limit; subsequent recovery retained locally.',
+  exclusions:sourceManifest.matched_workers?'Prior diagnostic/default-configuration studies kept separate; no pooling or backend/model fallback.':'Four earlier no-shell diagnostic runs excluded after methodology flaw. One diagnostic hit account usage limit; subsequent recovery retained locally.',
   privacy:'Chat/session IDs and local paths omitted. Primary synthetic artifacts unchanged; local orchestration metadata and supplementary proof files omitted.',
 });
 console.log(JSON.stringify({destination,trials:records.length,native_tokens:records.filter(r=>r.arm==='native').flatMap(r=>r.usage).reduce((s,u)=>s+u.input_tokens+u.output_tokens,0),pi_tokens:records.filter(r=>r.arm==='pi').flatMap(r=>r.usage).reduce((s,u)=>s+u.input_tokens+u.output_tokens,0)}));

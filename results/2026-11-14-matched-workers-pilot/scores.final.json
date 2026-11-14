@@ -1,0 +1,167 @@
+{
+  "artifacts": [
+    {
+      "blind_id": "artifact-001",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read primary implementation. Validation precedes Map winner selection; >= gives later-position tie winner. Void remains a tombstone until aggregation. Grouping uses winning customer, BigInt sums preserve cancellation, relational string comparison gives code-unit order. No input writes.",
+        "Copied implementation, decoding HTML transport entities and omitting comment/formatting only. node work/review.mjs passed 7 decisive cases and 500 seeded oracle cases. Cases cover latest sequence, tie reassignment, stale post after void, recreation/refund, invalid higher-sequence void, reserved keys, code-unit order, empty input, frozen inputs and exact cancellation.",
+        "Concrete precision case: posted A amounts MAX_SAFE_INTEGER, 2, -MAX_SAFE_INTEGER under three distinct IDs. Expected [{customer:'A',cents:2,count:3}]; actual matched. Supplied regression suite additionally covers safe-integer boundaries and KEEP bytes. No demonstrated defect.",
+        "Complete packet primary body independently accessible: summary.mjs, 1125 characters, SHA-256 298afada544b199e6c7e888d71d078d33e61bf4828bcfbcac1c2d1802a2104ab.",
+        "Updated verification: exact packet source copied unchanged into own work/complete directory; 507 independent cases and original submitted node:test suite passed. Earlier normalized copies are superseded for execution evidence."
+      ]
+    },
+    {
+      "blind_id": "artifact-002",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read primary implementation and six supplied tests. Validity gate, >= winner replacement, retained void tombstones, Map grouping, exact BigInt accumulation and code-unit sorting satisfy supplied contract. Output conversion returns numeric cents without mutating events.",
+        "Copied implementation passed same 7 decisive and 500 seeded oracle cases via node work/review.mjs. Input x/A/sequence2/cents3, x/B/sequence1/cents9, x/C/sequence2/cents-5 expected only C/-5/count1; actual matched. Frozen-input and serialization checks passed.",
+        "Supplied tests independently address invalid entries, safe keys, boundaries, refunds, ordering, KEEP preservation and unsafe-intermediate cancellation. No demonstrated defect. Worker claims excluded from quality judgment.",
+        "Complete packet primary body independently accessible: summary.mjs, 1084 characters, SHA-256 186ce6882acc0b0be608f6dcf99e017a53ff3340d42fd8773ddda1b2e6dfab95.",
+        "Updated verification: exact packet source copied unchanged into own work/complete directory; 507 independent cases and original submitted node:test suite passed. Earlier normalized copies are superseded for execution evidence."
+      ]
+    },
+    {
+      "blind_id": "artifact-003",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete primary DECISION.md against authoritative packet. North conditional; $10 + two $1 blocks = $12 including seven days [N2]. South $15 + $2 + $4 = $21 [S1]. Independent arithmetic reproduced in work/review.mjs.",
+        "Current at-least-once and stable-ID deduplication [N1,S1] explicitly override v1 exactly-once marketing [N1,M1]. Reports all N3 lab conditions and distinguishes observed 180 ms from absent production SLA [N1,N3].",
+        "Decision clearly below 600 words, with decisive inline section citations, unknown workload/failure conditions and bounded representative EU pilot with retry/deduplication check. Commitment requires pilot review and latency-risk acceptance. Supplied verifier supports arithmetic and text review, explicitly disclaims proving production performance. No demonstrated defect.",
+        "Complete packet primary body independently accessible: DECISION.md, 2215 characters, SHA-256 5c92b2ad75fc65fb52fd4f51801f6f325c1d7111da06d4eccbb139ae77111fb1.",
+        "Exact packet document measured 303/600 whitespace-delimited words. Full body read separately and manually compared with authoritative original source packet. Prior word-limit assessment now independently counted."
+      ]
+    },
+    {
+      "blind_id": "artifact-004",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete original summary.mjs, 1115 characters, and complete seven-test suite, 3312 characters, from explicitly authorized frozen anonymous packet. Previous transport truncation is not an artifact defect and incurs no penalty.",
+        "Validation ignores invalid records before winner selection. Map keyed by ID retains greatest sequence, with >= selecting later array position. Void winners remain tombstones through selection and are excluded during grouping. Second Map groups by winning customer. BigInt preserves signed exact totals; final Number conversion follows safe-total contract. Relational string comparison gives code-unit customer order. No input writes.",
+        "Unmodified copied primary source passed same 7 decisive cases and 500 seeded oracle cases used for every T02 artifact. Submitted seven-test suite also passed. Concrete input: three distinct posted A IDs with amounts MAX_SAFE_INTEGER,2,-MAX_SAFE_INTEGER; expected [{customer:A,cents:2,count:3}], actual matched. Equal-sequence x/A/3 then x/C/-5 yields only C/-5/count1. Invalid higher-sequence empty-customer void does not erase valid A winner. Frozen inputs passed.",
+        "Two-Map design is sufficient and clear. Regression tests cover sequence/customer reassignment, position ties, stale post after void, restoration, signed cents, invalid entries, special keys, Unicode ordering, whitespace, safe-integer endpoints, empty/repeated calls, exact cancellation and KEEP fixture. No demonstrated defect.",
+        "Complete packet primary body independently accessible: summary.mjs, 1115 characters, SHA-256 2d59c4c67540c625c337cda18a806f63b9c68ac10c4d8c8a3809356271312f3e.",
+        "Updated verification: exact packet source copied unchanged into own work/complete directory; 507 independent cases and original submitted node:test suite passed. Earlier normalized copies are superseded for execution evidence."
+      ]
+    },
+    {
+      "blind_id": "artifact-005",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read primary implementation and seven supplied tests. Two Maps cleanly separate latest-valid-ID resolution from customer aggregation. >= handles tie positions, void winners are skipped only during grouping, refunds use signed BigInt sums, Array.from produces fresh numeric rows, relational comparison sorts by code units.",
+        "Copied implementation passed same 7 decisive and 500 seeded oracle cases through node work/review.mjs, including frozen inputs. Valid x/A/1/4 followed by invalid x/empty-customer/99/0/void expected A/4/count1; actual matched. Three distinct A IDs with MAX_SAFE_INTEGER,2,-MAX_SAFE_INTEGER expected cents2/count3; actual matched.",
+        "Supplied regressions additionally exercise both safe-integer bounds, repeated calls, whitespace names, stale posts after void and KEEP bytes. No demonstrated defect.",
+        "Complete packet primary body independently accessible: summary.mjs, 1043 characters, SHA-256 bc107a9b8ac1ac1c3274d8c1f9048d75e8a08c44eede415cd2a399a2cf885e56.",
+        "Updated verification: exact packet source copied unchanged into own work/complete directory; 507 independent cases and original submitted node:test suite passed. Earlier normalized copies are superseded for execution evidence."
+      ]
+    },
+    {
+      "blind_id": "artifact-006",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete primary DECISION.md against authoritative packet. North $12, South $21 with retention surcharge, South $7 above budget. Both at-least-once; stable-ID North deduplication; v2 supersedes exactly-once v1 marketing. Decisive citations attach to each claim.",
+        "Includes 180 ms, 20 jobs/second, EU lab, 1 KB, single tenant, no induced failures and no production SLA. Distinguishes observation from production evidence; conditional commitment explicit.",
+        "Clearly below 600 words. Useful bounded EU pilot tests representative payloads, peak/burst load, retries/failures, deduplication and retention configuration. Independent price calculation reproduced. Verifier candidly limits text checks. No demonstrated defect.",
+        "Complete packet primary body independently accessible: DECISION.md, 2361 characters, SHA-256 18753a3cb3b354b07fc669c1f2fc6e28a057f25aa940b56ca9fd65cfd7a9ac2e.",
+        "Exact packet document measured 327/600 whitespace-delimited words. Full body read separately and manually compared with authoritative original source packet. Prior word-limit assessment now independently counted."
+      ]
+    },
+    {
+      "blind_id": "artifact-007",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete primary DECISION.md against authoritative packet. Complete North $12 and South $21 calculations correct. Explains seven-day surcharge and South exclusion by hard budget. Both at-least-once, North stable-ID deduplication and superseded v1 claim correctly cited.",
+        "Includes every N3 benchmark condition and absent production SLA; no unsupported production guarantee. Identifies uncertainty about whether desired metric uses same enqueue-to-delivery interval, alongside bursts, payloads and failure behavior.",
+        "Clearly below 600 words. Bounded EU trial with retention, representative load, latency measurement and retry/failure case supplies useful next step. Conditional rollout and contractual-guarantee distinction clear. Independent price arithmetic reproduced; supplied verifier states its semantic limits. No demonstrated defect.",
+        "Complete packet primary body independently accessible: DECISION.md, 2396 characters, SHA-256 18fa1d8e794aa16ccc292e8141520b3791dd4682a6e745324ee4263ff00bb1cb.",
+        "Exact packet document measured 334/600 whitespace-delimited words. Full body read separately and manually compared with authoritative original source packet. Prior word-limit assessment now independently counted."
+      ]
+    },
+    {
+      "blind_id": "artifact-008",
+      "mandatory_pass": true,
+      "critical_defect": false,
+      "scores": {
+        "correctness": 4,
+        "verification": 4,
+        "simplicity": 4,
+        "research": 4,
+        "instructions": 4
+      },
+      "evidence": [
+        "Read complete primary DECISION.md against authoritative packet. Conditional North with selected EU-only configuration, complete $12 versus $21 pricing and seven-day retention treatment correct. Independent arithmetic reproduced.",
+        "Both at-least-once, stable-ID deduplication and current v2 priority over stale exactly-once marketing explicit [N1,S1,M1]. All measured N3 conditions stated; 180 ms observation separated from absent production SLA and guarantee [N3,N1].",
+        "Clearly below 600 words. Bounded pilot uses representative payloads/peaks and controlled retry, records sample size/conditions/results before commitment. Useful unknowns, decisive citations, no invented vendor fact. Verifier distinguishes text checks from source interpretation. No demonstrated defect.",
+        "Complete packet primary body independently accessible: DECISION.md, 2066 characters, SHA-256 f9f8c4a43310560a1099d7ee6e916600b38bf114c05ad75234d9fe2a4e1ff64d.",
+        "Exact packet document measured 275/600 whitespace-delimited words. Full body read separately and manually compared with authoritative original source packet. Prior word-limit assessment now independently counted."
+      ]
+    }
+  ],
+  "review_limits": [
+    "Provisional AI artifact ratings only. Human review time unknown. No backend attribution, quality-equivalence claims, worker completion or tool-scope audit. Equal rubric scores do not establish equal quality or effort.",
+    "Input transport corrected by explicit authorization to read exactly blind-review-packet.local.json at supplied absolute path. All eight full primary artifact bodies accessed and reviewed individually. Artifact-004 reassessed without truncation penalty. Prior SCORES.json retained unchanged and copied byte-for-byte to SCORES_INCOMPLETE.json.",
+    "No other benchmark files, other chats, raw session logs, prior solver results, external messages, web research or subagents accessed. Only authorized anonymous packet and own review files used for reassessment. No originals repaired or modified.",
+    "All four original T02 implementations copied unchanged from parsed packet into own work/complete directories. Same 7 deterministic and 500 seeded differential cases passed for each; each original submitted test suite passed too. KEEP fixture copied from task packet for test execution, so these runs verify test behavior, not original checkout preservation. Rerun node work/validate-complete.mjs requires authorized packet and a fresh SCORES_INCOMPLETE.json destination because history overwrite is intentionally blocked.",
+    "T05 primary documents read against authoritative original SOURCES.md. Exact whitespace-delimited counts: artifact-003 303, artifact-006 327, artifact-007 334, artifact-008 275. Independent $12/$21 arithmetic executed. Supporting text verifiers inspected but not executed as full reconstructed packages; source interpretation remains manual review, and no production latency is proven.",
+    "KEEP/source preservation status outside copied fixtures remains supplied packet evidence, not independent original-checkout byte audit. Linked orchestration metadata, proof files and output aliases unavailable in supplied artifact body were not treated as primary-artifact defects. Delegation claims ignored in grading.",
+    "Ordinary array event data and safe final totals define T02 scope. Hostile getters/proxies and malformed top-level inputs are unspecified and were not invented as requirements. No demonstrated critical defects or alleged unreproduced functional defects.",
+    "Validation script and SHA-256 manifest retained in own work directory. Primary body lengths and hashes included per artifact so complete-input review is distinguishable from original truncated-input assessment."
+  ]
+}

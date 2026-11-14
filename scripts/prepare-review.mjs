@@ -26,7 +26,10 @@ for(const r of schedule.runs){
 }
 artifacts.sort((a,b)=>a.blind_id.localeCompare(b.blind_id));
 const packet={tasks:{T02:taskFiles('T02'),T05:taskFiles('T05')},artifacts};
-fs.writeFileSync(path.join(batch,process.argv.includes('--final')?'blind-review-packet.final.local.json':'blind-review-packet.local.json'),JSON.stringify(packet,null,2)+'\n');
+const batchName=path.basename(batch);
+const repairedIds=new Set(schedule.runs.filter(r=>fs.existsSync(path.join(batch,`${r.run_id}.repair1.observation.json`))).map(r=>r.blind_id));
+const packetPath=path.resolve(batch,process.argv.includes('--final')?'blind-review-packet.final.local.json':'blind-review-packet.local.json');
+fs.writeFileSync(packetPath,JSON.stringify(packet,null,2)+'\n');
 const prompt=`Act as independent fresh-session artifact reviewer. Do not read other chats, benchmark repository, raw session logs, or prior results. Do not use subagents. Work only in your own directory. No external messages, model/settings changes, or web research. Use caveman and unslop style as applicable.
 
 Eight anonymized artifacts follow. Backend, time, cost and run order withheld. Grade actual code/documents against original public task and source packet, not answer length. Public predeclared check results are evidence, not proof of complete correctness. Read implementations. Verify decisive claims. For any alleged defect, supply concrete input, expected/actual behavior, and reproduce in your own copied files when possible. Apply same standards to every artifact. Do not invent requirements.
@@ -42,4 +45,6 @@ Write outputs/SCORES.json with {"artifacts":[{"blind_id":"artifact-001","mandato
 ORIGINAL TASKS AND ANONYMIZED ARTIFACTS:
 ${JSON.stringify(packet)}
 `;
-console.log(JSON.stringify(process.argv.includes('--updates-only')?{artifacts:artifacts.filter(a=>['artifact-004','artifact-005'].includes(a.blind_id))}:{title:'Blind benchmark artifact review',directoryName:'fair-read-blind-review-20261113',prompt}));
+const marker='ORIGINAL TASKS AND ANONYMIZED ARTIFACTS:';
+const filePrompt=prompt.slice(0,prompt.indexOf(marker))+`ORIGINAL TASKS AND ANONYMIZED ARTIFACTS: Read exactly this frozen anonymous JSON file: ${packetPath}. This is an explicit exception to the repository-read restriction for this one file only. Do not read anything else in the benchmark folder. Parse JSON and inspect one artifact at a time; do not print the full packet. Confirm all eight primary artifact bodies were accessible before final scoring. If any tool output truncates, read a smaller selected artifact/file rather than grading missing evidence.\n`;
+console.log(JSON.stringify(process.argv.includes('--updates-only')?{artifacts:artifacts.filter(a=>repairedIds.has(a.blind_id))}:{title:`Blind review ${batchName}`,directoryName:`${batchName}-blind-review`,prompt:filePrompt}));

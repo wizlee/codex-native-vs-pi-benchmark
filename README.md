@@ -2,7 +2,7 @@
 
 Use paired trials. Same task, same starting files, same acceptance checks. Change delegation backend. Measure completed outcomes, all model usage, elapsed time, and human effort.
 
-Kit prepared 2026-11-12. [Measured pilot results](results/2026-11-13-fair-read-pilot/RESULTS.md) collected 2026-11-13 through 2026-11-14 in Kuala Lumpur time. Eight fresh root sessions, two task types, two repetitions per arm. Results favor native in this sample; model reasoning and skill-scoping differences limit backend attribution.
+Kit prepared 2026-11-12. Latest [matched-worker pilot](results/2026-11-14-matched-workers-pilot/RESULTS.md) uses gpt-6.1-sol/high workers in both arms, low root defaults, and identical reviewer skills. Eight fresh root sessions, two task types, two repetitions per arm. [Earlier default-configuration pilot](results/2026-11-13-fair-read-pilot/RESULTS.md) remains separate; its reasoning labels were corrected from actual session logs.
 
 Start with 8-run pilot. Expand only after prompts, scoring, and telemetry work.
 

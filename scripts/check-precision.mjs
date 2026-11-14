@@ -1,4 +1,4 @@
-// Independent reviewer edge case. Not part of original predeclared checker.
+// Independent reviewer edge case in the original pilot; predeclared in matched-worker trials.
 import fs from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -20,4 +20,6 @@ for(const r of schedule.runs.filter(r=>r.task==='T02')){
   const actual=summarize(events),expected=[{customer:'x',cents:2,count:3}];
   results.push({run_id:r.run_id,input_cents:cents,expected,actual,pass:JSON.stringify(actual)===JSON.stringify(expected)});
 }
-console.log(JSON.stringify({scope:'Independent post-submission review edge case; final mathematical total is safe integer',results},null,2));
+const manifestPath=path.join(batch,'manifest.json');
+const matched=fs.existsSync(manifestPath)&&JSON.parse(fs.readFileSync(manifestPath,'utf8')).matched_workers;
+console.log(JSON.stringify({scope:matched?'Predeclared precision cancellation check; final mathematical total is safe integer':'Independent post-submission review edge case; final mathematical total is safe integer',results},null,2));

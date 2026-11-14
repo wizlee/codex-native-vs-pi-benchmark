@@ -56,6 +56,18 @@ test('cached input and reasoning counted once; rates use disjoint buckets',()=>{
   assert.ok(Math.abs(result.estimated_api_usd-.0039)<1e-12);
   assert.equal(quality(scores),100);
 });
+test('unmeasured human effort remains unknown rather than zero',()=>{
+  assert.equal(measureRecord(record(),rates).human_s,25);
+  const schedule=makeSchedule('pilot',42);
+  const records=schedule.runs.map(p=>({...record(p),human_effort_measured:false,review_s:0,intervention_s:0}));
+  assert.equal(measureRecord(records[0],rates).human_s,null);
+  const result=analyze(schedule,records,rates);
+  for(const arm of ['native','pi']){
+    assert.equal(result.arms[arm].human_effort_measured,false);
+    assert.equal(result.arms[arm].human_s_all,null);
+    assert.equal(result.arms[arm].review_median_s,null);
+  }
+});
 
 test('record templates cover schedule but cannot masquerade as measurements',()=>{
   const schedule=makeSchedule('pilot',42);

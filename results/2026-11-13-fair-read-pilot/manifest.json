@@ -15,6 +15,7 @@
   "pi_worker_reasoning": "high",
   "configuration_source": "Actual per-session source contexts, not config defaults or self-reports",
   "configuration_correction": "Earlier report incorrectly labelled roots/native workers xhigh based on pre-run diagnostics. All eight fair-read session logs show low roots, low native workers, high Pi workers. Time, tokens, cost, correctness and rankings unchanged.",
+  "matched_workers": false,
   "read_policy": "Equivalent semantic read access; native read-only shell and Pi read/grep/find/ls. Root alone edits and executes tests.",
   "skills": "Shared caveman/unslop required; roots selected additional role skills. Pi T02 handoffs included execution-dependent diagnose and readers reported blocked.",
   "quality": "Independent fresh-session AI review with backend/time/cost labels withheld; same configured model family. No human review measured.",

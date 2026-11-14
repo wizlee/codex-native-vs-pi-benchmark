@@ -1,0 +1,9 @@
+{
+  "initial_review_input_incomplete": true,
+  "artifact": "artifact-004",
+  "cause": "Large inline packet transport truncation",
+  "solver_failure": false,
+  "solver_repair": false,
+  "final_review_read_complete_frozen_anonymous_file": true,
+  "all_eight_bodies_accessible": true
+}

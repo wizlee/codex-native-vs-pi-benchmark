@@ -86,6 +86,8 @@ Use monotonic stopwatch for durations; UTC timestamps for audit. Unit seconds.
 
 Review and delivery segments sequential in this protocol. Their sum cannot exceed elapsed beyond timing rounding. `human_s = review_s + intervention_s` measures labor, not extra wall time. Keep first-delivery timestamp and segment log as evidence.
 
+If human effort was not measured, set `human_effort_measured: false`. Numeric review/intervention placeholders then do not count as measured zero: aggregate human labor and review time remain `null`. Published AI-reviewed pilots use this flag and report agent submission time separately from human acceptance.
+
 Parallel workers' runtimes overlap. Do not sum them to estimate task wall time. Sum their tokens/costs. Optional detailed counters go under `diagnostics`.
 
 ## Additional diagnostics
